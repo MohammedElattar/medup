@@ -1,0 +1,1 @@
+function o(){let r=new URLSearchParams(window.location.search);const e=new Set;r.forEach((a,u)=>{e.add(u)});const s=Array.from(e);let n=new URLSearchParams;return s.forEach(a=>n.append(a,r.get(a))),n}export{o as g};

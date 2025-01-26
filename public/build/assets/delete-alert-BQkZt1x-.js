@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".delete-button").forEach(e=>{e.addEventListener("click",function(){showSweetAlert(()=>{const t=e.closest("a").querySelector(".delete-form");t?t.submit():console.error("Delete form not found")})})})});

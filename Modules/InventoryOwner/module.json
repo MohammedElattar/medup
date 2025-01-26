@@ -1,0 +1,11 @@
+{
+    "name": "InventoryOwner",
+    "alias": "inventoryowner",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\InventoryOwner\\Providers\\InventoryOwnerServiceProvider"
+    ],
+    "files": []
+}
