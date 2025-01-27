@@ -25,7 +25,7 @@ if (! function_exists('translate_word')) {
 if (! function_exists('translate_ui')) {
     function translate_ui(string $key, array $parameters = []): string
     {
-//      echo \App\Helpers\TranslationHelper::getCurrentLocale();
+        //      echo \App\Helpers\TranslationHelper::getCurrentLocale();
         return __('locale.'.$key, $parameters, \App\Helpers\TranslationHelper::getCurrentLocale());
     }
 }

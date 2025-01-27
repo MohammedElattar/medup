@@ -11,8 +11,10 @@ use Spatie\Translatable\HasTranslations;
 
 class Skill extends Model implements HasMedia
 {
-    use HasTranslations, PaginationTrait, InteractsWithMedia;
+    use HasTranslations, InteractsWithMedia, PaginationTrait;
+
     protected $fillable = ['name'];
+
     protected $translatable = ['name'];
 
     public function icon()

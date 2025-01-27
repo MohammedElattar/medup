@@ -9,7 +9,9 @@ enum UserTypeEnum
     const ADMIN = 0;
 
     const EXPERT = 1;
+
     const TRAINEE = 2;
+
     const STUDENT = 3;
 
     public static function availableTypes(): array

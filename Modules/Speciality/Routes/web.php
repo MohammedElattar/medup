@@ -4,7 +4,7 @@ use App\Helpers\GeneralHelper;
 use Illuminate\Support\Facades\Route;
 use Modules\Speciality\Http\Controllers\AdminSpecialityController;
 
-Route::group(['prefix' => 'admin/colleges/{collegeId}/specialities', 'middleware' => GeneralHelper::adminMiddlewares()], function(){
+Route::group(['prefix' => 'admin/colleges/{collegeId}/specialities', 'middleware' => GeneralHelper::adminMiddlewares()], function () {
     Route::get('', [AdminSpecialityController::class, 'index'])->name('specialities.index');
     Route::get('create', [AdminSpecialityController::class, 'create'])->name('specialities.create');
     Route::post('', [AdminSpecialityController::class, 'store'])->name('specialities.store');

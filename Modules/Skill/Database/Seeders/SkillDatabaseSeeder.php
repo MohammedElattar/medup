@@ -13,10 +13,9 @@ class SkillDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        for($i = 0; $i<20; $i++)
-        {
+        for ($i = 0; $i < 20; $i++) {
             Skill::query()->create([
-                'name' => TranslationHelper::generateFakeTranslatedInput()
+                'name' => TranslationHelper::generateFakeTranslatedInput(),
             ]);
         }
     }

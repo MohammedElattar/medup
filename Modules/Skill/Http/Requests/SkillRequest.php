@@ -12,7 +12,7 @@ class SkillRequest extends FormRequest
         $inUpdate = ! preg_match('/.*skills$/', $this->url());
 
         return array_merge(ValidationRuleHelper::translatedArray(), [
-            'icon' => ValidationRuleHelper::storeOrUpdateImageRules($inUpdate)
+            'icon' => ValidationRuleHelper::storeOrUpdateImageRules($inUpdate),
         ]);
     }
 }

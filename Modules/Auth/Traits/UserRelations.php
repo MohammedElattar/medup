@@ -17,16 +17,16 @@ trait UserRelations
 
     public function expert()
     {
-      return $this->hasOne(Expert::class);
+        return $this->hasOne(Expert::class);
     }
 
     public function student()
     {
-      return $this->hasOne(Student::class);
+        return $this->hasOne(Student::class);
     }
 
     public function trainee()
     {
-      return $this->hasOne(Trainee::class);
+        return $this->hasOne(Trainee::class);
     }
 }

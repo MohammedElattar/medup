@@ -9,12 +9,12 @@ class AdminChangePasswordRequest extends FormRequest
 {
     public function rules(): array
     {
-      return [
-        'old_password' => [
-          'required',
-          'current_password',
-        ],
-        'new_password' => ValidationRuleHelper::defaultPasswordRules(),
-      ];
+        return [
+            'old_password' => [
+                'required',
+                'current_password',
+            ],
+            'new_password' => ValidationRuleHelper::defaultPasswordRules(),
+        ];
     }
 }

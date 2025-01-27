@@ -15,9 +15,9 @@ class UserBuilder extends Builder
     {
         if ($inMobile) {
             return $this
-              ->whereIn('type', UserTypeHelper::mobileTypes())
-              ->whereNotNull('email')
-              ->where('email', $data['email']);
+                ->whereIn('type', UserTypeHelper::mobileTypes())
+                ->whereNotNull('email')
+                ->where('email', $data['email']);
         }
 
         return $this

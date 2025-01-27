@@ -33,15 +33,14 @@ class CountryService
         Country::query()->findOrFail($id)->delete();
     }
 
-  /**
-   * @throws ValidationErrorsException
-   */
-  public function exists($id, string $errorKey = 'country_id')
+    /**
+     * @throws ValidationErrorsException
+     */
+    public function exists($id, string $errorKey = 'country_id')
     {
         $item = Country::query()->find($id);
 
-        if(! $item)
-        {
+        if (! $item) {
             throw new ValidationErrorsException([
                 $errorKey => translate_error_message('country', 'not_exists'),
             ]);

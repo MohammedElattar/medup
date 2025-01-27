@@ -17,8 +17,5 @@ class UserRelationHelper
         }
     }
 
-    public static function loadDashboardRelations($user): void
-    {
-
-    }
+    public static function loadDashboardRelations($user): void {}
 }

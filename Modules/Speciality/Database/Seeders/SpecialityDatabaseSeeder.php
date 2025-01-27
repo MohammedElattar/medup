@@ -4,8 +4,8 @@ namespace Modules\Speciality\Database\Seeders;
 
 use App\Helpers\TranslationHelper;
 use Illuminate\Database\Seeder;
-use Modules\Speciality\Models\Speciality;
 use Modules\College\Models\College;
+use Modules\Speciality\Models\Speciality;
 
 class SpecialityDatabaseSeeder extends Seeder
 {

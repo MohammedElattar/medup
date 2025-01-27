@@ -13,10 +13,10 @@ class CountryDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        for($i = 0; $i<10; $i++) {
-          Country::query()->create([
-            'name' => TranslationHelper::generateFakeTranslatedInput('country'),
-          ]);
+        for ($i = 0; $i < 10; $i++) {
+            Country::query()->create([
+                'name' => TranslationHelper::generateFakeTranslatedInput('country'),
+            ]);
         }
     }
 }

@@ -23,32 +23,32 @@ class LoginController extends Controller
         $user = $this->loginService->mobile($request->validated());
 
         return $this->okResponse(array_merge([
-          'user' => UserResource::make($user),
+            'user' => UserResource::make($user),
         ],
-          SanctumTokenResource::make($user->tokens['token'])->toArray(request()),
-          RefreshTokenResource::make($user->tokens['refresh_token'])->toArray(request())
+            SanctumTokenResource::make($user->tokens['token'])->toArray(request()),
+            RefreshTokenResource::make($user->tokens['refresh_token'])->toArray(request())
         ), message: translate_word('logged_in'));
     }
 
     public function show()
     {
-      $pageConfigs = ['myLayout' => 'blank'];
+        $pageConfigs = ['myLayout' => 'blank'];
 
-      return view('auth::login', ['pageConfigs' => $pageConfigs]);
+        return view('auth::login', ['pageConfigs' => $pageConfigs]);
     }
 
     public function dashboard(DashboardLoginRequest $request)
     {
-      $data = $request->validated();
+        $data = $request->validated();
 
-      try {
-        $user = $this->loginService->dashboard($data);
-      } catch (Exception $e) {
-        return redirect()->route('login')->withInput($data)->withErrors(['error' => $e->getMessage()]);
-      }
+        try {
+            $user = $this->loginService->dashboard($data);
+        } catch (Exception $e) {
+            return redirect()->route('login')->withInput($data)->withErrors(['error' => $e->getMessage()]);
+        }
 
-      session()->put('user', $user);
+        session()->put('user', $user);
 
-      return redirect()->route('dashboard-ecommerce');
+        return redirect()->route('dashboard-ecommerce');
     }
 }

@@ -7,23 +7,21 @@ use Modules\Country\Services\CountryService;
 
 class CityService
 {
-    public function __construct(private readonly CountryService $countryService)
-    {
-    }
+    public function __construct(private readonly CountryService $countryService) {}
 
     public function index($countryId)
     {
         return City::query()
-          ->where('country_id', $countryId)
-          ->latest()
-          ->paginatedCollection();
+            ->where('country_id', $countryId)
+            ->latest()
+            ->paginatedCollection();
     }
 
     public function show($countryId, $id)
     {
         return City::query()
-          ->where('country_id', $countryId)
-          ->findOrFail($id);
+            ->where('country_id', $countryId)
+            ->findOrFail($id);
     }
 
     public function store(array $data, $countryId)

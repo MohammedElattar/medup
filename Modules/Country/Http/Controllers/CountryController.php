@@ -8,9 +8,7 @@ use Modules\Country\Services\CountryService;
 
 class CountryController extends Controller
 {
-    public function __construct(private readonly CountryService $countryService)
-    {
-    }
+    public function __construct(private readonly CountryService $countryService) {}
 
     public function index()
     {
@@ -21,14 +19,14 @@ class CountryController extends Controller
 
     public function create()
     {
-      return view('country::create');
+        return view('country::create');
     }
 
     public function edit($item)
     {
-      $item = $this->countryService->show($item);
+        $item = $this->countryService->show($item);
 
-      return view('country::edit', compact('item'));
+        return view('country::edit', compact('item'));
     }
 
     public function store(CountryRequest $request)

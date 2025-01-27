@@ -8,9 +8,7 @@ use Modules\Speciality\Services\AdminSpecialityService;
 
 class AdminSpecialityController extends Controller
 {
-    public function __construct(private readonly AdminSpecialityService $specialityService)
-    {
-    }
+    public function __construct(private readonly AdminSpecialityService $specialityService) {}
 
     public function index($collegeId)
     {

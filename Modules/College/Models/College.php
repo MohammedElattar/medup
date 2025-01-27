@@ -9,6 +9,8 @@ use Spatie\Translatable\HasTranslations;
 class College extends Model
 {
     use HasTranslations, PaginationTrait;
+
     protected $fillable = ['name'];
+
     protected $translatable = ['name'];
 }

@@ -20,7 +20,7 @@ class AdminSkillService
 
     public function store(array $data)
     {
-        DB::transaction(function() use ($data){
+        DB::transaction(function () use ($data) {
             $skill = Skill::query()->create($data);
             $imageService = new ImageService($skill, $data);
             $imageService->storeOneMediaFromRequest('skill_icon', 'icon');
@@ -29,7 +29,7 @@ class AdminSkillService
 
     public function update(array $data, $id)
     {
-        DB::transaction(function() use ($id, $data){
+        DB::transaction(function () use ($id, $data) {
             $skill = Skill::query()->findOrFail($id);
             $skill->update($data);
             $imageService = new ImageService($skill, $data);

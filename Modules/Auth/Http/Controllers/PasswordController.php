@@ -2,7 +2,6 @@
 
 namespace Modules\Auth\Http\Controllers;
 
-use App\Exceptions\ValidationErrorsException;
 use App\Helpers\ToastHelper;
 use App\Traits\HttpResponse;
 use Illuminate\Http\JsonResponse;
@@ -36,6 +35,7 @@ class PasswordController extends Controller
         $action->handle($request->validated(), auth()->id());
 
         ToastHelper::successToast();
+
         return redirect()->back();
     }
 }

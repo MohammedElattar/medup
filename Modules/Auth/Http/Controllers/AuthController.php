@@ -13,17 +13,17 @@ use Modules\Auth\Transformers\SanctumTokenResource;
 
 class AuthController extends Controller
 {
-  use HttpResponse;
+    use HttpResponse;
 
-  public function refreshToken(RefreshTokenRequest $request, RefreshTokenService $refreshTokenService): JsonResponse
-  {
-      $refreshToken = RefreshToken::query()
-        ->where('token', $refreshTokenService->getEncryptedToken($request->token))
-        ->firstOrFail();
+    public function refreshToken(RefreshTokenRequest $request, RefreshTokenService $refreshTokenService): JsonResponse
+    {
+        $refreshToken = RefreshToken::query()
+            ->where('token', $refreshTokenService->getEncryptedToken($request->token))
+            ->firstOrFail();
 
-      $refreshTokenService->assertExpired($refreshToken);
-      $user = $refreshToken->user;
+        $refreshTokenService->assertExpired($refreshToken);
+        $user = $refreshToken->user;
 
-      return $this->resourceResponse(SanctumTokenResource::make(LoginService::generateBearerToken($user)));
-  }
+        return $this->resourceResponse(SanctumTokenResource::make(LoginService::generateBearerToken($user)));
+    }
 }

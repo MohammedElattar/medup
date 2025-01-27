@@ -7,9 +7,7 @@ use Modules\Speciality\Models\Speciality;
 
 readonly class AdminSpecialityService
 {
-    public function __construct(private AdminCollegeService $collegeService)
-    {
-    }
+    public function __construct(private AdminCollegeService $collegeService) {}
 
     public function index($collegeId)
     {

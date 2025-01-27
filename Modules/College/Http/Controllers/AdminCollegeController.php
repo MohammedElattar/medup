@@ -8,9 +8,7 @@ use Modules\Country\Http\Requests\CountryRequest;
 
 class AdminCollegeController extends Controller
 {
-    public function __construct(private readonly AdminCollegeService $collegeService)
-    {
-    }
+    public function __construct(private readonly AdminCollegeService $collegeService) {}
 
     public function index()
     {

@@ -13,10 +13,10 @@ class CityDatabaseSeeder extends Seeder
     {
         $countries = Country::query()->pluck('id')->toArray();
 
-        for($i = 0; $i<100; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             City::query()->create([
-              'name' => TranslationHelper::generateFakeTranslatedInput('city'),
-              'country_id' => fake()->randomElement($countries),
+                'name' => TranslationHelper::generateFakeTranslatedInput('city'),
+                'country_id' => fake()->randomElement($countries),
             ]);
         }
     }

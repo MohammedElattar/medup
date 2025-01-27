@@ -4,7 +4,7 @@ use App\Helpers\GeneralHelper;
 use Illuminate\Support\Facades\Route;
 use Modules\City\Http\Controllers\CityController;
 
-Route::group(['prefix' => 'admin/countries/{countryId}/cities', 'middleware' => GeneralHelper::adminMiddlewares()], function(){
+Route::group(['prefix' => 'admin/countries/{countryId}/cities', 'middleware' => GeneralHelper::adminMiddlewares()], function () {
     Route::get('', [CityController::class, 'index'])->name('cities.index');
     Route::get('create', [CityController::class, 'create'])->name('cities.create');
     Route::post('', [CityController::class, 'store'])->name('cities.store');

@@ -10,16 +10,16 @@ class ProfileRequest extends FormRequest
 {
     public function prepareForValidation()
     {
-      RequestHelper::formatPhoneNumber($this);
+        RequestHelper::formatPhoneNumber($this);
     }
 
     public function rules(): array
-      {
-         return [
-              'name' => ValidationRuleHelper::stringRules(['required' => 'sometimes']),
-              'email' => ValidationRuleHelper::emailRules(['required' => 'sometimes']),
-              'phone' => ValidationRuleHelper::phoneRules(['required' => 'sometimes']),
-              'avatar' => ValidationRuleHelper::storeOrUpdateImageRules(true),
-          ];
-      }
+    {
+        return [
+            'name' => ValidationRuleHelper::stringRules(['required' => 'sometimes']),
+            'email' => ValidationRuleHelper::emailRules(['required' => 'sometimes']),
+            'phone' => ValidationRuleHelper::phoneRules(['required' => 'sometimes']),
+            'avatar' => ValidationRuleHelper::storeOrUpdateImageRules(true),
+        ];
+    }
 }

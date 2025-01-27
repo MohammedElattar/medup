@@ -11,7 +11,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\App;
 use Modules\Auth\Enums\AuthEnum;
-use Modules\Auth\Http\Requests\AdminProfileRequest;
 use Modules\Auth\Http\Requests\ProfileRequest;
 use Modules\Auth\Http\Requests\UpdateLocaleRequest;
 use Modules\Auth\Services\ProfileService;
@@ -32,12 +31,13 @@ class ProfileController extends Controller
     public function handle(ProfileRequest $request, ProfileService $profileService)
     {
         try {
-          $profileService->handle($request->validated());
+            $profileService->handle($request->validated());
 
-          ToastHelper::successToast();
-          return redirect()->route('profile.show');
+            ToastHelper::successToast();
+
+            return redirect()->route('profile.show');
         } catch (ValidationErrorsException $e) {
-          return redirect()->back()->withErrors($e->getErrors());
+            return redirect()->back()->withErrors($e->getErrors());
         }
     }
 
@@ -50,24 +50,24 @@ class ProfileController extends Controller
 
     public function updateLocale(UpdateLocaleRequest $request): JsonResponse
     {
-      auth()->user()->forceFill($request->validated())->save();
+        auth()->user()->forceFill($request->validated())->save();
 
-      return $this->okResponse(message: translate_success_message('profile', 'updated'), showToast: false);
+        return $this->okResponse(message: translate_success_message('profile', 'updated'), showToast: false);
     }
 
     public function updateDashboardLocale($locale): RedirectResponse
     {
-      auth()->user()->forceFill(['locale' => $locale])->save();
-      session()->put('locale', $locale);
-      App::setLocale($locale);
+        auth()->user()->forceFill(['locale' => $locale])->save();
+        session()->put('locale', $locale);
+        App::setLocale($locale);
 
-      return redirect()->back();
+        return redirect()->back();
     }
 
     public function showView()
     {
-      $user = User::whereId(auth()->id())->with(['avatar'])->first();
+        $user = User::whereId(auth()->id())->with(['avatar'])->first();
 
-      return view('auth::profile', compact('user'));
+        return view('auth::profile', compact('user'));
     }
 }

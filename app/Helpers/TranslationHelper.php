@@ -81,28 +81,28 @@ class TranslationHelper
 
     public static function isRtl()
     {
-      return self::getCurrentLocale() == 'ar';
+        return self::getCurrentLocale() == 'ar';
     }
 
     public static function mergeDefaultTranslatedInput(string $keyName = 'name'): void
     {
-      $acceptedLocales = self::getAvailableLocales();
-      $firstValue = null;
+        $acceptedLocales = self::getAvailableLocales();
+        $firstValue = null;
 
-      foreach ($acceptedLocales as $locale) {
-        if(! $firstValue) {
-          $firstValue = request()->input("$keyName.$locale");
+        foreach ($acceptedLocales as $locale) {
+            if (! $firstValue) {
+                $firstValue = request()->input("$keyName.$locale");
+            }
         }
-      }
 
-      $input = request()->input($keyName);
+        $input = request()->input($keyName);
 
-      foreach($acceptedLocales as $locale) {
-        if(!isset($input[$locale])) {
-          $input[$locale] = $firstValue;
+        foreach ($acceptedLocales as $locale) {
+            if (! isset($input[$locale])) {
+                $input[$locale] = $firstValue;
+            }
         }
-      }
 
-      request()->merge([$keyName => $input]);
+        request()->merge([$keyName => $input]);
     }
 }
