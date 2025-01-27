@@ -60,4 +60,6 @@ return [
     'new_password_confirmation' => 'تأكيد كلمة المرور',
     'countries' => 'الدول',
     'cities' => 'المدن',
+    'skills' => 'المهارات',
+    'icon' => 'الصورة',
 ];

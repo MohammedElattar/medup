@@ -5,6 +5,12 @@
         "icon": "menu-icon tf-icons ti ti-world",
         "url": "/admin/countries",
         "slug": "countries.index"
+      },
+      {
+          "name": "skills",
+          "icon": "menu-icon tf-icons ti ti-pill",
+          "url": "/admin/skills",
+          "slug": "skills.index"
       }
     ]
 }

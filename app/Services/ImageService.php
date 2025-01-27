@@ -43,8 +43,7 @@ class ImageService
     public function updateOneMedia(string $collectionName, string $requestFileName, string $resetMainImageCollectionName = 'resetImage'): void
     {
         if (isset($this->data[$requestFileName])) {
-            $this->model->$resetMainImageCollectionName();
-
+            $this->model->clearMediaCollection($collectionName);
             $this->storeOneMediaFromRequest($collectionName, $requestFileName);
         }
     }

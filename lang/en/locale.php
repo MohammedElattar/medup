@@ -63,4 +63,6 @@ return [
 
     'countries' => 'Countries',
     'cities' => 'Cities',
+    'skills' => 'Skills',
+    'icon' => 'Icon',
 ];

@@ -23,5 +23,6 @@
     "Student": true,
     "Trainee": true,
     "Country": true,
-    "City": true
+    "City": true,
+    "Skill": true
 }
