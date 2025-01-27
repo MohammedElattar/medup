@@ -2,9 +2,7 @@
 
 use App\Exceptions\InternalServerErrorException;
 use App\Exceptions\ValidationErrorsException;
-use App\Helpers\GeneralHelper;
 use App\Http\Middleware\AccountMustBeActive;
-use App\Http\Middleware\AlwaysAcceptJson;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\MustBeVerified;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -22,11 +20,6 @@ use Illuminate\Http\Middleware\HandleCors;
 use Illuminate\Support\Str;
 use Modules\Auth\Helpers\AuthExceptionHelper;
 use Modules\Auth\Http\Middleware\CheckUserType;
-use Modules\Cart\Helpers\CartExceptionHelper;
-use Modules\InventoryOwner\Helpers\InventoryOwnerExceptionHelper;
-use Modules\Role\Helpers\PermissionExceptionHelper;
-use Modules\Role\Http\Middleware\PermissionMiddleware;
-use Modules\Vendor\Helpers\VendorExceptionHelper;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -65,7 +58,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'auth' => Authenticate::class,
             'guest' => RedirectIfAuthenticated::class,
-            'permission' => PermissionMiddleware::class,
             'account_must_be_active' => AccountMustBeActive::class,
             'must_be_verified' => MustBeVerified::class,
             'user_type_in' => CheckUserType::class,
@@ -74,11 +66,6 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
 
         AuthExceptionHelper::handle($exceptions);
-        PermissionExceptionHelper::handle($exceptions);
-        InventoryOwnerExceptionHelper::handle($exceptions);
-        VendorExceptionHelper::handle($exceptions);
-        \Modules\Wallet\Helpers\WalletExceptionHelper::handle($exceptions);
-        //        CartExceptionHelper::handle($exceptions);
 
         $httpResponse = (new class
         {

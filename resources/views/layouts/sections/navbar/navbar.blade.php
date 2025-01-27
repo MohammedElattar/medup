@@ -125,13 +125,6 @@
                       <i class="ti ti-user me-3 ti-md"></i><span class="align-middle">{{translate_ui('profile')}}</span>
                     </a>
                   </li>
-                  @if(\Modules\Auth\Enums\UserTypeEnum::getUserType() == \Modules\Auth\Enums\UserTypeEnum::INVENTORY_OWNER)
-                  <li>
-                    <a class="dropdown-item" href="javascript:void(0);">
-                      <i class="ti td-md me-3 ti-currency-dollar"></i><span class="align-middle">{{auth()->user()->wallet->balance}}</span>
-                    </a>
-                  </li>
-                  @endif
                   <li>
                     <div class="dropdown-divider my-1 mx-n2"></div>
                   </li>

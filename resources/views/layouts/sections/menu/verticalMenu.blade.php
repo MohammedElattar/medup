@@ -1,5 +1,5 @@
 @php
-  use App\Helpers\Helpers;use Illuminate\Support\Facades\Route;use Modules\Auth\Enums\UserTypeEnum;
+  use App\Helpers\Helpers;use Illuminate\Support\Facades\Route;
   $configData = Helpers::appClasses();
 @endphp
 
@@ -58,7 +58,7 @@
           }
         @endphp
 
-        @if(auth()->check() && (UserTypeEnum::getUserType() != UserTypeEnum::INVENTORY_OWNER || (isset($menu->open_for_inventory_owner) && $menu->open_for_inventory_owner)))
+
           {{-- main menu --}}
           <li class="menu-item {{$activeClass}}">
             <a href="{{ isset($menu->url) ? url($menu->url) : 'javascript:void(0);' }}"
@@ -79,7 +79,6 @@
             @endisset
           </li>
         @endif
-      @endif
     @endforeach
   </ul>
 

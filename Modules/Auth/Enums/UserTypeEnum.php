@@ -8,18 +8,17 @@ enum UserTypeEnum
 {
     const ADMIN = 0;
 
-    const INVENTORY_OWNER = 1;
-
-    const ADMIN_EMPLOYEE = 2;
-
-    const VENDOR = 3;
+    const EXPERT = 1;
+    const TRAINEE = 2;
+    const STUDENT = 3;
 
     public static function availableTypes(): array
     {
         return [
             self::ADMIN,
-            self::INVENTORY_OWNER,
-            self::VENDOR,
+            self::EXPERT,
+            self::TRAINEE,
+            self::STUDENT,
         ];
     }
 
@@ -34,8 +33,9 @@ enum UserTypeEnum
     {
         return [
             self::ADMIN => 'admin',
-            self::INVENTORY_OWNER => 'inventory_owner',
-            self::VENDOR => 'vendor',
+            self::EXPERT => 'expert',
+            self::TRAINEE => 'trainee',
+            self::STUDENT => 'student',
         ];
     }
 }

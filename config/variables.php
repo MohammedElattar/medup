@@ -3,7 +3,7 @@
 return [
   "creatorName" => "Elzero Team",
   "creatorUrl" => "https://pixinvent.com",
-  "templateName" => "Tasaheel",
+  "templateName" => "Medup",
   "templateSuffix" => "",
   "templateVersion" => "2.0.0",
   "templateFree" => false,

@@ -5,14 +5,11 @@ namespace Modules\Auth\Http\Controllers;
 use App\Traits\HttpResponse;
 use Exception;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\DB;
-use Modules\Auth\Enums\VerifyTokenTypeEnum;
-use Modules\Auth\Http\Requests\CodeSendRequest;
 use Modules\Auth\Http\Requests\Login\DashboardLoginRequest;
 use Modules\Auth\Http\Requests\Login\MobileLoginRequest;
 use Modules\Auth\Services\LoginService;
-use Modules\Auth\Strategies\Verifiable;
+use Modules\Auth\Transformers\RefreshTokenResource;
+use Modules\Auth\Transformers\SanctumTokenResource;
 use Modules\Auth\Transformers\UserResource;
 
 class LoginController extends Controller
@@ -25,12 +22,12 @@ class LoginController extends Controller
     {
         $user = $this->loginService->mobile($request->validated());
 
-        return $this->okResponse(UserResource::make($user), message: translate_word('logged_in'))->withCookie(Cookie::make(
-            'isLoggedIn',
-            'true',
-            config('session.lifetime'),
-            httpOnly: false,
-        ));
+        return $this->okResponse(array_merge([
+          'user' => UserResource::make($user),
+        ],
+          SanctumTokenResource::make($user->tokens['token'])->toArray(request()),
+          RefreshTokenResource::make($user->tokens['refresh_token'])->toArray(request())
+        ), message: translate_word('logged_in'));
     }
 
     public function show()
@@ -53,12 +50,5 @@ class LoginController extends Controller
       session()->put('user', $user);
 
       return redirect()->route('dashboard-ecommerce');
-    }
-
-    public function loginOtp(CodeSendRequest $request, Verifiable $verifiable)
-    {
-        DB::transaction(fn () => $verifiable->generalSendOtp($request->handle, VerifyTokenTypeEnum::LOGIN));
-
-        return $this->okResponse(message: translate_word('resend_verify_code'));
     }
 }

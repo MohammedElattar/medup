@@ -1,96 +1,10 @@
 {
   "menu": [
-    {
-      "name": "inventory-owners",
-      "icon": "menu-icon tf-icons ti ti-box",
-      "slug": "",
-      "submenu": [
-        {
-          "url": "admin/inventory-owners",
-          "name": "List",
-          "icon": "circle",
-          "slug": "inventory-owners.index"
-        },
-        {
-          "url": "admin/inventory-owners/create",
-          "name": "create",
-          "icon": "circle",
-          "slug": "inventory-owners.create"
-        }
-      ]
-    },
-    {
-      "name": "vendors",
-      "icon": "menu-icon tf-icons ti ti-box",
-      "slug": "",
-      "submenu": [
-        {
-          "url": "admin/vendors",
-          "name": "List",
-          "icon": "circle",
-          "slug": "vendors.index"
-        },
-        {
-          "url": "admin/vendors/create",
-          "name": "create",
-          "icon": "circle",
-          "slug": "vendors.create"
-        }
-      ]
-    },
-    {
-      "name": "categories",
-      "icon": "menu-icon tf-icons ti ti-category",
-      "slug": "",
-      "submenu": [
-        {
-          "url": "admin/categories",
-          "name": "List",
-          "icon": "circle",
-          "slug": "categories.index"
-        },
-        {
-          "url": "admin/categories/create",
-          "name": "create",
-          "icon": "circle",
-          "slug": "categories.create"
-        }
-      ]
-    },
-
-    {
-      "name": "products",
-      "icon": "menu-icon tf-icons ti ti-shopping-cart",
-      "slug": "",
-      "open_for_inventory_owner": true,
-      "submenu": [
-        {
-          "url": "admin/products",
-          "name": "List",
-          "icon": "circle",
-          "slug": "products.index"
-        },
-        {
-          "url": "admin/products/create",
-          "name": "create",
-          "icon": "circle",
-          "slug": "products.create"
-        }
-      ]
-    },
-    {
-      "name": "orders",
-      "icon": "menu-icon tf-icons ti ti-shopping-cart",
-      "slug": "orders.index",
-      "url": "admin/orders",
-      "open_for_inventory_owner": true
-    },
-    {
-      "name": "transactions",
-      "icon": "menu-icon tf-icons ti ti-currency-dollar",
-      "slug": "transactions.index",
-      "url": "admin/transactions",
-      "open_for_inventory_owner": true
-    }
-  ]
+      {
+        "name": "countries",
+        "icon": "menu-icon tf-icons ti ti-world",
+        "url": "/admin/countries",
+        "slug": "countries.index"
+      }
+    ]
 }

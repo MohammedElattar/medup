@@ -21,7 +21,7 @@ class UserResource extends JsonResource
                 return $this->pivot->value;
             }),
             AuthEnum::UNIQUE_COLUMN => $this->whenHas(AuthEnum::UNIQUE_COLUMN),
-            'email' => $this->whenHas('email'),
+            'phone' => $this->whenHas('phone'),
             'avatar' => $this->whenNotNull($this->getAvatar($request->url())),
             'type' => $this->whenHas('type'),
             'created_at' => $this->whenHas('created_at'),

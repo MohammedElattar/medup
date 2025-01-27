@@ -12,7 +12,6 @@ class UserRelationHelper
 
         switch ($type) {
             case UserTypeEnum::ADMIN:
-            case UserTypeEnum::ADMIN_EMPLOYEE:
                 self::loadDashboardRelations($user);
                 break;
         }
@@ -20,6 +19,6 @@ class UserRelationHelper
 
     public static function loadDashboardRelations($user): void
     {
-        $user->load('permissionsOnly.permissions');
+
     }
 }

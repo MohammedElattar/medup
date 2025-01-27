@@ -10,15 +10,15 @@ class UserTypeHelper
     {
         return [
             UserTypeEnum::ADMIN,
-            UserTypeEnum::ADMIN_EMPLOYEE,
-            UserTypeEnum::INVENTORY_OWNER,
         ];
     }
 
     public static function mobileTypes(): array
     {
         return [
-            UserTypeEnum::VENDOR,
+            UserTypeEnum::EXPERT,
+            UserTypeEnum::STUDENT,
+            UserTypeEnum::TRAINEE,
         ];
     }
 }

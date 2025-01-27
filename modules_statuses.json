@@ -15,12 +15,13 @@
     "Color": false,
     "Tile": false,
     "Cart": false,
-    "Order": true,
     "Employee": false,
     "OrderStatus": false,
-    "Category": true,
-    "InventoryOwner": true,
-    "Product": true,
     "Vendor": true,
-    "Wallet": true
+    "Wallet": true,
+    "Expert": true,
+    "Student": true,
+    "Trainee": true,
+    "Country": true,
+    "City": true
 }

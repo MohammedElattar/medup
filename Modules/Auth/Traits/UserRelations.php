@@ -3,13 +3,10 @@
 namespace Modules\Auth\Traits;
 
 use App\Helpers\MediaHelper;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Auth\Enums\AuthEnum;
-use Modules\InventoryOwner\Models\InventoryOwner;
-use Modules\Role\Models\Role;
-use Modules\Vendor\Models\Vendor;
-use Modules\Wallet\Entities\Wallet;
+use Modules\Expert\Models\Expert;
+use Modules\Student\Models\Student;
+use Modules\Trainee\Models\Trainee;
 
 trait UserRelations
 {
@@ -18,28 +15,18 @@ trait UserRelations
         return MediaHelper::mediaRelationship($this, AuthEnum::AVATAR_COLLECTION_NAME);
     }
 
-    public function inventoryOwner(): HasOne
+    public function expert()
     {
-        return $this->hasOne(InventoryOwner::class);
+      return $this->hasOne(Expert::class);
     }
 
-    public function roles(): BelongsToMany
+    public function student()
     {
-        return $this->belongsToMany(Role::class);
+      return $this->hasOne(Student::class);
     }
 
-    public function permissionsOnly(): BelongsToMany
+    public function trainee()
     {
-        return $this->roles();
-    }
-
-    public function vendor()
-    {
-        return $this->hasOne(Vendor::class);
-    }
-
-    public function wallet()
-    {
-        return $this->hasOne(Wallet::class);
+      return $this->hasOne(Trainee::class);
     }
 }

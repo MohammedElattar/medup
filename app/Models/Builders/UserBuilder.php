@@ -14,7 +14,10 @@ class UserBuilder extends Builder
     public function loginByType(array $data, bool $inMobile)
     {
         if ($inMobile) {
-            return $this->where('type', UserTypeEnum::VENDOR)->whereNotNull('email')->where('email', $data['email'])->whereIn('type', UserTypeHelper::mobileTypes());
+            return $this
+              ->whereIn('type', UserTypeHelper::mobileTypes())
+              ->whereNotNull('email')
+              ->where('email', $data['email']);
         }
 
         return $this

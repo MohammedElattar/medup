@@ -101,9 +101,4 @@ return [
     'maintenance_mode' => 'نحن حاليًا في وضع الصيانة، يرجى المحاولة مرة أخرى في وقت لاحق',
     ...BaseTranslationHelper::ar(),
     ...\Modules\Auth\Helpers\AuthTranslationHelper::ar(),
-    ...\Modules\Role\Helpers\RoleTranslationHelper::ar(),
-    ...\Modules\Order\Helpers\OrderTranslationHelper::ar(),
-    ...\Modules\Vendor\Helpers\VendorTranslationHelper::ar(),
-    ...\Modules\Wallet\Helpers\WalletTranslationHelper::ar(),
-    ...\Modules\InventoryOwner\Helpers\InventoryOwnerTranslationHelper::ar(),
 ];

@@ -11,17 +11,12 @@ class GeneralHelper
 {
     public static function adminMiddlewares(): array
     {
-        return array_merge(['auth', 'user_type_in:'.UserTypeEnum::ADMIN.'|'.UserTypeEnum::ADMIN_EMPLOYEE, SetLocaleMiddleware::class]);
+        return array_merge(['auth', 'user_type_in:'.UserTypeEnum::ADMIN.'|', SetLocaleMiddleware::class]);
     }
 
     public static function dashboardUserMiddlewares(): array
     {
-        return self::getDefaultLoggedUserMiddlewares(['user_type_in:'.UserTypeEnum::ADMIN.'|'.UserTypeEnum::INVENTORY_OWNER.'|'.UserTypeEnum::ADMIN_EMPLOYEE]);
-    }
-
-    public static function vendorMiddlewares(): array
-    {
-        return self::getDefaultLoggedUserMiddlewares(['user_type_in:'.UserTypeEnum::VENDOR]);
+        return self::getDefaultLoggedUserMiddlewares(['user_type_in:'.UserTypeEnum::ADMIN]);
     }
 
     public static function getDefaultLoggedUserMiddlewares(array $additionalMiddlewares = [

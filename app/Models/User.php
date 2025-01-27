@@ -13,7 +13,6 @@ use Laravel\Sanctum\HasApiTokens;
 use Modules\Auth\Enums\AuthEnum;
 use Modules\Auth\Traits\HasVerifyTokens;
 use Modules\Auth\Traits\UserRelations;
-use Modules\Role\Traits\HasPermissions;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -21,7 +20,6 @@ class User extends Authenticatable implements HasMedia
 {
     use HasApiTokens,
         HasFactory,
-        HasPermissions,
         HasVerifyTokens,
         InteractsWithMedia,
         Notifiable,

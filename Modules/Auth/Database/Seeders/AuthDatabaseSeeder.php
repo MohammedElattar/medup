@@ -6,7 +6,10 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Modules\Auth\Enums\AuthEnum;
 use Modules\Auth\Enums\UserTypeEnum;
+use Modules\Expert\Models\Expert;
 use Modules\InventoryOwner\Models\InventoryOwner;
+use Modules\Student\Models\Student;
+use Modules\Trainee\Models\Trainee;
 use Modules\Vendor\Models\Vendor;
 use Modules\Wallet\Database\factories\WalletFactory;
 
@@ -32,19 +35,23 @@ class AuthDatabaseSeeder extends Seeder
                 'type' => $type,
             ]);
 
-            if ($type == UserTypeEnum::ADMIN) {
-                $user->assignRole('admin');
+            if($type == UserTypeEnum::EXPERT) {
+              Expert::query()->create([
+                'user_id' => $user->id,
+              ]);
             }
 
-            if ($type == UserTypeEnum::INVENTORY_OWNER) {
-                InventoryOwner::create(['user_id' => $user->id]);
+            if($type == UserTypeEnum::STUDENT) {
+              Student::query()->create([
+                'user_id' => $user->id,
+              ]);
             }
 
-            if ($type == UserTypeEnum::VENDOR) {
-                Vendor::create(['user_id' => $user->id]);
+            if($type == UserTypeEnum::TRAINEE) {
+              Trainee::query()->create([
+                'user_id' => $user->id,
+              ]);
             }
-
-            WalletFactory::new()->create(['user_id' => $user->id]);
         }
     }
 }

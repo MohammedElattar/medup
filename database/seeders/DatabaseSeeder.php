@@ -4,22 +4,17 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Modules\Auth\Database\Seeders\AuthDatabaseSeeder;
-use Modules\Category\Database\Seeders\CategoryDatabaseSeeder;
-use Modules\Product\Database\Seeders\ProductDatabaseSeeder;
-use Modules\Role\Database\Seeders\RoleDatabaseSeeder;
+use Modules\City\Database\Seeders\CityDatabaseSeeder;
+use Modules\Country\Database\Seeders\CountryDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
         $this->call([
-            RoleDatabaseSeeder::class,
+            CountryDatabaseSeeder::class,
+            CityDatabaseSeeder::class,
             AuthDatabaseSeeder::class,
-//            CategoryDatabaseSeeder::class,
-//            ProductDatabaseSeeder::class,
         ]);
     }
 }

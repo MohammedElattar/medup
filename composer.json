@@ -11,7 +11,6 @@
   "require": {
     "php": "^8.2",
     "ext-dom": "*",
-    "ext-libxml": "*",
     "elattar/fast-paginate": "*",
     "elattar/prepare": "^4.5",
     "laravel/framework": "^11.31",
