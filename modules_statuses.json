@@ -24,5 +24,7 @@
     "Trainee": true,
     "Country": true,
     "City": true,
-    "Skill": true
+    "Skill": true,
+    "College": true,
+    "Speciality": true
 }

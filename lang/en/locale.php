@@ -65,4 +65,6 @@ return [
     'cities' => 'Cities',
     'skills' => 'Skills',
     'icon' => 'Icon',
+    'colleges' => 'Colleges',
+    'specialities' => 'Specialities',
 ];
