@@ -14,6 +14,8 @@ enum UserTypeEnum
 
     const STUDENT = 3;
 
+    const EXPERT_LEARNER = 4;
+
     public static function availableTypes(): array
     {
         return [
@@ -21,6 +23,7 @@ enum UserTypeEnum
             self::EXPERT,
             self::TRAINEE,
             self::STUDENT,
+            self::EXPERT_LEARNER,
         ];
     }
 
@@ -38,6 +41,7 @@ enum UserTypeEnum
             self::EXPERT => 'expert',
             self::TRAINEE => 'trainee',
             self::STUDENT => 'student',
+            self::EXPERT_LEARNER => 'expert_learner',
         ];
     }
 }

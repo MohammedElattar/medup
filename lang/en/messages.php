@@ -63,4 +63,7 @@ return [
     'privacy_policy' => 'Privacy Policy',
     ...BaseTranslationHelper::en(),
     ...\Modules\Auth\Helpers\AuthTranslationHelper::en(),
+    ...\Modules\Skill\Helpers\SkillTranslationHelper::en(),
+    ...\Modules\City\Helpers\CityTranslationHelper::en(),
+    ...\Modules\Speciality\Helpers\SpecialityTranslationHelper::en(),
 ];

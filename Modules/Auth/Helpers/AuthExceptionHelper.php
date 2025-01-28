@@ -10,6 +10,7 @@ use Modules\Auth\Enums\ForbiddenLoginEnum;
 use Modules\Auth\Exceptions\LoginException;
 use Modules\Auth\Exceptions\RefreshTokenException;
 use Modules\Auth\Exceptions\SanctumTokenException;
+use Modules\Auth\Exceptions\VerificationCodeException;
 
 class AuthExceptionHelper extends BaseExceptionHelper
 {
@@ -31,6 +32,7 @@ class AuthExceptionHelper extends BaseExceptionHelper
         });
 
         $exceptions->renderable(fn (SanctumTokenException $e) => self::generalErrorResponse($e));
+        $exceptions->renderable(fn (VerificationCodeException $e) => self::generalErrorResponse($e));
         $exceptions->renderable(fn (RefreshTokenException $e) => self::generalErrorResponse($e));
         $exceptions->renderable(function (AuthenticationException $e, $req) {
             $httpResponse = new class

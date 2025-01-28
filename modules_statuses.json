@@ -21,7 +21,6 @@
     "Wallet": true,
     "Expert": true,
     "Student": true,
-    "Trainee": true,
     "Country": true,
     "City": true,
     "Skill": true,

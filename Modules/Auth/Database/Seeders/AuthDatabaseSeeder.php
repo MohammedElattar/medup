@@ -6,9 +6,10 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Modules\Auth\Enums\AuthEnum;
 use Modules\Auth\Enums\UserTypeEnum;
+use Modules\City\Models\City;
 use Modules\Expert\Models\Expert;
+use Modules\Speciality\Models\Speciality;
 use Modules\Student\Models\Student;
-use Modules\Trainee\Models\Trainee;
 
 class AuthDatabaseSeeder extends Seeder
 {
@@ -18,13 +19,16 @@ class AuthDatabaseSeeder extends Seeder
     public function run(): void
     {
         $userTypes = UserTypeEnum::availableTypes();
+        $cities = City::query()->pluck('id')->toArray();
+        $specialities = Speciality::query()->pluck('id')->toArray();
 
         foreach ($userTypes as $type) {
             $alphaType = UserTypeEnum::alphaTypes()[$type];
 
             $user = User::create([
-                'name' => $alphaType,
-                'email' => $alphaType.'@admin.com',
+                'first_name' => fake()->name(),
+                'middle_name' => fake()->name(),
+                'email' => $alphaType . '@admin.com',
                 'phone' => fake()->e164PhoneNumber(),
                 'status' => true,
                 AuthEnum::VERIFIED_AT => now(),
@@ -32,22 +36,22 @@ class AuthDatabaseSeeder extends Seeder
                 'type' => $type,
             ]);
 
-            if ($type == UserTypeEnum::EXPERT) {
-                Expert::query()->create([
-                    'user_id' => $user->id,
-                ]);
-            }
-
-            if ($type == UserTypeEnum::STUDENT) {
-                Student::query()->create([
-                    'user_id' => $user->id,
-                ]);
-            }
-
-            if ($type == UserTypeEnum::TRAINEE) {
-                Trainee::query()->create([
-                    'user_id' => $user->id,
-                ]);
+            switch ($type) {
+                case UserTypeEnum::STUDENT:
+                case UserTypeEnum::TRAINEE:
+                    Student::query()->create([
+                        'user_id' => $user->id,
+                        'city_id' => fake()->randomElement($cities),
+                        'speciality_id' => fake()->randomElement($specialities),
+                    ]);
+                    break;
+                default:
+                    Expert::query()->create([
+                        'user_id' => $user->id,
+                        'city_id' => fake()->randomElement($cities),
+                        'speciality_id' => fake()->randomElement($specialities),
+                    ]);
+                    break;
             }
         }
     }

@@ -2,6 +2,7 @@
 
 namespace Modules\Speciality\Services;
 
+use App\Exceptions\ValidationErrorsException;
 use Modules\College\Services\AdminCollegeService;
 use Modules\Speciality\Models\Speciality;
 
@@ -41,5 +42,21 @@ readonly class AdminSpecialityService
     public function destroy($collegeId, $id)
     {
         Speciality::query()->where('college_id', $collegeId)->findOrFail($id)->delete();
+    }
+
+    /**
+     * @throws ValidationErrorsException
+     */
+    public function exists(int $id, string $errorKey = 'speciality_id')
+    {
+        $speciality = Speciality::query()->find($id);
+
+        if(! $speciality) {
+            throw new ValidationErrorsException([
+                $errorKey => translate_error_message('speciality', 'not_exists'),
+            ]);
+        }
+
+        return $speciality;
     }
 }

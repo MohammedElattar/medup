@@ -6,7 +6,7 @@ use Modules\Auth\Strategies\OTPVerificationStrategy;
 return [
     'verify' => [
         'enabled' => env('VERIFY_ENABLED', true),
-        'strategy' => env('VERIFY_STRATEGY', 'otp'),
+        'strategy' => env('VERIFY_STRATEGY', 'email'),
         'strategies' => [
             'email' => [
                 'class' => EmailVerificationStrategy::class,

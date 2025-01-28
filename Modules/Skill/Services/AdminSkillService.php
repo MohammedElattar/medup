@@ -2,9 +2,12 @@
 
 namespace Modules\Skill\Services;
 
+use App\Exceptions\ValidationErrorsException;
 use App\Services\ImageService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Modules\Skill\Models\Skill;
+use Nette\Schema\ValidationException;
 
 class AdminSkillService
 {
@@ -40,5 +43,27 @@ class AdminSkillService
     public function destroy($id)
     {
         Skill::query()->findOrFail($id)->delete();
+    }
+
+    /**
+     * @throws ValidationErrorsException
+     */
+    public function exist(array $ids, string $errorKey = 'skills.*')
+    {
+        $items = Skill::query()->whereIntegerInRaw('id', $ids)->get();
+        $existingIds = $items->pluck('id')->toArray();
+        $counter = 0;
+
+        foreach($ids as $id) {
+            if(! in_array($id, $existingIds)) {
+                throw new ValidationErrorsException([
+                    Str::replace('*', $counter, $errorKey) => translate_error_message('skill', 'not_exists'),
+                ]);
+            }
+
+            $counter++;
+        }
+
+        return $items;
     }
 }

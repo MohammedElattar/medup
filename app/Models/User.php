@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Builders\UserBuilder;
 use App\Traits\PaginationTrait;
 use App\Traits\Searchable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -28,13 +29,23 @@ class User extends Authenticatable implements HasMedia
         SoftDeletes,
         UserRelations;
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($model){
+            $model->name = $model->first_name . ' ' . $model->middle_name;
+        });
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'middle_name',
         'email',
         'phone',
         'type',
@@ -42,6 +53,7 @@ class User extends Authenticatable implements HasMedia
         'locale',
         'password',
         AuthEnum::VERIFIED_AT,
+        'name',
     ];
 
     /**

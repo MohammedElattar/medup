@@ -136,6 +136,13 @@ class ValidationRuleHelper
 
     }
 
+    public static function pdfRules(bool $inUpdate = false, array $replaceDefaultRules = [])
+    {
+        return self::fileRules($inUpdate, [
+            'mimes' => 'mimes:pdf',
+            ...$replaceDefaultRules
+        ]);
+    }
     /**
      * @return string[]
      */

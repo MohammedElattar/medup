@@ -2,6 +2,7 @@
 
 namespace Modules\City\Services;
 
+use App\Exceptions\ValidationErrorsException;
 use Modules\City\Models\City;
 use Modules\Country\Services\CountryService;
 
@@ -41,5 +42,18 @@ class CityService
     public function destroy($countryId, $id)
     {
         City::query()->where('country_id', $countryId)->findOrFail($id)->delete();
+    }
+
+    public function exists(int $id, string $errorKey = 'city_id')
+    {
+        $city = City::query()->find($id);
+
+        if(! $city) {
+            throw new ValidationErrorsException([
+                $errorKey => translate_error_message('city', 'not_exists')
+            ]);
+        }
+
+        return $city;
     }
 }

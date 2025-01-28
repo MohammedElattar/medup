@@ -3,6 +3,7 @@
 namespace Modules\Auth\Strategies;
 
 use App\Exceptions\ValidationErrorsException;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Modules\Auth\Abstracts\AbstractVerifyUser;
 use Modules\Auth\Emails\VerifyUserEmail;
@@ -26,7 +27,7 @@ class EmailVerificationStrategy extends AbstractVerifyUser implements Verifiable
      */
     public function sendCode($handle): void
     {
-        [$user, $code] = $this->generalSendCode($handle, VerifyTokenTypeEnum::PASSWORD_RESET);
+        [$user, $code] = $this->generalSendCode($handle);
 
         Mail::to($user->getUniqueColumnValue(), $user->name)->send(new VerifyUserEmail([
             'code' => $code,
@@ -57,5 +58,13 @@ class EmailVerificationStrategy extends AbstractVerifyUser implements Verifiable
         $user->forceFill([
             'password' => $newPassword,
         ])->save();
+    }
+
+    /**
+     * @throws ValidationErrorsException
+     */
+    public function validateCode($handle, $code): void
+    {
+        $this->generalValidateCode($handle, $code, VerifyTokenTypeEnum::PASSWORD_RESET);
     }
 }

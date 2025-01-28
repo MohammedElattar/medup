@@ -15,10 +15,4 @@ interface Verifiable
     public function resetPassword($handle, $code, $newPassword);
 
     public function validateCode($handle, $code);
-
-    public function sendPhoneCode(string $newPhone, ?User $user = null);
-
-    public function updatePhone($code, array $data = [], ?User $user = null);
-
-    public function generalSendOtp($handle, $type);
 }

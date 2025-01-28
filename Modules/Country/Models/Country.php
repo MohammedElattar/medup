@@ -4,6 +4,7 @@ namespace Modules\Country\Models;
 
 use App\Traits\PaginationTrait;
 use Illuminate\Database\Eloquent\Model;
+use Modules\City\Models\City;
 use Spatie\Translatable\HasTranslations;
 
 class Country extends Model
@@ -13,4 +14,9 @@ class Country extends Model
     protected $fillable = ['name'];
 
     protected $translatable = ['name'];
+
+    public function cities()
+    {
+        return $this->hasMany(City::class);
+    }
 }
