@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('experts', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->timestamp('top_start_time')->nullable();
-            $table->timestamp('top_end_time')->nullable();
-            $table->timestamps();
+        Schema::table('experts', function (Blueprint $table) {
+            $table->boolean('is_premium')->default(false);
+            $table->decimal('rating_average')->default(0);
         });
     }
 
@@ -25,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('experts');
+        Schema::table('experts', function (Blueprint $table) {
+
+        });
     }
 };

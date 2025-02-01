@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('experts', function (Blueprint $table) {
+        Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->timestamp('top_start_time')->nullable();
-            $table->timestamp('top_end_time')->nullable();
+            $table->timestamp('starts_at');
+            $table->timestamp('ends_at');
+            $table->boolean('paid')->default(false);
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('experts');
+        Schema::dropIfExists('subscriptions');
     }
 };

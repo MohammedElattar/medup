@@ -4,6 +4,7 @@ namespace Modules\Speciality\Models;
 
 use App\Traits\PaginationTrait;
 use Illuminate\Database\Eloquent\Model;
+use Modules\College\Models\College;
 use Spatie\Translatable\HasTranslations;
 
 class Speciality extends Model
@@ -13,4 +14,9 @@ class Speciality extends Model
     protected $fillable = ['name', 'college_id'];
 
     protected $translatable = ['name'];
+
+    public function college()
+    {
+        return $this->belongsTo(College::class);
+    }
 }

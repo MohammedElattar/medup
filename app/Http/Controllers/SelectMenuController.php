@@ -10,6 +10,7 @@ use Modules\Country\Models\Country;
 use Modules\Country\Transformers\CountryResource;
 use Modules\Skill\Models\Skill;
 use Modules\Speciality\Models\Speciality;
+use Modules\Speciality\Transformers\SpecialityResource;
 
 class SelectMenuController extends Controller
 {
@@ -58,8 +59,11 @@ class SelectMenuController extends Controller
         $collegeId = request()->input('college_id');
 
         return $this->resourceResponse(
-            CountryResource::collection(
-                Speciality::query()->latest()->where('college_id', $collegeId)->select(['id', 'name'])->get()
+            SpecialityResource::collection(
+                Speciality::query()
+                    ->latest()
+                    ->when(!is_null($collegeId), fn($q) => $q->where('college_id', $collegeId))
+                    ->get()
             )
         );
     }

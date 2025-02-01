@@ -25,5 +25,6 @@
     "City": true,
     "Skill": true,
     "College": true,
-    "Speciality": true
+    "Speciality": true,
+    "Subscription": true
 }

@@ -2,6 +2,7 @@
 
 use App\Jobs\TruncateTelescopeJob;
 use Illuminate\Support\Facades\Schedule;
+use Modules\Expert\Jobs\SyncTopExpertJob;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,4 @@ use Illuminate\Support\Facades\Schedule;
 //Schedule::command('backup:run --only-db --disable-notifications')->daily()->at('2:00');
 
 Schedule::job(new TruncateTelescopeJob)->everyTenMinutes();
+Schedule::job(SyncTopExpertJob::class)->everyTenSeconds();

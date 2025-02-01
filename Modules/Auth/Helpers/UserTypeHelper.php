@@ -19,6 +19,7 @@ class UserTypeHelper
             UserTypeEnum::EXPERT,
             UserTypeEnum::STUDENT,
             UserTypeEnum::TRAINEE,
+            UserTypeEnum::EXPERT_LEARNER,
         ];
     }
 }
