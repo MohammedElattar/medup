@@ -2,21 +2,22 @@
 
 namespace Modules\Country\Database\Seeders;
 
-use App\Helpers\TranslationHelper;
+use App\Helpers\JsonParserHelper;
 use Illuminate\Database\Seeder;
 use Modules\Country\Models\Country;
 
 class CountryDatabaseSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        for ($i = 0; $i < 10; $i++) {
-            Country::query()->create([
-                'name' => TranslationHelper::generateFakeTranslatedInput('country'),
-            ]);
-        }
+        JsonParserHelper::parse(storage_path('countries/countries.json'))
+            ->seedChunks(Country::class, function($item){
+                return [
+                    'name' => json_encode([
+                        'en' => $item['label'],
+                        'ar' => $item['label_ar'],
+                    ])
+                ];
+            });
     }
 }
