@@ -26,19 +26,13 @@ class SearchController extends Controller
                     $hasVirtualColumn = isset($query->getModel()->virtualColumns) && in_array(TranslationHelper::generateVirtualColumnName($key, $locale), $query->getModel()->virtualColumns);
 
                     if (! $isFirstKey) {
-                        if($hasVirtualColumn) {
-                            $query->where("$table.".TranslationHelper::generateVirtualColumnName($key, $locale), $handle);
-                        } else {
-                            $query->where("$table."."$key->$locale", 'like', "%$handle%");
-                        }
+                        $key = $hasVirtualColumn ? TranslationHelper::generateVirtualColumnName($key, $locale) : "$key->$locale";
+                        $query->where("$table.$key", 'like', "%$handle");
 
                         $isFirstKey = true;
                     } else {
-                        if($hasVirtualColumn) {
-                            $query->orWhere("$table.".TranslationHelper::generateVirtualColumnName($key, $locale), $handle);
-                        } else {
-                            $query->orWhere("$table."."$key->$locale", 'like', "%$handle%");
-                        }
+                        $key = $hasVirtualColumn ? TranslationHelper::generateVirtualColumnName($key, $locale) : "$key->$locale";
+                        $query->orWhere("$table.$key", 'like', "%$handle");
                     }
                 }
             } else {
