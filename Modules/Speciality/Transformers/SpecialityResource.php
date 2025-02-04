@@ -14,6 +14,7 @@ class SpecialityResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->whenHas('name'),
+            'experts_count' => $this->whenHas('experts_count'),
             'college_id' => $this->when(
                 ResourceHelper::shouldReturnForeignKey($this, 'college', 'college_id'),
                 $this->college_id

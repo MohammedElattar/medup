@@ -7,6 +7,7 @@ use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Country\Models\Country;
 use App\Traits\HasTranslations;
+use Modules\Expert\Models\Expert;
 
 class City extends Model
 {
@@ -19,5 +20,10 @@ class City extends Model
     public function country()
     {
         return $this->belongsTo(Country::class);
+    }
+
+    public function experts()
+    {
+        return $this->hasMany(Expert::class);
     }
 }

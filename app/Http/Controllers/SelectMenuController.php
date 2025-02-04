@@ -6,6 +6,7 @@ use App\Traits\HttpResponse;
 use Illuminate\Http\Request;
 use Modules\City\Models\City;
 use Modules\College\Models\College;
+use Modules\College\Transformers\CollegeResource;
 use Modules\Country\Models\Country;
 use Modules\Country\Transformers\CountryResource;
 use Modules\Skill\Models\Skill;
@@ -40,7 +41,7 @@ class SelectMenuController extends Controller
     {
         return $this->resourceResponse(
             CountryResource::collection(
-                Skill::query()->latest()->select(['id', 'name'])->get()
+                Skill::query()->latest()->select(['id', 'name'])->withCount('experts')->get()
             )
         );
     }
@@ -48,8 +49,8 @@ class SelectMenuController extends Controller
     public function colleges()
     {
         return $this->resourceResponse(
-            CountryResource::collection(
-                College::query()->whereHas('specialities')->latest()->select(['id', 'name'])->get()
+            CollegeResource::collection(
+                College::query()->whereHas('specialities')->latest()->select(['id', 'name'])->withCount('experts')->get()
             )
         );
     }
@@ -63,6 +64,8 @@ class SelectMenuController extends Controller
                 Speciality::query()
                     ->latest()
                     ->when(!is_null($collegeId), fn($q) => $q->where('college_id', $collegeId))
+                    ->withCount('experts')
+
                     ->get()
             )
         );

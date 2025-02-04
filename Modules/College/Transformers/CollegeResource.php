@@ -12,6 +12,7 @@ class CollegeResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->whenHas('name'),
+            'experts_count' => $this->whenHas('experts_count'),
         ];
     }
 }

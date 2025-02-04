@@ -17,6 +17,7 @@ class CityResource extends JsonResource
             'id' => $this->id,
             'name' => $this->whenHas('name'),
             'country' => CountryResource::make($this->whenLoaded('country')),
+            'experts_count' => $this->whenHas('experts_count'),
         ];
     }
 }

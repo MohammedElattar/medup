@@ -6,6 +6,7 @@ use App\Traits\PaginationTrait;
 use Illuminate\Database\Eloquent\Model;
 use Modules\College\Models\College;
 use App\Traits\HasTranslations;
+use Modules\Expert\Models\Expert;
 
 class Speciality extends Model
 {
@@ -18,5 +19,10 @@ class Speciality extends Model
     public function college()
     {
         return $this->belongsTo(College::class);
+    }
+
+    public function experts()
+    {
+        return $this->hasMany(Expert::class);
     }
 }
