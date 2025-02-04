@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Str;
 
 class TranslationHelper
@@ -104,5 +105,41 @@ class TranslationHelper
         }
 
         request()->merge([$keyName => $input]);
+    }
+
+    public static function generateTranslatedColumn(Blueprint $table, string $key = 'name') {
+        $table->json($key);
+
+        foreach(self::getAvailableLocales() as $locale) {
+            $table->string(self::generateVirtualColumnName($key, $locale))->nullable()->virtualAs("JSON_UNQUOTE(JSON_EXTRACT($key, '$.\"$locale\"'))");
+            $table->index(self::generateVirtualColumnName($key, $locale));
+        }
+    }
+
+    public static function generateVirtualColumnName(string $key, string $locale): string
+    {
+        return $key.'_'.$locale."_virtual";
+    }
+
+    public static function generateVirtualColumnNames(string $key = 'name')
+    {
+        $names = [];
+
+        foreach(self::getAvailableLocales() as $locale) {
+            $names[] = self::generateVirtualColumnName($key, $locale);
+        }
+
+        return $names;
+    }
+
+    public static function generateVirtualColumns(array $translatableColumns)
+    {
+        $columns = [];
+
+        foreach($translatableColumns as $column) {
+            $columns = array_merge($columns, self::generateVirtualColumnNames($column));
+        }
+
+        return $columns;
     }
 }

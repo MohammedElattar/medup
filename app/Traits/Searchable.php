@@ -15,12 +15,12 @@ trait Searchable
         );
     }
 
-    public function scopeSearchByRelation(Builder $builder, string $relationName, array $columns = ['name'], array $translatedKeys = [], bool $orWhere = false)
+    public function scopeSearchByRelation(Builder $builder, string $relationName, array $columns = ['name'], array $translatedKeys = [], bool $orWhere = false, string $handleKeyName = 'handle')
     {
         if (! $orWhere) {
-            $builder->whereHas($relationName, fn (Builder $query) => $query->searchable($columns, $translatedKeys));
+            $builder->whereHas($relationName, fn (Builder $query) => $query->searchable($columns, $translatedKeys, $orWhere, $handleKeyName));
         } else {
-            $builder->orWhereHas($relationName, fn (Builder $query) => $query->searchable($columns, $translatedKeys));
+            $builder->orWhereHas($relationName, fn (Builder $query) => $query->searchable($columns, $translatedKeys, $orWhere, $handleKeyName));
         }
 
         return $builder;

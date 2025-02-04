@@ -16,6 +16,7 @@ class ExpertFilterRequest extends FormRequest
         'colleges' => 'speciality.college',
         'specialities' => 'speciality',
         'skills' => 'skills',
+        'cities' => 'city',
     ];
 
     public function prepareForValidation(): void
@@ -37,6 +38,9 @@ class ExpertFilterRequest extends FormRequest
             'only_top' => ValidationRuleHelper::booleanRules([
                 'required' => 'nullable',
             ]),
+            'only_premium' => ValidationRuleHelper::booleanRules([
+                'required' => 'nullable',
+            ]),
             'colleges' => ValidationRuleHelper::arrayRules([
                 'required' => 'sometimes',
             ]),
@@ -52,9 +56,21 @@ class ExpertFilterRequest extends FormRequest
             'skills' => ValidationRuleHelper::arrayRules([
                 'required' => 'sometimes',
             ]),
+            'cities' => ValidationRuleHelper::arrayRules([
+                'required' => 'sometimes',
+            ]),
             'skills.*' => ValidationRuleHelper::foreignKeyRules([
                 'required' => 'sometimes',
             ]),
+            'cities.*' => ValidationRuleHelper::foreignKeyRules([
+                'required' => 'sometimes',
+            ]),
+            'order_by_date' => ValidationRuleHelper::enumRules(['asc', 'desc'], [
+                'required' => 'nullable'
+            ]),
+            'city' => ValidationRuleHelper::stringRules([
+                'required' => 'nullable',
+            ])
         ];
     }
 

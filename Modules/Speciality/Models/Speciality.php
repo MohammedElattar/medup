@@ -5,7 +5,7 @@ namespace Modules\Speciality\Models;
 use App\Traits\PaginationTrait;
 use Illuminate\Database\Eloquent\Model;
 use Modules\College\Models\College;
-use Spatie\Translatable\HasTranslations;
+use App\Traits\HasTranslations;
 
 class Speciality extends Model
 {

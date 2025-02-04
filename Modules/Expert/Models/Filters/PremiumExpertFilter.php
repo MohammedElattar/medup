@@ -8,7 +8,7 @@ class PremiumExpertFilter
     {
         if(isset($filters['only_premium']))
         {
-            $query->where('is_premium', true);
+            $query->where('is_premium', $filters['only_premium']);
         }
 
         return $next($query);

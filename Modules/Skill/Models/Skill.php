@@ -7,7 +7,7 @@ use App\Traits\PaginationTrait;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Translatable\HasTranslations;
+use App\Traits\HasTranslations;
 
 class Skill extends Model implements HasMedia
 {

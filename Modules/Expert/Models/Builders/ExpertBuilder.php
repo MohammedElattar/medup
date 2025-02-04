@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Pipeline;
+use Modules\Expert\Models\Filters\ExpertDateFilter;
 use Modules\Expert\Models\Filters\ExpertRelationFilter;
 use Modules\Expert\Models\Filters\ExpertSearchFilter;
 use Modules\Expert\Models\Filters\PremiumExpertFilter;
@@ -60,6 +61,7 @@ class ExpertBuilder extends Builder
                 fn($builder, $next) => PremiumExpertFilter::handle($filters, $builder, $next),
                 fn($builder, $next) => TopExpertFilter::handle($filters, $builder, $next),
                 fn($builder, $next) => ExpertRelationFilter::handle($filters, $builder, $next),
+                fn($builder, $next) => ExpertDateFilter::handle($filters, $builder, $next),
                 fn($builder, $next) => ExpertSearchFilter::handle($filters, $builder, $next),
             ])
             ->thenReturn();
@@ -67,7 +69,7 @@ class ExpertBuilder extends Builder
 
     private function setFilters(array &$filters)
     {
-        if(isset($filters['only_top']) && $filters['only_top']) {
+        if (isset($filters['only_top']) && $filters['only_top']) {
             $filters['only_premium'] = true;
         }
     }

@@ -3,13 +3,14 @@
 namespace Modules\City\Models;
 
 use App\Traits\PaginationTrait;
+use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Country\Models\Country;
-use Spatie\Translatable\HasTranslations;
+use App\Traits\HasTranslations;
 
 class City extends Model
 {
-    use HasTranslations, PaginationTrait;
+    use HasTranslations, PaginationTrait, Searchable;
 
     protected $fillable = ['name', 'country_id'];
 
