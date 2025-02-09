@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Traits\HttpResponse;
-use Illuminate\Http\Request;
 use Modules\City\Models\City;
 use Modules\College\Models\College;
 use Modules\College\Transformers\CollegeResource;

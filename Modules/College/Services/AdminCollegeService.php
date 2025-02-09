@@ -3,29 +3,39 @@
 namespace Modules\College\Services;
 
 use App\Exceptions\ValidationErrorsException;
+use App\Services\ImageService;
+use Illuminate\Support\Facades\DB;
 use Modules\College\Models\College;
 
 class AdminCollegeService
 {
     public function index()
     {
-        return College::query()->latest()->paginatedCollection();
+        return College::query()->latest()->with('icon')->paginatedCollection();
     }
 
     public function show($id)
     {
-        return College::query()->findOrFail($id);
+        return College::query()->with('icon')->findOrFail($id);
     }
 
     public function store(array $data)
     {
-        College::query()->create($data);
+        DB::transaction(function() use ($data){
+            $college = College::query()->create($data);
+
+        });
     }
 
     public function update(array $data, $id)
     {
         $college = College::query()->findOrFail($id);
-        $college->update($data);
+
+        DB::transaction(function() use ($data, $college){
+            $college->update($data);
+            $imageService = new ImageService($college, $data);
+            $imageService->updateOneMedia( 'college_logo', 'icon');
+        });
     }
 
     public function destroy($id)

@@ -9,6 +9,6 @@ Route::group(['prefix' => 'admin/colleges', 'middleware' => GeneralHelper::admin
     Route::get('create', [AdminCollegeController::class, 'create'])->name('colleges.create');
     Route::post('', [AdminCollegeController::class, 'store'])->name('colleges.store');
     Route::get('{college}/edit', [AdminCollegeController::class, 'edit'])->name('colleges.edit');
-    Route::put('{college}', [AdminCollegeController::class, 'update'])->name('colleges.update');
+    Route::post('{college}', [AdminCollegeController::class, 'update'])->name('colleges.update');
     Route::delete('{college}', [AdminCollegeController::class, 'destroy'])->name('colleges.destroy');
 });

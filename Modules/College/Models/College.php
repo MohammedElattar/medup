@@ -2,19 +2,22 @@
 
 namespace Modules\College\Models;
 
+use App\Helpers\MediaHelper;
 use App\Traits\PaginationTrait;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Expert\Models\Expert;
 use Modules\Speciality\Models\Speciality;
 use App\Traits\HasTranslations;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class College extends Model
+class College extends Model implements HasMedia
 {
-    use HasTranslations, PaginationTrait;
+    use HasTranslations, PaginationTrait, InteractsWithMedia;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'description'];
 
-    protected $translatable = ['name'];
+    protected $translatable = ['name', 'description'];
 
     public function specialities()
     {
@@ -24,5 +27,10 @@ class College extends Model
     public function experts()
     {
         return $this->hasManyThrough(Expert::class, Speciality::class);
+    }
+
+    public function icon()
+    {
+        return MediaHelper::mediaRelationship($this, 'college_logo');
     }
 }

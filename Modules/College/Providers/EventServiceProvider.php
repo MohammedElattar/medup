@@ -3,6 +3,8 @@
 namespace Modules\College\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Modules\College\Listeners\SyncCachedCollegesListener;
+use Modules\College\Models\College;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -11,7 +13,17 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array<string, array<int, string>>
      */
-    protected $listen = [];
+    protected $listen = [
+        'eloquent.created: '. College::class => [
+            SyncCachedCollegesListener::class,
+        ],
+        'eloquent.updated: '. College::class => [
+            SyncCachedCollegesListener::class,
+        ],
+        'eloquent.deleted: '. College::class => [
+            SyncCachedCollegesListener::class,
+        ],
+    ];
 
     /**
      * Indicates if events should be discovered.

@@ -9,6 +9,7 @@ use Modules\College\Database\Seeders\CollegeDatabaseSeeder;
 use Modules\Country\Database\Seeders\CountryDatabaseSeeder;
 use Modules\Skill\Database\Seeders\SkillDatabaseSeeder;
 use Modules\Speciality\Database\Seeders\SpecialityDatabaseSeeder;
+use Modules\Testimonial\Database\Seeders\TestimonialDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
             CollegeDatabaseSeeder::class,
             SpecialityDatabaseSeeder::class,
             AuthDatabaseSeeder::class,
+            TestimonialDatabaseSeeder::class,
         ]);
     }
 }

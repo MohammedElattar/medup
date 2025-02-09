@@ -8,7 +8,7 @@
                 <h4 class="card-title">{{ translate_ui('create') }}</h4>
             </div>
             <div class="card-body">
-                <form class="form form-horizontal" action="{{ route('colleges.store') }}" method="POST">
+                <form class="form form-horizontal" action="{{ route('colleges.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div>
@@ -29,9 +29,28 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="mb-1 col-12">
+                                    <div class="col-sm-3">
+                                        <label class="col-form-label"
+                                               for="description">{{ translate_ui('description') }}</label>
+                                    </div>
+                                    <div>
+                                        <x-forms.textarea name="description"/>
+                                    </div>
+                                </div>
                             </x-forms.multi-lang>
                         </div>
-
+                        <div class="col-12">
+                            <div class="mb-3 col">
+                                <div class="col-sm-3">
+                                    <label class="col-form-label" for="icon">{{translate_ui('icon')}}</label>
+                                </div>
+                                <x-forms.image :name="'icon'" :relation="'icon'" />
+                                @error('icon')
+                                <span class="invalid-feedback d-block mt-1">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="col-sm-9">
                             <button type="submit" class="btn btn-primary me-1">{{ translate_ui('submit') }}</button>
                         </div>

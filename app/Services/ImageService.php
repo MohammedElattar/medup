@@ -111,6 +111,6 @@ class ImageService
 
     public static function getMediaExtension(UploadedFile $uploadedFile): string
     {
-        return explode('/', $uploadedFile->getMimeType())[1];
+        return $uploadedFile->extension();
     }
 }

@@ -26,5 +26,6 @@
     "Skill": true,
     "College": true,
     "Speciality": true,
-    "Subscription": true
+    "Subscription": true,
+    "Testimonial": true
 }

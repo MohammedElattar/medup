@@ -15,9 +15,10 @@ class FileOperationService
         string $fileName = 'img',
         ?string $storedFileName = null
     ): object {
+
         return json_decode($class
             ->addMediaFromRequest($fileName)
-            ->usingFileName($storedFileName ?: Str::random().'.png')
+            ->usingFileName($storedFileName ?: Str::random().'.'.ImageService::getMediaExtension(request()->file($fileName)))
             ->toMediaCollection($collectionName));
     }
 

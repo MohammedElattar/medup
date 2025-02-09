@@ -3,6 +3,7 @@
 namespace Modules\College\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Modules\College\Http\Requests\CollegeRequest;
 use Modules\College\Services\AdminCollegeService;
 use Modules\Country\Http\Requests\CountryRequest;
 
@@ -29,14 +30,14 @@ class AdminCollegeController extends Controller
         return view('college::edit', compact('item'));
     }
 
-    public function store(CountryRequest $request)
+    public function store(CollegeRequest $request)
     {
         $this->collegeService->store($request->validated());
 
         return redirect()->route('colleges.index');
     }
 
-    public function update(CountryRequest $request, $id)
+    public function update(CollegeRequest $request, $id)
     {
         $this->collegeService->update($request->validated(), $id);
 

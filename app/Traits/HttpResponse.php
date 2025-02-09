@@ -94,15 +94,25 @@ trait HttpResponse
         );
     }
 
-    public function paginatedResponse(
+    public function preparePaginatedDataPayload(
+        LengthAwarePaginator $collection,
+        string $resourceClass,
+        bool $isCollection = false,
+    )
+    {
+        return $isCollection ? new $resourceClass($collection->items()) : $resourceClass::collection($collection->items());
+    }
+
+    public function preparePaginatedPayload(
         LengthAwarePaginator $collection,
         string $resourceClass,
         bool $isCollection = false,
         string $message = 'Data Fetched Successfully',
         int $code = Response::HTTP_OK
-    ): JsonResponse {
-        $data = [
-            'data' => $isCollection ? new $resourceClass($collection->items()) : $resourceClass::collection($collection->items()),
+    )
+    {
+        return [
+            'data' => $this->preparePaginatedDataPayload($collection, $resourceClass, $isCollection),
             'meta' => [
                 'current_page' => $collection->currentPage(),
                 'from' => $collection->firstItem(),
@@ -113,6 +123,16 @@ trait HttpResponse
             'code' => $code,
             'type' => 'success',
         ];
+    }
+
+    public function paginatedResponse(
+        LengthAwarePaginator $collection,
+        string $resourceClass,
+        bool $isCollection = false,
+        string $message = 'Data Fetched Successfully',
+        int $code = Response::HTTP_OK
+    ): JsonResponse {
+        $data = $this->preparePaginatedPayload($collection, $resourceClass, $isCollection, $message, $code);
 
         return response()->json($data, $code);
     }

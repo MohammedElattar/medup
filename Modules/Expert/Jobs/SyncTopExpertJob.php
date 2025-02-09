@@ -18,7 +18,6 @@ class SyncTopExpertJob implements ShouldQueue
 
     public function __construct()
     {
-
     }
 
     /**
@@ -29,7 +28,7 @@ class SyncTopExpertJob implements ShouldQueue
         $counter = 0;
         $chunk = [];
         $now = now();
-        $startDate = Carbon::parse(Expert::query()->max('top_end_time')?: $now);
+        $startDate = Carbon::parse(Expert::query()->max('top_end_time')?: $now)->timezone('UTC');
         $endDate = $startDate->clone()->addHour();
 
         Expert::query()

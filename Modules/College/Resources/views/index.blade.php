@@ -3,7 +3,7 @@
 
 @section('title', translate_ui('colleges'))
 @section('content')
-    <x-ui.table.view :columns="['ID', 'Name', 'Actions']" :title="'colleges'"
+    <x-ui.table.view :columns="['ID', 'Name', 'description', 'icon', 'Actions']" :title="'colleges'"
                      :paginationObject="PaginationHelper::getPaginationObject($colleges)">
         <x-ui.table.buttons>
             <x-ui.buttons.add url="{{ route('colleges.create') }}"/>
@@ -14,6 +14,10 @@
                 <tr>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
+                    <td>{{ $item->description }}</td>
+                    <td>
+                        <x-ui.table.image :item="$item" relation="icon"/>
+                    </td>
                     <x-ui.table.actions.view>
                         <x-ui.table.actions.info url="{{ route('specialities.index', $item->id) }}" :title="translate_ui('specialities')"/>
                         <x-ui.table.actions.edit url="{{ route('colleges.edit', $item->id) }}"/>
