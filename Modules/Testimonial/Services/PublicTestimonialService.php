@@ -14,7 +14,7 @@ class PublicTestimonialService
             return Testimonial::query()
                 ->latest()
                 ->with([
-                    'user' => fn(UserBuilder|BelongsTo $b) => $b->withMinimalDetails(excludeColumns: ['phone', 'email', 'status']),
+                    'user' => fn(UserBuilder|BelongsTo $b) => $b->withMinimalDetails(excludeColumns: ['phone', 'email', 'status'], additionalColumns: ['type']),
                 ])
                 ->paginatedCollection();
         });
