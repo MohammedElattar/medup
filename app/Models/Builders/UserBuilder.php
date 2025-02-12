@@ -30,6 +30,8 @@ class UserBuilder extends Builder
     {
         $columns = array_diff([
             'users.id',
+            'users.first_name',
+            'users.middle_name',
             'users.name',
         ], array_map(fn ($column) => "users.$column", $excludeColumns));
 

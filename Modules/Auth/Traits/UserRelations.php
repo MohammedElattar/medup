@@ -6,7 +6,6 @@ use App\Helpers\MediaHelper;
 use Modules\Auth\Enums\AuthEnum;
 use Modules\Expert\Models\Expert;
 use Modules\Student\Models\Student;
-use Modules\Trainee\Models\Trainee;
 
 trait UserRelations
 {
@@ -23,10 +22,5 @@ trait UserRelations
     public function student()
     {
         return $this->hasOne(Student::class);
-    }
-
-    public function trainee()
-    {
-        return $this->hasOne(Trainee::class);
     }
 }

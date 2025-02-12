@@ -104,4 +104,5 @@ return [
     ...\Modules\Skill\Helpers\SkillTranslationHelper::ar(),
     ...\Modules\City\Helpers\CityTranslationHelper::ar(),
     ...\Modules\Speciality\Helpers\SpecialityTranslationHelper::ar(),
+    ...\Modules\Expert\Helpers\ExpertTranslationHelper::ar(),
 ];

@@ -10,14 +10,24 @@ class PublicExpertService
     public function index(array $filters)
     {
         return Expert::query()
-            ->when(true, fn(ExpertBuilder $b) => $b->withMinimalPublicDetails()->handleFilters($filters))
+            ->when(
+                true,
+                fn(ExpertBuilder $b) => $b
+                    ->withMinimalPublicDetails()
+                    ->handleFilters($filters)
+            )
             ->paginatedCollection();
     }
 
     public function topExperts()
     {
-        return cache()->remember('top_experts', now()->addHours(2), function(){
+        return cache()->remember('top_experts', now()->addHour(), function(){
           return $this->index(['only_top' => true]);
         });
+    }
+
+    public function show($id)
+    {
+        return Expert::query()->when(true, fn(ExpertBuilder $b) => $b->withDetailsForPublic())->findOrFail($id);
     }
 }

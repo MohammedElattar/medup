@@ -16,6 +16,8 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'first_name' => $this->whenHas('first_name'),
+            'middle_name' => $this->whenHas('middle_name'),
             'name' => $this->whenHas('name'),
             'reaction' => $this->when(! is_null($this->pivot), function () {
                 return $this->pivot->value;

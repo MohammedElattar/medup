@@ -6,6 +6,8 @@ use App\Models\Builders\UserBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Pipeline;
 use Modules\Expert\Models\Filters\ExpertDateFilter;
 use Modules\Expert\Models\Filters\ExpertRelationFilter;
@@ -15,13 +17,43 @@ use Modules\Expert\Models\Filters\TopExpertFilter;
 
 class ExpertBuilder extends Builder
 {
-    public function withMinimalPublicDetails()
+    public function withBaseMinimalDetails(array $selectedColumns = ['*'], array $userSelectedColumns = [])
     {
         return $this
+            ->select($selectedColumns)
+            ->withTotalExperienceYears()
             ->withSkills()
             ->withSpecialityDetails()
-            ->withUserDetails()
+            ->withUserDetails($userSelectedColumns)
             ->withCityDetails();
+    }
+
+    public function withMinimalPublicDetails(): ExpertBuilder
+    {
+        return $this
+            ->withBaseMinimalDetails([
+                'id', 'city_id', 'speciality_id', 'user_id', 'rating_average', 'is_premium',
+            ]);
+    }
+
+    public function withDetailsForPublic()
+    {
+        return $this
+            ->withBaseMinimalDetails(userSelectedColumns: ['created_at'])
+            ->withExperiences()
+            ->withCertificationDetails()
+            ->withSocialContacts()
+            ->withCv();
+    }
+
+    public function withProfileDetails()
+    {
+        return $this->withBaseMinimalDetails()->withCv()->withSocialContacts();
+    }
+
+    public function withCv()
+    {
+        return $this->with('cv');
     }
 
     public function withSkills(): ExpertBuilder
@@ -45,10 +77,10 @@ class ExpertBuilder extends Builder
         ]);
     }
 
-    public function withUserDetails(): ExpertBuilder
+    public function withUserDetails(array $additionalColumns = []): ExpertBuilder
     {
         return $this->with([
-            'user' => fn(UserBuilder|BelongsTo $b) => $b->withMinimalDetails(additionalColumns: ['type'])
+            'user' => fn(UserBuilder|BelongsTo $b) => $b->withMinimalDetails(additionalColumns: ['type', ...$additionalColumns])
         ]);
     }
 
@@ -77,5 +109,29 @@ class ExpertBuilder extends Builder
     public function orderByPremium(): ExpertBuilder
     {
         return $this->orderByRaw('CASE WHEN is_premium = true THEN 0 ELSE 1 END');
+    }
+
+    public function withExperiences()
+    {
+        return $this->with([
+            'experiences' => fn(ExpertExperienceBuilder|HasMany $b) => $b->withMinimalDetailsForPublic()
+        ]);
+    }
+
+    public function withCertificationDetails(): ExpertBuilder
+    {
+        return $this->with([
+            'certification' => fn(CertificationBuilder|HasOne $b) => $b->withDetails(),
+        ]);
+    }
+
+    public function withSocialContacts(): ExpertBuilder
+    {
+        return $this->with('socialContacts');
+    }
+
+    public function withTotalExperienceYears(): ExpertBuilder
+    {
+        return $this->withSum('experiences', 'experience_years');
     }
 }

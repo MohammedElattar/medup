@@ -21,6 +21,11 @@ class Expert extends Model implements HasMedia
         'speciality_id',
         'rating_average',
         'is_premium',
+        'graduation_year',
+        'headline',
+        'degree',
+        'headline',
+        'education',
     ];
 
     public static function boot(): void
@@ -36,6 +41,8 @@ class Expert extends Model implements HasMedia
             'is_premium' => 'boolean',
             'top_end_time' => 'datetime',
             'top_start_time' => 'datetime',
+            'graduation_year' => 'integer',
+            'experiences_sum_experience_years' => 'integer',
         ];
     }
 

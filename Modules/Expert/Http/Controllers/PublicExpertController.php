@@ -18,8 +18,15 @@ class PublicExpertController extends Controller
 
     public function index(ExpertFilterRequest $request)
     {
-        $experts = $this->publicExpertService->index($request->validated());
+        $experts = $request->has('only_top') ? $this->publicExpertService->topExperts() : $this->publicExpertService->index($request->validated());
 
         return $this->paginatedResponse($experts, ExpertResource::class);
+    }
+
+    public function show($id)
+    {
+        $expert = $this->publicExpertService->show($id);
+
+        return $this->resourceResponse(ExpertResource::make($expert));
     }
 }

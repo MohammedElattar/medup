@@ -12,11 +12,12 @@ class GeneralHelper
 {
     public static function adminMiddlewares(): array
     {
-        return array_merge(['auth', 'user_type_in:'.UserTypeEnum::ADMIN.'|', SetLocaleMiddleware::class]);
+        return array_merge(self::getDefaultLoggedUserMiddlewares(), ['user_type_in:'.UserTypeEnum::ADMIN]);
     }
 
-    public static function expert()
+    public static function generalExpertMiddlewares(): array
     {
+        return self::getDefaultLoggedUserMiddlewares(['user_type_in:'.UserTypeEnum::EXPERT.'|'.UserTypeEnum::EXPERT_LEARNER]);
     }
 
     public static function dashboardUserMiddlewares(): array

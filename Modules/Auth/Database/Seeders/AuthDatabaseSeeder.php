@@ -5,6 +5,7 @@ namespace Modules\Auth\Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Modules\Auth\Enums\AuthEnum;
+use Modules\Auth\Enums\DegreeEnum;
 use Modules\Auth\Enums\UserTypeEnum;
 use Modules\City\Models\City;
 use Modules\Expert\Models\Expert;
@@ -54,6 +55,9 @@ class AuthDatabaseSeeder extends Seeder
                         'user_id' => $user->id,
                         'city_id' => fake()->randomElement($cities),
                         'speciality_id' => fake()->randomElement($specialities),
+                        'headline' => fake()->sentence(),
+                        'graduation_year' => fake()->year(),
+                        'degree' => fake()->randomElement(DegreeEnum::toArray()),
                     ]);
                     $expert->skills()->attach(fake()->randomElements($skills));
                     break;

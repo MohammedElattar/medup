@@ -66,4 +66,5 @@ return [
     ...\Modules\Skill\Helpers\SkillTranslationHelper::en(),
     ...\Modules\City\Helpers\CityTranslationHelper::en(),
     ...\Modules\Speciality\Helpers\SpecialityTranslationHelper::en(),
+    ...\Modules\Expert\Helpers\ExpertTranslationHelper::en(),
 ];

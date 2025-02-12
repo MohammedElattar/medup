@@ -20,6 +20,7 @@ use Illuminate\Http\Middleware\HandleCors;
 use Illuminate\Support\Str;
 use Modules\Auth\Helpers\AuthExceptionHelper;
 use Modules\Auth\Http\Middleware\CheckUserType;
+use Modules\Expert\Helpers\ExpertExceptionHelper;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -114,5 +115,8 @@ return Application::configure(basePath: dirname(__DIR__))
 
             return $httpResponse->errorResponse(code: $e->getStatusCode(), message: $e->getMessage());
         });
+
+        AuthExceptionHelper::handle($exceptions);
+        ExpertExceptionHelper::handle($exceptions);
     })
     ->create();
