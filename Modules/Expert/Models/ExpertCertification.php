@@ -14,7 +14,7 @@ class ExpertCertification extends Model implements HasMedia
 
     protected $fillable = ['name', 'date', 'expert_id'];
 
-    public function image()
+    public function file()
     {
         return MediaHelper::mediaRelationship($this, 'expert_certification');
     }

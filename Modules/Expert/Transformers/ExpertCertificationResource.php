@@ -17,7 +17,7 @@ class ExpertCertificationResource extends JsonResource
             'id' => $this->id,
             'name' => $this->whenHas('name'),
             'date' => $this->whenHas('date'),
-            'image' => $this->whenNotNull(ResourceHelper::getFirstMediaOriginalUrl($this, 'image')),
+            'file' => $this->whenNotNull(ResourceHelper::getFirstMediaOriginalUrl($this, 'file')),
         ];
     }
 }

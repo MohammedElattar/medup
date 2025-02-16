@@ -16,7 +16,7 @@ class ExpertCertificationService
     {
         return ExpertCertification::query()
             ->where('expert_id', $this->getExpert()->id)
-            ->with('image')
+            ->with('file')
             ->first();
     }
 
