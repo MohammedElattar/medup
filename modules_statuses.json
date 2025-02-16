@@ -29,5 +29,6 @@
     "Subscription": true,
     "Testimonial": true,
     "Blog": true,
-    "Tag": true
+    "Tag": true,
+    "Research": true
 }

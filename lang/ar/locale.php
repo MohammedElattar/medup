@@ -70,4 +70,7 @@ return [
     'sub_title' => 'العنوان الفرعي',
     'choose_date' => 'أختر التاريخ',
     'blogs' => 'المدونات',
+    'notes' => 'المحتوي',
+    'contributors' => 'المشاركين',
+    'researches' => 'الأبحاث',
 ];

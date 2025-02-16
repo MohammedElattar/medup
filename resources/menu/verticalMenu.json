@@ -29,6 +29,12 @@
             "icon": "menu-icon tf-icons ti ti-article",
             "url": "/admin/blogs",
             "slug": "blogs.index"
+        },
+        {
+            "name": "researches",
+            "icon": "menu-icon tf-icons ti ti-microscope",
+            "url": "/admin/researches",
+            "slug": "researches.index"
         }
     ]
 }

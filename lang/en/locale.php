@@ -72,4 +72,7 @@ return [
     'sub_title' => 'Sub title',
     'choose_date' => 'Select date',
     'blogs' => 'Blogs',
+    'notes' => 'Notes',
+    'contributors' => 'Contributors',
+    'researches' => 'Researches',
 ];

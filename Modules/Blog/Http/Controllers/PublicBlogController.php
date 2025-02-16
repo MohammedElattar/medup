@@ -24,4 +24,11 @@ class PublicBlogController extends Controller
 
         return $this->paginatedResponse($blogs, BlogResource::class);
     }
+
+    public function show($id)
+    {
+        $blog = Blog::query()->with(['image', 'tags:id,name'])->findOrFail($id);
+
+        return $this->resourceResponse(BlogResource::make($blog));
+    }
 }
