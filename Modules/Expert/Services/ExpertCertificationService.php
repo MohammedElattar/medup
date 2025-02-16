@@ -26,9 +26,9 @@ class ExpertCertificationService
             ->where('expert_id', $this->getExpert()->id)
             ->first();
 
-        if(! $expertCertification && !isset($data['image'])) {
+        if(! $expertCertification && !isset($data['file'])) {
             throw new ValidationErrorsException([
-                'image' => translate_error_message('image', 'required')
+                'file' => translate_error_message('file', 'required')
             ]);
         }
 
@@ -40,7 +40,7 @@ class ExpertCertificationService
             }
 
             $imageService = new ImageService($expertCertification, $data);
-            $imageService->storeOneMediaFromRequest('expert_certification', 'image');
+            $imageService->storeOneMediaFromRequest('expert_certification', 'file');
         });
 
         return $this->show();

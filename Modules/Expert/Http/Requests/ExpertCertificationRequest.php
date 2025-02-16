@@ -17,7 +17,9 @@ class ExpertCertificationRequest extends FormRequest
         return [
             'name' => ValidationRuleHelper::stringRules(),
             'date' => ValidationRuleHelper::dateRules(),
-            'image' => ValidationRuleHelper::storeOrUpdateImageRules(true)
+            'file' => ValidationRuleHelper::pdfRules(true, [
+                'mimes' => 'mimes:pdf',
+            ])
         ];
     }
 
