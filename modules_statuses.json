@@ -27,5 +27,7 @@
     "College": true,
     "Speciality": true,
     "Subscription": true,
-    "Testimonial": true
+    "Testimonial": true,
+    "Blog": true,
+    "Tag": true
 }

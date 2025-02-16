@@ -4,6 +4,7 @@ namespace Modules\College\Models;
 
 use App\Helpers\MediaHelper;
 use App\Traits\PaginationTrait;
+use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Expert\Models\Expert;
 use Modules\Speciality\Models\Speciality;
@@ -13,7 +14,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class College extends Model implements HasMedia
 {
-    use HasTranslations, PaginationTrait, InteractsWithMedia;
+    use HasTranslations, PaginationTrait, InteractsWithMedia, Searchable;
 
     protected $fillable = ['name', 'description'];
 

@@ -30,6 +30,7 @@ class GeneralHelper
         $defaultMiddlewares = [
             MustBeVerified::class,
             EnabledMiddleware::class,
+            SetLocaleMiddleware::class,
         ];
 
         $middlewares = array_merge($defaultMiddlewares, $additionalMiddlewares ?? []);

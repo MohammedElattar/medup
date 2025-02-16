@@ -11,7 +11,7 @@ class AdminCollegeService
 {
     public function index()
     {
-        return College::query()->latest()->with('icon')->paginatedCollection();
+        return College::query()->latest()->searchable(['name'], ['name'])->with('icon')->paginatedCollection();
     }
 
     public function show($id)

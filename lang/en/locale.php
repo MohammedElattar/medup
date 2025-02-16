@@ -67,4 +67,9 @@ return [
     'icon' => 'Icon',
     'colleges' => 'Colleges',
     'specialities' => 'Specialities',
+    'tags' => 'Tags',
+    'date' => 'Date',
+    'sub_title' => 'Sub title',
+    'choose_date' => 'Select date',
+    'blogs' => 'Blogs',
 ];
