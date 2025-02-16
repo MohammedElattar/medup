@@ -8,6 +8,6 @@ class CertificationBuilder extends Builder
 {
     public function withDetails()
     {
-        return $this->with('image');
+        return $this->with('file');
     }
 }
