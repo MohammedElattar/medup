@@ -48,7 +48,7 @@ class ExpertBuilder extends Builder
 
     public function withProfileDetails()
     {
-        return $this->withBaseMinimalDetails()->withCv()->withSocialContacts();
+        return $this->withBaseMinimalDetails(userSelectedColumns: ['email', 'phone'])->withCv()->withSocialContacts();
     }
 
     public function withCv()
