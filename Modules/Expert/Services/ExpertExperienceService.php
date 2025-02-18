@@ -30,6 +30,7 @@ class ExpertExperienceService
     public function show($id)
     {
         return ExpertExperience::query()
+            ->when(true, fn(ExpertExperienceBuilder $b) => $b->withCityDetails())
             ->where('expert_id', $this->getExpert()->id)
             ->findOrFail($id);
     }
