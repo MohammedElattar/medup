@@ -64,8 +64,16 @@ class SelectMenuController extends Controller
                     ->latest()
                     ->when(!is_null($collegeId), fn($q) => $q->where('college_id', $collegeId))
                     ->withCount('experts')
-
                     ->get()
+            )
+        );
+    }
+
+    public function collegesWithSpecialities()
+    {
+        return $this->resourceResponse(
+            CollegeResource::collection(
+                College::query()->latest()->select(['id', 'name'])->whereHas('specialities')->with('specialities')->get()
             )
         );
     }

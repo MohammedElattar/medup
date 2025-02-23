@@ -73,4 +73,12 @@ return [
     'notes' => 'المحتوي',
     'contributors' => 'المشاركين',
     'researches' => 'الأبحاث',
+    'activate' => 'تفعيل',
+    'deactivate' => 'إلغاء التفعيل',
+    'ideas' => 'الأفكار',
+    'expert' => 'الخبير',
+    'price' => 'السعر',
+    'college' => 'الكلية',
+    'speciality' => 'التخصص',
+    'idea' => 'الفكرة',
 ];

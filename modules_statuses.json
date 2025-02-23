@@ -30,5 +30,6 @@
     "Testimonial": true,
     "Blog": true,
     "Tag": true,
-    "Research": true
+    "Research": true,
+    "Idea": true
 }

@@ -35,6 +35,12 @@
             "icon": "menu-icon tf-icons ti ti-microscope",
             "url": "/admin/researches",
             "slug": "researches.index"
+        },
+        {
+            "name": "ideas",
+            "icon": "menu-icon tf-icons ti ti-bulb",
+            "url": "/admin/ideas",
+            "slug": "ideas.index"
         }
     ]
 }

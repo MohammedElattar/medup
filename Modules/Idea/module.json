@@ -1,0 +1,11 @@
+{
+    "name": "Idea",
+    "alias": "idea",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Idea\\Providers\\IdeaServiceProvider"
+    ],
+    "files": []
+}

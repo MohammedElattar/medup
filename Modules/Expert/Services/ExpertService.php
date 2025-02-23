@@ -2,6 +2,7 @@
 
 namespace Modules\Expert\Services;
 
+use App\Exceptions\ValidationErrorsException;
 use App\Services\ImageService;
 use Illuminate\Support\Facades\DB;
 use Modules\City\Services\CityService;
@@ -59,5 +60,18 @@ class ExpertService
         });
 
         return $this->show();
+    }
+
+    public function exists($id, string $errorKey = 'expert_id')
+    {
+        $expert = Expert::query()->find($id);
+
+        if(! $expert) {
+            throw new ValidationErrorsException([
+                $errorKey => translate_error_message('expert', 'not_exists'),
+            ]);
+        }
+
+        return $expert;
     }
 }

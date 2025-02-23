@@ -9,4 +9,5 @@ Route::group(['prefix' => 'api/select_menu'], function(){
     Route::get('skills', [SelectMenuController::class, 'skills']);
     Route::get('colleges', [SelectMenuController::class, 'colleges']);
     Route::get('specialities', [SelectMenuController::class, 'specialities']);
+    Route::get('colleges_with_specialities', [SelectMenuController::class, 'collegesWithSpecialities']);
 });

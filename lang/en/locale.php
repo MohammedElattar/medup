@@ -75,4 +75,12 @@ return [
     'notes' => 'Notes',
     'contributors' => 'Contributors',
     'researches' => 'Researches',
+    'activate' => 'Activate',
+    'deactivate' => 'Deactivate',
+    'ideas' => 'Ideas',
+    'expert' => 'Expert',
+    'price' => 'Price',
+    'college' => 'College',
+    'speciality' => 'Speciality',
+    'idea' => 'Idea',
 ];
