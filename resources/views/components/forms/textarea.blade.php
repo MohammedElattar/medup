@@ -4,7 +4,8 @@
           class="form-control @error($name) is-invalid @enderror"
           name="{{$name}}"
           style="{{$style}}"
-          disabled="{{$disabled ? 'disabled' : ''}}"
+          translate
+          {{$disabled ? 'disabled' : ''}}
           placeholder="{{ translate_ui($name) }}"
 
 >{{$value}}</textarea>

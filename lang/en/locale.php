@@ -83,4 +83,10 @@ return [
     'college' => 'College',
     'speciality' => 'Speciality',
     'idea' => 'Idea',
+    'join_date' => 'Joining date',
+    'experts' => 'Experts',
+    'name_en' => 'English name',
+    'name_ar' => 'Arabic name',
+    'content_en' => 'English content',
+    'content_ar' => 'Arabic content',
 ];

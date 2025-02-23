@@ -2,6 +2,7 @@
 
 use App\Exceptions\InternalServerErrorException;
 use App\Exceptions\ValidationErrorsException;
+use App\Helpers\FlasherHelper;
 use App\Http\Middleware\AccountMustBeActive;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\MustBeVerified;
@@ -17,7 +18,9 @@ use Illuminate\Foundation\Http\Middleware\TrimStrings;
 use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Middleware\HandleCors;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Modules\Auth\Helpers\AuthExceptionHelper;
 use Modules\Auth\Http\Middleware\CheckUserType;
 use Modules\Expert\Helpers\ExpertExceptionHelper;
@@ -72,6 +75,15 @@ return Application::configure(basePath: dirname(__DIR__))
         {
             use \App\Traits\HttpResponse;
         });
+
+        $exceptions->render(function(ValidationException $e, Request $req){
+            foreach ($e->errors() as $field => $errors) {
+                $translatedKey = translate_ui(str_replace('.', '_', $field));
+                FlasherHelper::error("$translatedKey : $errors[0]");
+                break;
+            }
+        });
+
 
         $exceptions->renderable(function (ValidationErrorsException $e) use ($httpResponse) {
             return $httpResponse->validationErrorsResponse($e->getErrors());

@@ -15,7 +15,7 @@
     'value' => ''
 ])
 
-@php($value = $value instanceof Carbon ? $value->format(DateHelper::defaultDateTimeFormat()) : ($value ? Carbon::parse($value)->format(DateHelper::dateTimeFormat()) : ''))
+@php($value = $value instanceof Carbon ? $value->format(DateHelper::defaultDateTimeFormat()) : ($value ? Carbon::parse($value)->format(DateHelper::defaultTimeFormat()) : ''))
 @php($hideDate = $overrideOptions['disableDate'] ?? $options['disableDate'])
 @php($errorKey = $errorKey ?: $name)
 @php($value = $hideDate && ($overrideOptions['enableTime'] ?? $options['enableTime'] )? (explode(' ', $value)[1] ?? '') : $value)

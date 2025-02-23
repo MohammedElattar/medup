@@ -2,6 +2,7 @@
 
 namespace Modules\Blog\Http\Controllers;
 
+use App\Helpers\FlasherHelper;
 use App\Http\Controllers\Controller;
 use App\Traits\HttpResponse;
 use Modules\Blog\Http\Requests\BlogRequest;
@@ -40,6 +41,8 @@ class AdminBlogController extends Controller
    {
        $this->adminBlogService->store($request->validated());
 
+       FlasherHelper::success(translate_success_message('blog', 'created_female'));
+
        return redirect()->route('blogs.index');
    }
 
@@ -47,12 +50,16 @@ class AdminBlogController extends Controller
    {
        $this->adminBlogService->update($request->validated(), $id);
 
+       FlasherHelper::success(translate_success_message('blog', 'updated_female'));
+
        return redirect()->route('blogs.index');
    }
 
    public function destroy($id)
    {
        Blog::query()->findOrFail($id)->delete();
+
+       FlasherHelper::success(translate_success_message('blog', 'deleted_female'));
 
        return redirect()->route('blogs.index');
    }

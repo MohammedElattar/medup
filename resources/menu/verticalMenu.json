@@ -1,6 +1,12 @@
 {
     "menu": [
         {
+            "name": "experts",
+            "icon": "menu-icon tf-icons ti ti-users",
+            "url": "/admin/experts",
+            "slug": "experts.index"
+        },
+        {
             "name": "countries",
             "icon": "menu-icon tf-icons ti ti-world",
             "url": "/admin/countries",
