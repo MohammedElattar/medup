@@ -39,7 +39,7 @@ Route::group(['middleware' => GeneralHelper::getDefaultLoggedUserMiddlewares()],
     Route::patch('password/change_password', [PasswordController::class, 'changePassword']);
     Route::group(['prefix' => 'profile'], function () {
         Route::get('', [ProfileController::class, 'show']);
-        Route::post('', [ProfileController::class, 'handle']);
+        Route::post('', [ProfileController::class, 'publicHandle']);
     });
 
     Route::post('logout', LogoutController::class);

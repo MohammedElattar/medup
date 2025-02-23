@@ -16,7 +16,8 @@ class ProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ValidationRuleHelper::stringRules(['required' => 'sometimes']),
+            'first_name' => ValidationRuleHelper::stringRules(['required' => 'sometimes']),
+            'middle_name' => ValidationRuleHelper::stringRules(['required' => 'sometimes']),
             'email' => ValidationRuleHelper::emailRules(['required' => 'sometimes']),
             'phone' => ValidationRuleHelper::phoneRules(['required' => 'sometimes']),
             'avatar' => ValidationRuleHelper::storeOrUpdateImageRules(true),

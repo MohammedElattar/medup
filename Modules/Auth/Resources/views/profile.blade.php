@@ -35,14 +35,23 @@
             <input name="avatar" type="file" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" />
             <div class="row">
               <div class="mb-4 col-md-6">
-                <label for="name" class="form-label">{{translate_ui('name')}}</label>
-                <input class="form-control @error('name') is-invalid @enderror" type="text" id="name" name="name" value="{{ old('name', $user->name) }}" />
-                @error('name')
+                <label for="first_name" class="form-label">{{translate_ui('first_name')}}</label>
+                <input class="form-control @error('first_name') is-invalid @enderror" type="text" id="first_name" name="first_name" value="{{ old('first_name', $user->first_name) }}" />
+                @error('first_name')
                 <div class="invalid-feedback">
                   {{ $message }}
                 </div>
                 @enderror
               </div>
+                <div class="mb-4 col-md-6">
+                    <label for="last_name" class="form-label">{{translate_ui('last_name')}}</label>
+                    <input class="form-control @error('last_name') is-invalid @enderror" type="text" id="last_name" name="last_name" value="{{ old('last_name', $user->last_name) }}" />
+                    @error('last_name')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
               <div class="mb-4 col-md-6">
                 <label for="email" class="form-label">{{translate_ui('email')}}</label>
                 <input class="form-control @error('email') is-invalid @enderror" type="text" id="email" name="email" value="{{ old('email', $user->email) }}" />

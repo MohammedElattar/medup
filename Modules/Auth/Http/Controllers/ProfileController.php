@@ -25,9 +25,6 @@ class ProfileController extends Controller
         return AuthEnum::AVATAR_COLLECTION_NAME;
     }
 
-    /**
-     * @throws ValidationErrorsException
-     */
     public function handle(ProfileRequest $request, ProfileService $profileService)
     {
         try {
@@ -40,6 +37,24 @@ class ProfileController extends Controller
             return redirect()->back()->withErrors($e->getErrors());
         }
     }
+
+    public function publicHandle(ProfileRequest $request, ProfileService $profileService): JsonResponse
+    {
+        $result = $profileService->handle($request->validated());
+
+        $msg = translate_success_message('profile', 'updated');
+
+        if (isset($result['verified'])) {
+            $msg .= ' and sms verification sent';
+        }
+
+        if (is_bool($result) || isset($result['verified'])) {
+            return $this->okResponse(message: $msg);
+        }
+
+        return $this->validationErrorsResponse($result);
+    }
+
 
     public function show()
     {

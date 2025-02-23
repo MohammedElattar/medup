@@ -36,6 +36,10 @@ class User extends Authenticatable implements HasMedia
         static::creating(function($model){
             $model->name = $model->first_name . ' ' . $model->middle_name;
         });
+
+        static::updating(function($model){
+            $model->name = $model->first_name . ' ' . $model->middle_name;
+        });
     }
 
     /**
