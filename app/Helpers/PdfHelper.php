@@ -2,19 +2,14 @@
 
 namespace App\Helpers;
 
-use Imagick;
-use ImagickException;
+use setasign\Fpdi\Fpdi;
 
 class PdfHelper
 {
-    /**
-     * @throws ImagickException
-     */
     public static function getPagesCount(string $path)
     {
-        $image = new Imagick();
-        $image->pingImage($path);
-
-        return $image->getNumberImages();
+        $pdf = new Fpdi();
+//        $pdf->setSourceFile($path);
+        return $pdf->setSourceFile($path);
     }
 }

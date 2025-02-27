@@ -11,6 +11,7 @@
   "require": {
     "php": "^8.2",
     "ext-dom": "*",
+    "ext-imagick": "*",
     "cerbero/json-parser": "^1.1",
     "elattar/fast-paginate": "*",
     "elattar/prepare": "^4.5",
@@ -21,10 +22,11 @@
     "laravel/tinker": "^2.9",
     "nwidart/laravel-modules": "*",
     "php-flasher/flasher-laravel": "^2.1",
+    "setasign/fpdf": "^1.8",
+    "setasign/fpdi": "^2.6",
     "socialiteproviders/apple": "^5.6",
     "spatie/laravel-medialibrary": "^11.10",
-    "spatie/laravel-translatable": "^6.8",
-      "ext-imagick": "*"
+    "spatie/laravel-translatable": "^6.8"
   },
   "require-dev": {
     "barryvdh/laravel-debugbar": "^3.14",
