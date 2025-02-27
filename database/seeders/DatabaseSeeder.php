@@ -10,6 +10,7 @@ use Modules\Collaborate\Database\Seeders\CollaborateDatabaseSeeder;
 use Modules\College\Database\Seeders\CollegeDatabaseSeeder;
 use Modules\Country\Database\Seeders\CountryDatabaseSeeder;
 use Modules\Idea\Database\Seeders\IdeaDatabaseSeeder;
+use Modules\Library\Database\Seeders\LibraryDatabaseSeeder;
 use Modules\Research\Database\Seeders\ResearchDatabaseSeeder;
 use Modules\Skill\Database\Seeders\SkillDatabaseSeeder;
 use Modules\Speciality\Database\Seeders\SpecialityDatabaseSeeder;
@@ -33,6 +34,7 @@ class DatabaseSeeder extends Seeder
             ResearchDatabaseSeeder::class,
             CollaborateDatabaseSeeder::class,
             IdeaDatabaseSeeder::class,
+            LibraryDatabaseSeeder::class,
         ]);
     }
 }

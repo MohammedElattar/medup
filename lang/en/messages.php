@@ -70,4 +70,5 @@ return [
     ...\Modules\Speciality\Helpers\SpecialityTranslationHelper::en(),
     ...\Modules\Expert\Helpers\ExpertTranslationHelper::en(),
     ...\Modules\Comment\Helpers\CommentTranslationHelper::en(),
+    ...\Modules\Library\Helpers\LibraryTranslationHelper::en(),
 ];

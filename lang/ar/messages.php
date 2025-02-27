@@ -108,4 +108,5 @@ return [
     ...\Modules\Speciality\Helpers\SpecialityTranslationHelper::ar(),
     ...\Modules\Expert\Helpers\ExpertTranslationHelper::ar(),
     ...\Modules\Comment\Helpers\CommentTranslationHelper::ar(),
+    ...\Modules\Library\Helpers\LibraryTranslationHelper::ar(),
 ];

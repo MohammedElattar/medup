@@ -13,7 +13,7 @@
                     <td>{{ $item->title }}</td>
                     <td>{{ $item->speciality->college->name ?? 'N/A' }}</td>
                     <td>{{ $item->speciality->name ?? 'N/A' }}</td>
-                    <td>{{ $item->expert->user->name ?? 'N/A' }}</td>
+                    <td>{{ $item->expert->user->name ?? $item->expert->user->first_name }}</td>
                     <td>{{ number_format($item->comments_count)}}</td>
                     <td>{{ Carbon::parse($item->created_at)->format(DateHelper::defaultDateTimeFormat()) }}</td>
                     <x-ui.table.actions.view>

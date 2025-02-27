@@ -23,7 +23,8 @@
     "php-flasher/flasher-laravel": "^2.1",
     "socialiteproviders/apple": "^5.6",
     "spatie/laravel-medialibrary": "^11.10",
-    "spatie/laravel-translatable": "^6.8"
+    "spatie/laravel-translatable": "^6.8",
+      "ext-imagick": "*"
   },
   "require-dev": {
     "barryvdh/laravel-debugbar": "^3.14",
