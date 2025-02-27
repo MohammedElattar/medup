@@ -17,6 +17,10 @@
                     <td>{{ number_format($item->comments_count)}}</td>
                     <td>{{ Carbon::parse($item->created_at)->format(DateHelper::defaultDateTimeFormat()) }}</td>
                     <x-ui.table.actions.view>
+                        <a class="dropdown-item w-auto" href="{{route('comments.index', ['type' => 'collaborate', 'commentable_id' => $item->id])}}"
+                           title="{{translate_ui('comments')}}">
+                            <i class="fa fa-comments"></i>
+                        </a>
                         <a class="dropdown-item w-auto" href="{{route('ideas.change_status', $item->id)}}"
                            title="{{translate_ui($item->status ? 'deactivate' : 'activate')}}">
                             <i class="fa fa-{{$item->status ? 'cancel' : 'check'}}"></i>
