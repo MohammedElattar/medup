@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\Idea\Models\Filters;
+namespace Modules\Collaborate\Models\Filters;
 
-class ideaPaidFilter
+class CollaboratePaidFilter
 {
     public static function handle($query, $next, $filters)
     {

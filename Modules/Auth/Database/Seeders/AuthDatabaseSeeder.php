@@ -27,10 +27,10 @@ class AuthDatabaseSeeder extends Seeder
 
         foreach ($userTypes as $type) {
             $alphaType = UserTypeEnum::alphaTypes()[$type];
-
             $user = User::create([
                 'first_name' => fake()->name(),
                 'middle_name' => fake()->name(),
+                'name' => fake()->name(),
                 'email' => $alphaType . '@admin.com',
                 'phone' => fake()->e164PhoneNumber(),
                 'status' => true,

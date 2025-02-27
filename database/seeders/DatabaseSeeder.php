@@ -6,8 +6,10 @@ use Illuminate\Database\Seeder;
 use Modules\Auth\Database\Seeders\AuthDatabaseSeeder;
 use Modules\Blog\Database\Seeders\BlogDatabaseSeeder;
 use Modules\City\Database\Seeders\CityDatabaseSeeder;
+use Modules\Collaborate\Database\Seeders\CollaborateDatabaseSeeder;
 use Modules\College\Database\Seeders\CollegeDatabaseSeeder;
 use Modules\Country\Database\Seeders\CountryDatabaseSeeder;
+use Modules\Idea\Database\Seeders\IdeaDatabaseSeeder;
 use Modules\Research\Database\Seeders\ResearchDatabaseSeeder;
 use Modules\Skill\Database\Seeders\SkillDatabaseSeeder;
 use Modules\Speciality\Database\Seeders\SpecialityDatabaseSeeder;
@@ -29,6 +31,8 @@ class DatabaseSeeder extends Seeder
             TagDatabaseSeeder::class,
             BlogDatabaseSeeder::class,
             ResearchDatabaseSeeder::class,
+            CollaborateDatabaseSeeder::class,
+            IdeaDatabaseSeeder::class,
         ]);
     }
 }

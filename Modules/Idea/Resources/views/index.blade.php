@@ -3,7 +3,7 @@
 
 @section('title', translate_ui('ideas'))
 @section('content')
-    <x-ui.table.view :columns="['ID', 'Title', 'college', 'speciality', 'price', 'expert', 'date', 'Actions']"
+    <x-ui.table.view :columns="['ID', 'Title', 'college', 'speciality', 'expert', 'comments_count', 'date', 'Actions']"
                      :title="'ideas'"
                      :paginationObject="PaginationHelper::getPaginationObject($ideas)">
         <x-ui.table.body>
@@ -13,8 +13,8 @@
                     <td>{{ $item->title }}</td>
                     <td>{{ $item->speciality->college->name ?? 'N/A' }}</td>
                     <td>{{ $item->speciality->name ?? 'N/A' }}</td>
-                    <td>{{ $item->price ?: 'N/A' }}</td>
                     <td>{{ $item->expert->user->name ?? 'N/A' }}</td>
+                    <td>{{ number_format($item->comments_count)}}</td>
                     <td>{{ Carbon::parse($item->created_at)->format(DateHelper::defaultDateTimeFormat()) }}</td>
                     <x-ui.table.actions.view>
                         <a class="dropdown-item w-auto" href="{{route('ideas.change_status', $item->id)}}"

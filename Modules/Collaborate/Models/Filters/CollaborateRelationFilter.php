@@ -1,14 +1,13 @@
 <?php
 
-namespace Modules\Idea\Models\Filters;
+namespace Modules\Collaborate\Models\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class IdeaRelationFilter
+class CollaborateRelationFilter
 {
     public static function handle(Builder $query, $next, array $filters)
     {
-        info($filters);
         if(isset($filters['specialities'])) {
             $query->whereIntegerInRaw('speciality_id', $filters['specialities']);
         }

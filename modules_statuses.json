@@ -31,5 +31,7 @@
     "Blog": true,
     "Tag": true,
     "Research": true,
-    "Idea": true
+    "Idea": true,
+    "Collaborate": true,
+    "Comment": true
 }

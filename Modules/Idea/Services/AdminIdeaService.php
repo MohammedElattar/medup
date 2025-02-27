@@ -2,7 +2,7 @@
 
 namespace Modules\Idea\Services;
 
-use Modules\Idea\Models\Builders\IdeaBuilder;
+use Modules\Collaborate\Models\Builders\CollaborateBuilder;
 use Modules\Idea\Models\Idea;
 
 class AdminIdeaService
@@ -11,7 +11,7 @@ class AdminIdeaService
     {
         return Idea::query()
             ->latest()
-            ->when(true, fn(IdeaBuilder $b) => $b->withDetailsForPublic())
+            ->when(true, fn(CollaborateBuilder $b) => $b->withDetailsForPublic())
             ->searchable(['title'])
             ->paginatedCollection();
     }
@@ -20,6 +20,4 @@ class AdminIdeaService
     {
         return Idea::query()->findOrFail($id);
     }
-
-
 }

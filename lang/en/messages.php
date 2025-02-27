@@ -61,10 +61,13 @@ return [
     'record_not_found' => 'Could not find the requested resource',
     'maintenance_mode' => 'We are currently under maintenance, please try again later',
     'privacy_policy' => 'Privacy Policy',
+    'collaborate' => 'Collaborate',
+    'idea' => 'Idea',
     ...BaseTranslationHelper::en(),
     ...\Modules\Auth\Helpers\AuthTranslationHelper::en(),
     ...\Modules\Skill\Helpers\SkillTranslationHelper::en(),
     ...\Modules\City\Helpers\CityTranslationHelper::en(),
     ...\Modules\Speciality\Helpers\SpecialityTranslationHelper::en(),
     ...\Modules\Expert\Helpers\ExpertTranslationHelper::en(),
+    ...\Modules\Comment\Helpers\CommentTranslationHelper::en(),
 ];

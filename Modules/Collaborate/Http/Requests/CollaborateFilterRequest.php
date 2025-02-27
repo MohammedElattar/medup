@@ -1,14 +1,14 @@
 <?php
 
-namespace Modules\Idea\Http\Requests;
+namespace Modules\Collaborate\Http\Requests;
 
 use App\Helpers\ValidationRuleHelper;
-use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\HttpResponse;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\ValidationException;
 
-class IdeaFilterRequest extends FormRequest
+class CollaborateFilterRequest extends FormRequest
 {
     use HttpResponse;
 

@@ -85,5 +85,11 @@ return [
     'experts' => 'الخبراء',
     'name_en' => 'الاسم بالإنجليزية',
     'name_ar' => 'الاسم بالعربية',
-    'content_en' => 'المحتوي بالعربي'
+    'content_en' => 'المحتوي بالعربي',
+    'content_ar' => 'المحتوي بالعربي',
+    'collaborates' => 'المشاركات',
+    'collaborate' => 'المشاركة',
+    'comments' => 'التعليقات',
+    'user' => 'المستخدم',
+    'comments_count' => 'عدد التعليقات',
 ];

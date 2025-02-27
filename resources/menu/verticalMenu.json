@@ -43,6 +43,12 @@
             "slug": "researches.index"
         },
         {
+            "name": "collaborates",
+            "icon": "menu-icon tf-icons ti ti-users-group",
+            "url": "/admin/collaborates",
+            "slug": "collaborates.index"
+        },
+        {
             "name": "ideas",
             "icon": "menu-icon tf-icons ti ti-bulb",
             "url": "/admin/ideas",

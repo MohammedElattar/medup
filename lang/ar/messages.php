@@ -99,10 +99,13 @@ return [
     'finished' => 'تم الانتهاء بنجاح',
     'record_not_found' => 'لم نتمكن من العثور على السجل المطلوب',
     'maintenance_mode' => 'نحن حاليًا في وضع الصيانة، يرجى المحاولة مرة أخرى في وقت لاحق',
+    'idea' => 'الفكرة',
+    'collaborate' => 'المشاركة',
     ...BaseTranslationHelper::ar(),
     ...\Modules\Auth\Helpers\AuthTranslationHelper::ar(),
     ...\Modules\Skill\Helpers\SkillTranslationHelper::ar(),
     ...\Modules\City\Helpers\CityTranslationHelper::ar(),
     ...\Modules\Speciality\Helpers\SpecialityTranslationHelper::ar(),
     ...\Modules\Expert\Helpers\ExpertTranslationHelper::ar(),
+    ...\Modules\Comment\Helpers\CommentTranslationHelper::ar(),
 ];

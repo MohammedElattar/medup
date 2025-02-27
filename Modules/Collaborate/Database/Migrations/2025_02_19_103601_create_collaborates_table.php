@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ideas', function (Blueprint $table) {
+        Schema::create('collaborates', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->unsignedInteger('price')->nullable();
+            $table->string('orcid_number')->nullable();
             $table->boolean('status')->default(false);
             $table->longText('description');
             $table->foreignId('expert_id')->constrained()->cascadeOnDelete();

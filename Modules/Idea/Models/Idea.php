@@ -5,21 +5,20 @@ namespace Modules\Idea\Models;
 use App\Traits\PaginationTrait;
 use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Expert\Models\Expert;
-use Modules\Idea\Models\Builders\IdeaBuilder;
-use Modules\Speciality\Models\Speciality;
+use Modules\Collaborate\Models\Builders\CollaborateBuilder;
+use Modules\Collaborate\Traits\CollaborateRelations;
 
 class Idea extends Model
 {
-    use PaginationTrait, Searchable;
+    use PaginationTrait, Searchable, CollaborateRelations;
 
     protected $fillable = [
         'title',
         'description',
-        'price',
         'expert_id',
         'speciality_id',
         'status',
+        'orcid_number',
     ];
 
     protected function casts()
@@ -29,18 +28,8 @@ class Idea extends Model
         ];
     }
 
-    public function expert()
+    public function newEloquentBuilder($query): CollaborateBuilder
     {
-        return $this->belongsTo(Expert::class);
-    }
-
-    public function speciality()
-    {
-        return $this->belongsTo(Speciality::class);
-    }
-
-    public function newEloquentBuilder($query): IdeaBuilder
-    {
-        return new IdeaBuilder($query);
+        return new CollaborateBuilder($query);
     }
 }

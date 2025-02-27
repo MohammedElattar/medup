@@ -2,10 +2,9 @@
 
 namespace Modules\Idea\Services;
 
-use Modules\Expert\Services\ExpertService;
-use Modules\Expert\Traits\ExpertSetter;
-use Modules\Idea\Models\Builders\IdeaBuilder;
+use Modules\Collaborate\Models\Builders\CollaborateBuilder;
 use Modules\Idea\Models\Idea;
+use Modules\Expert\Traits\ExpertSetter;
 use Modules\Speciality\Services\AdminSpecialityService;
 
 class PublicIdeaService
@@ -21,10 +20,10 @@ class PublicIdeaService
     public function index(array $filters)
     {
         return Idea::query()
-            ->when(true, fn(IdeaBuilder $b) => $b->withFilters($filters)->withDetailsForPublic())
+            ->latest()
+            ->when(true, fn(CollaborateBuilder $b) => $b->withFilters($filters)->withDetailsForPublic())
             ->searchable(['title'])
             ->where('status', true)
-            ->latest()
             ->paginatedCollection();
     }
 
@@ -32,7 +31,7 @@ class PublicIdeaService
     {
         return Idea::query()
             ->where('status', true)
-            ->when(true, fn(IdeaBuilder $b) => $b->withDetailsForPublic())
+            ->when(true, fn(CollaborateBuilder $b) => $b->withDetailsForPublic())
             ->findOrFail($id);
     }
 
@@ -41,7 +40,7 @@ class PublicIdeaService
         $this->adminSpecialityService->exists($data['speciality_id']);
 
         Idea::query()->create($data + [
-            'expert_id' => $this->getExpert()->id,
-        ]);
+                'expert_id' => $this->getExpert()->id,
+            ]);
     }
 }
