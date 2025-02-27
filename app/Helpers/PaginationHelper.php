@@ -11,7 +11,7 @@ class PaginationHelper
     {
         $count = request()->input('per_page') ?: 10;
 
-        return ($count >= 5 && $count <= 100) ? $count : 10;
+        return ($count >= 4 && $count <= 100) ? $count : 10;
     }
 
     public static function paginateData(Builder $builder): LengthAwarePaginator

@@ -23,6 +23,7 @@ class PublicLibraryService
     {
         return Library::query()
             ->when(true, fn(LibraryBuilder $b) => $b->handleFilters($filters)->withMinimalDetailsForPublic())
+            ->searchable(['title'])
             ->paginatedCollection();
     }
 
