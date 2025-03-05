@@ -11,7 +11,17 @@ class LibrarySuggestedFilter
         if(isset($filters['suggested_based_id'])) {
             $item = Library::query()->findOrFail($filters['suggested_based_id']);
 
-            $query->whereHas('tags', fn($q) => $q->whereIn('tags.id', $item->tags()->select('tags.id')));
+            $query
+                ->where('id', '<>', $item->id)
+                ->whereHas(
+                    'speciality', fn($q) => $q->where(
+                        'specialities.id',
+                        $item
+                            ->speciality()
+                            ->select(['id'])
+                            ->value('id')
+                    )
+                );
         }
 
         return $next($query);

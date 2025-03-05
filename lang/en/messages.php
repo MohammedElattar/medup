@@ -71,4 +71,5 @@ return [
     ...\Modules\Expert\Helpers\ExpertTranslationHelper::en(),
     ...\Modules\Comment\Helpers\CommentTranslationHelper::en(),
     ...\Modules\Library\Helpers\LibraryTranslationHelper::en(),
+    ...\Modules\Course\Helpers\CourseTranslationHelper::en(),
 ];

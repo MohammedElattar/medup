@@ -40,6 +40,10 @@ class User extends Authenticatable implements HasMedia
         static::updating(function($model){
             $model->name = $model->first_name . ' ' . $model->middle_name;
         });
+
+        static::addGlobalScope('valid', function($builder){
+            $builder->where('status', true);
+        });
     }
 
     /**

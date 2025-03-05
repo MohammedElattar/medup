@@ -82,10 +82,13 @@ class ExpertBuilder extends Builder
         ]);
     }
 
-    public function withUserDetails(array $additionalColumns = []): ExpertBuilder
+    public function withUserDetails(array $additionalColumns = [], array $excludedColumns = []): ExpertBuilder
     {
         return $this->with([
-            'user' => fn(UserBuilder|BelongsTo $b) => $b->withMinimalDetails(additionalColumns: ['type', ...$additionalColumns])
+            'user' => fn(UserBuilder|BelongsTo $b) => $b->withMinimalDetails(
+                excludeColumns: $excludedColumns,
+                additionalColumns: ['type', ...$additionalColumns]
+            )
         ]);
     }
 

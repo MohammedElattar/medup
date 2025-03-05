@@ -1,24 +1,17 @@
 <?php
 
-namespace Modules\Library\Traits;
+namespace Modules\Course\Traits;
 
 use App\Helpers\MediaHelper;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Modules\Expert\Models\Expert;
 use Modules\Speciality\Models\Speciality;
-use Modules\Tag\Models\Tag;
 
-trait LibraryRelations
+trait CourseRelations
 {
     public function cover()
     {
-        return MediaHelper::mediaRelationship($this, 'library_cover');
-    }
-
-    public function file()
-    {
-        return MediaHelper::mediaRelationship($this, 'library_file');
+        return MediaHelper::mediaRelationship($this, 'course_cover');
     }
 
     public function expert(): BelongsTo

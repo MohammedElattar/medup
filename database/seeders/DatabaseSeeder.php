@@ -9,6 +9,7 @@ use Modules\City\Database\Seeders\CityDatabaseSeeder;
 use Modules\Collaborate\Database\Seeders\CollaborateDatabaseSeeder;
 use Modules\College\Database\Seeders\CollegeDatabaseSeeder;
 use Modules\Country\Database\Seeders\CountryDatabaseSeeder;
+use Modules\Course\Database\Seeders\CourseDatabaseSeeder;
 use Modules\Idea\Database\Seeders\IdeaDatabaseSeeder;
 use Modules\Library\Database\Seeders\LibraryDatabaseSeeder;
 use Modules\Research\Database\Seeders\ResearchDatabaseSeeder;
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
             CollaborateDatabaseSeeder::class,
             IdeaDatabaseSeeder::class,
             LibraryDatabaseSeeder::class,
+            CourseDatabaseSeeder::class,
         ]);
     }
 }
