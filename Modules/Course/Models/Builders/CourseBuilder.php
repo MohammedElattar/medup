@@ -46,7 +46,7 @@ class CourseBuilder extends Builder
     public function withDetailsForPublic(): CourseBuilder
     {
         return $this
-            ->select([...self::$baseColumns])
+            ->select([...self::$baseColumns, 'created_at'])
             ->withCover()
             ->withExpertDetails()
             ->withSpecialityDetails();

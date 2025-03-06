@@ -21,6 +21,7 @@ class CourseResource extends JsonResource
             'price' => $this->whenHas('price'),
             'cover' => $this->whenNotNull(ResourceHelper::getFirstMediaOriginalUrl($this, 'cover')),
             'rating_average' => $this->whenHas('rating_average'),
+            'created_at' => $this->whenHas('created_at'),
             'link' => $this->whenHas('link'),
             'description' => $this->whenHas('description'),
             'expert' => $this->whenLoaded('expert', function(){
