@@ -9,7 +9,6 @@ class DashboardController extends Controller
 {
     public function dashboardEcommerce()
     {
-        return Expert::query()->get();
         $pageConfigs = ['pageHeader' => false];
 
         return view('/content/dashboard/dashboards-crm', ['pageConfigs' => $pageConfigs]);
