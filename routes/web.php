@@ -25,3 +25,10 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => GeneralHelper::dashboardUserMiddlewares()], function () {
     Route::get('/', [DashboardController::class, 'dashboardEcommerce'])->name('dashboard-ecommerce');
 });
+
+Route::get('translate_word', function () {
+    $field = request()->input('field');
+
+    return translate_ui(str_replace('.', '_', $field));
+})->name('translate-word');
+

@@ -76,10 +76,20 @@ return Application::configure(basePath: dirname(__DIR__))
             use \App\Traits\HttpResponse;
         });
 
-        $exceptions->render(function(ValidationException $e, Request $req){
+        $exceptions->render(function (ValidationException $e, Request $req) {
+            if ($req->acceptsJson() ||
+                ($req->hasHeader('show-toast') && ! $req->header('show-toast'))
+            ) {
+                return;
+            }
+
             foreach ($e->errors() as $field => $errors) {
                 $translatedKey = translate_ui(str_replace('.', '_', $field));
-                FlasherHelper::error("$translatedKey : $errors[0]");
+                flash()
+                    ->options([
+                        'position' => 'bottom-center',
+                    ])
+                    ->error("$translatedKey : $errors[0]");
                 break;
             }
         });

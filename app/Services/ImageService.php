@@ -5,6 +5,9 @@ namespace App\Services;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Encoders\WebpEncoder;
+use Intervention\Image\ImageManager;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
@@ -102,6 +105,15 @@ class ImageService
      */
     public function storeMediaFromFile(UploadedFile $media, string $collectionName)
     {
+        if (self::isCompressibleImage($media->getMimeType())) {
+            info('iam here');
+            return $this
+                ->model
+                ->addMediaFromString(self::getCompressesImagePath($media->getPathname()))
+                ->usingFileName(Str::random().'.webp')
+                ->toMediaCollection($collectionName);
+        }
+
         return $this
             ->model
             ->addMedia($media)
@@ -111,6 +123,22 @@ class ImageService
 
     public static function getMediaExtension(UploadedFile $uploadedFile): string
     {
-        return $uploadedFile->extension();
+        return self::isCompressibleImage($uploadedFile->getMimeType()) ? 'webp' : $uploadedFile->extension();
+    }
+
+    public static function getCompressesImagePath(string $path)
+    {
+        $manager = new ImageManager(new Driver);
+
+        $image = $manager->read($path);
+
+        return $image->encode(new WebpEncoder(10))->toString();
+    }
+
+    public static function isCompressibleImage(string $mimeType)
+    {
+        $mimeType = explode('/', $mimeType);
+
+        return $mimeType[0] == 'image' && $mimeType[1] != 'svg+xml';
     }
 }

@@ -3,6 +3,7 @@
 @section('title', translate_ui('comment_details'))
 
 @section('content')
+    <x-ui.breadcrumbs :pages="['comments' => url()->previous(), 'show']"/>
     <div class="col-12">
         <div class="card">
             <div class="card-header">

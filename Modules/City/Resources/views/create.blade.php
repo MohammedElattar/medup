@@ -2,13 +2,14 @@
 
 @section('title', translate_ui('create'))
 @section('content')
+    <x-ui.breadcrumbs :pages="['countries' => route('countries.index'), 'cities' => route('cities.index', $countryId), 'create']"/>
     <div class="col-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">{{ translate_ui('create') }}</h4>
             </div>
             <div class="card-body">
-                <form class="form form-horizontal" action="{{ route('cities.store', $countryId) }}" method="POST">
+                <form class="form form-horizontal send-form" action="{{ route('cities.store', $countryId) }}" method="POST">
                     @csrf
                     <div class="row">
                         <div>
@@ -40,5 +41,5 @@
             </div>
         </div>
     </div>
-    <x-ui.toast />
+    <x-forms.ajax-submit :callbackUrl="route('cities.index', $countryId)"/>
 @endsection

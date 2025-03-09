@@ -2,6 +2,7 @@
 
 namespace Modules\Tag\Http\Controllers;
 
+use App\Helpers\FlasherHelper;
 use App\Http\Controllers\Controller;
 use Modules\Country\Http\Requests\CountryRequest;
 use Modules\Tag\Services\TagService;
@@ -33,6 +34,8 @@ class TagController extends Controller
     {
         $this->tagService->store($request->validated());
 
+        FlasherHelper::success(translate_success_message('tag', 'created'));
+
         return redirect()->route('tags.index');
     }
 
@@ -40,12 +43,16 @@ class TagController extends Controller
     {
         $this->tagService->update($request->validated(), $id);
 
+        FlasherHelper::success(translate_success_message('tag', 'updated'));
+
         return redirect()->route('tags.index');
     }
 
     public function destroy($id)
     {
         $this->tagService->destroy($id);
+
+        FlasherHelper::success(translate_success_message('tag', 'deleted'));
 
         return redirect()->route('tags.index');
     }

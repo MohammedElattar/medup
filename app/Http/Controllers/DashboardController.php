@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller;
-use Modules\Expert\Models\Expert;
 
 class DashboardController extends Controller
 {

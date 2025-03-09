@@ -3,6 +3,7 @@
 @section('title', translate_ui('edit'))
 
 @section('content')
+    <x-ui.breadcrumbs :pages="['collaborate' => route('collaborates.index'), 'update']"/>
     <div class="col-12">
         <div class="card">
             <div class="card-header">
@@ -96,5 +97,5 @@
             </div>
         </div>
     </div>
-    <x-ui.toast/>
+    <x-forms.ajax-submit :callbackUrl="route('collaborates.index')"/>
 @endsection

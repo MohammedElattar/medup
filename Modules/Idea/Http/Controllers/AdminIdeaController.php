@@ -2,6 +2,7 @@
 
 namespace Modules\Idea\Http\Controllers;
 
+use App\Helpers\FlasherHelper;
 use App\Http\Controllers\SelectMenuController;
 use App\Traits\HttpResponse;
 use Illuminate\Routing\Controller;
@@ -34,6 +35,8 @@ class AdminIdeaController extends Controller
     {
         Idea::query()->findOrFail($id)->delete();
 
+        FlasherHelper::success(translate_success_message('idea', 'deleted_female'));
+
         return redirect()->route('ideas.index');
     }
 
@@ -41,6 +44,8 @@ class AdminIdeaController extends Controller
     {
         $item = Idea::query()->findOrFail($id);
         $item->forceFill(['status' => !$item->status])->save();
+
+        FlasherHelper::success(translate_success_message('idea', 'updated_female'));
 
         return redirect()->route('ideas.index');
     }

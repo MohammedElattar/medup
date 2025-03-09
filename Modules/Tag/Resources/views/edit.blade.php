@@ -2,13 +2,14 @@
 
 @section('title', translate_ui('edit'))
 @section('content')
+  <x-ui.breadcrumbs :pages="['tags' => route('tags.index'), 'edit']"/>
   <div class="col-12">
     <div class="card">
       <div class="card-header">
         <h4 class="card-title">{{ translate_ui('edit') }}</h4>
       </div>
       <div class="card-body">
-        <form class="form form-horizontal" action="{{ route('tags.update', $item->id) }}" method="POST">
+        <form class="form form-horizontal send-form" action="{{ route('tags.update', $item->id) }}" method="POST">
           @csrf
           @method('PUT')
           <div class="row">
@@ -42,5 +43,5 @@
       </div>
     </div>
   </div>
-  <x-ui.toast />
+  <x-forms.ajax-submit :callbackUrl="route('tags.index')"/>
 @endsection

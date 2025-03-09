@@ -16,9 +16,17 @@ class FileOperationService
         ?string $storedFileName = null
     ): object {
 
+        if (ImageService::isCompressibleImage(request()->file($fileName)->getMimeType())) {
+            return
+                $class
+                    ->addMediaFromString(ImageService::getCompressesImagePath(request()->file($fileName)->getPathname()))
+                    ->usingFileName(Str::random().'.webp')
+                    ->toMediaCollection($collectionName);
+        }
+
         return json_decode($class
             ->addMediaFromRequest($fileName)
-            ->usingFileName($storedFileName ?: Str::random().'.'.ImageService::getMediaExtension(request()->file($fileName)))
+            ->usingFileName($storedFileName ?: Str::random().'.'.request()->file($fileName)->extension())
             ->toMediaCollection($collectionName));
     }
 
@@ -47,6 +55,15 @@ class FileOperationService
                 $storedFileName .= 'mp4';
                 break;
 
+        }
+
+        if (ImageService::isCompressibleImage(request()->file($requestFileName)->getMimeType())) {
+            return json_encode(
+                $class
+                    ->addMediaFromString(ImageService::getCompressesImagePath(request()->file($requestFileName)->getPathname()))
+                    ->usingFileName(Str::random().'.webp')
+                    ->toMediaCollection($collectionName)
+            );
         }
 
         return json_decode($class

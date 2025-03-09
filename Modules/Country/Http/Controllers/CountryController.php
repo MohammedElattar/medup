@@ -2,6 +2,7 @@
 
 namespace Modules\Country\Http\Controllers;
 
+use App\Helpers\FlasherHelper;
 use App\Http\Controllers\Controller;
 use Modules\Country\Http\Requests\CountryRequest;
 use Modules\Country\Services\CountryService;
@@ -33,6 +34,8 @@ class CountryController extends Controller
     {
         $this->countryService->store($request->validated());
 
+        FlasherHelper::success(translate_success_message('country', 'created_female'));
+
         return redirect()->route('countries.index');
     }
 
@@ -40,12 +43,16 @@ class CountryController extends Controller
     {
         $this->countryService->update($request->validated(), $id);
 
+        FlasherHelper::success(translate_success_message('country', 'updated_female'));
+
         return redirect()->route('countries.index');
     }
 
     public function destroy($id)
     {
         $this->countryService->destroy($id);
+
+        FlasherHelper::success(translate_success_message('country', 'deleted_female'));
 
         return redirect()->route('countries.index');
     }

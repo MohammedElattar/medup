@@ -2,13 +2,14 @@
 
 @section('title', translate_ui('edit'))
 @section('content')
+    <x-ui.breadcrumbs :pages="['colleges' => route('colleges.index'), 'update']"/>
     <div class="col-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">{{ translate_ui('edit') }}</h4>
             </div>
             <div class="card-body">
-                <form class="form form-horizontal" action="{{ route('colleges.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+                <form class="form form-horizontal send-form" action="{{ route('colleges.update', $item->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div>
@@ -59,5 +60,5 @@
             </div>
         </div>
     </div>
-    <x-ui.toast />
+    <x-forms.ajax-submit :callbackUrl="route('colleges.index')"/>
 @endsection

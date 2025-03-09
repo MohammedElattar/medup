@@ -2,6 +2,7 @@
 
 namespace Modules\Research\Http\Controllers;
 
+use App\Helpers\FlasherHelper;
 use App\Traits\HttpResponse;
 use Illuminate\Routing\Controller;
 use Modules\Research\Models\Research;
@@ -20,6 +21,8 @@ class AdminResearchController extends Controller
     public function destroy($id)
     {
         Research::query()->findOrFail($id)->delete();
+
+        FlasherHelper::success(translate_success_message('research', 'deleted'));
 
         return redirect()->route('researches.index');
     }

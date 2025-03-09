@@ -3,6 +3,7 @@
 
 @section('title', translate_ui('specialities'))
 @section('content')
+    <x-ui.breadcrumbs :pages="['colleges' => route('colleges.index'), 'specialities']"/>
     <x-ui.table.view :columns="['ID', 'Name', 'Actions']" :title="'specialities'"
                      :paginationObject="PaginationHelper::getPaginationObject($specialities)">
         <x-ui.table.buttons>

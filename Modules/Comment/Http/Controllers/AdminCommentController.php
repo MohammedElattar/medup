@@ -2,6 +2,7 @@
 
 namespace Modules\Comment\Http\Controllers;
 
+use App\Helpers\FlasherHelper;
 use Illuminate\Routing\Controller;
 use Modules\Collaborate\Models\Collaborate;
 use Modules\Comment\Http\Requests\CommentFetchRequest;
@@ -37,6 +38,8 @@ class AdminCommentController extends Controller
         $params['type'] = $comment->commentable_type == Collaborate::class ? 'collaborate' : 'idea';
         $params['commentable_id'] = $comment->commentable_id;
         $comment->delete();
+
+        FlasherHelper::success(translate_success_message('comment', 'deleted'));
 
         return redirect()->route('comments.index', $params);
     }

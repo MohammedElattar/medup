@@ -3,6 +3,7 @@
 
 @section('title', translate_ui('cities'))
 @section('content')
+    <x-ui.breadcrumbs :pages="['countries' => route('countries.index'), 'cities']"/>
     <x-ui.table.view :columns="['ID', 'Name', 'Actions']" :title="'cities'"
                      :paginationObject="PaginationHelper::getPaginationObject($cities)">
         <x-ui.table.buttons>

@@ -2,6 +2,7 @@
 
 namespace Modules\Collaborate\Http\Controllers;
 
+use App\Helpers\FlasherHelper;
 use App\Http\Controllers\SelectMenuController;
 use App\Traits\HttpResponse;
 use Illuminate\Routing\Controller;
@@ -34,6 +35,8 @@ class AdminCollaborateController extends Controller
     {
         Collaborate::query()->findOrFail($id)->delete();
 
+        FlasherHelper::success(translate_success_message('collaborate', 'deleted_female'));
+
         return redirect()->route('collaborates.index');
     }
 
@@ -41,6 +44,8 @@ class AdminCollaborateController extends Controller
     {
         $item = Collaborate::query()->findOrFail($id);
         $item->forceFill(['status' => !$item->status])->save();
+
+        FlasherHelper::success(translate_success_message('collaborate', 'updated_female'));
 
         return redirect()->route('collaborates.index');
     }

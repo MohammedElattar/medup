@@ -94,4 +94,10 @@ return [
     'comments' => 'Comments',
     'user' => 'User',
     'comments_count' => 'Comments count',
+    'title_en' => 'English title',
+    'title_ar' => 'Arabic title',
+    'likes_count' => 'Likes count',
+    'comment_details' => 'Comment details',
+    'replied_user' => 'Replied user',
+    'previous' => 'Previous',
 ];

@@ -8,6 +8,7 @@ class CityTranslationHelper
     {
         return [
             'city' => 'City',
+            'country' => 'Country',
         ];
     }
 
@@ -15,6 +16,7 @@ class CityTranslationHelper
     {
         return [
             'city' => 'المدينة',
+            'country' => 'الدولة',
         ];
     }
 }

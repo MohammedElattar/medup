@@ -101,6 +101,7 @@ return [
     'maintenance_mode' => 'نحن حاليًا في وضع الصيانة، يرجى المحاولة مرة أخرى في وقت لاحق',
     'idea' => 'الفكرة',
     'collaborate' => 'المشاركة',
+    'research' => 'البحث',
     ...BaseTranslationHelper::ar(),
     ...\Modules\Auth\Helpers\AuthTranslationHelper::ar(),
     ...\Modules\Skill\Helpers\SkillTranslationHelper::ar(),
@@ -111,4 +112,5 @@ return [
     ...\Modules\Library\Helpers\LibraryTranslationHelper::ar(),
     ...\Modules\Course\Helpers\CourseTranslationHelper::ar(),
     ...\Modules\Markable\Helpers\FavoriteTranslationHelper::ar(),
+    ...\Modules\Tag\Helpers\TagTranslationHelper::ar(),
 ];

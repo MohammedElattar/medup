@@ -12,7 +12,7 @@ class AdminCommentService
         return Comment::query()
             ->latest()
             ->where(PublicCommentService::getMorph($types))
-            ->when(true, fn(CommentBuilder $b) => $b->withDetails())
+            ->when(true, fn(CommentBuilder $b) => $b->withDetails()->withFavoritesCount())
             ->where(function($q){
                 $q
                     ->searchable(['content'])

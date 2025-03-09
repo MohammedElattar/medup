@@ -23,7 +23,8 @@ class AdminCollegeService
     {
         DB::transaction(function() use ($data){
             $college = College::query()->create($data);
-
+            $imageService = new ImageService($college, $data);
+            $imageService->storeOneMediaFromRequest('college_logo', 'icon');
         });
     }
 

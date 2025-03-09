@@ -8,6 +8,7 @@ class SpecialityTranslationHelper
     {
         return [
             'speciality' => 'Speciality',
+            'college' => 'College',
         ];
     }
 
@@ -15,6 +16,7 @@ class SpecialityTranslationHelper
     {
         return [
             'speciality' => 'التخصص',
+            'college' => 'الكلية',
         ];
     }
 }

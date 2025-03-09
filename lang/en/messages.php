@@ -63,6 +63,7 @@ return [
     'privacy_policy' => 'Privacy Policy',
     'collaborate' => 'Collaborate',
     'idea' => 'Idea',
+    'research' => 'Research',
     ...BaseTranslationHelper::en(),
     ...\Modules\Auth\Helpers\AuthTranslationHelper::en(),
     ...\Modules\Skill\Helpers\SkillTranslationHelper::en(),
@@ -73,4 +74,5 @@ return [
     ...\Modules\Library\Helpers\LibraryTranslationHelper::en(),
     ...\Modules\Course\Helpers\CourseTranslationHelper::en(),
     ...\Modules\Markable\Helpers\FavoriteTranslationHelper::en(),
+    ...\Modules\Tag\Helpers\TagTranslationHelper::en(),
 ];
