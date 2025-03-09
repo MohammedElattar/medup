@@ -110,4 +110,5 @@ return [
     ...\Modules\Comment\Helpers\CommentTranslationHelper::ar(),
     ...\Modules\Library\Helpers\LibraryTranslationHelper::ar(),
     ...\Modules\Course\Helpers\CourseTranslationHelper::ar(),
+    ...\Modules\Markable\Helpers\FavoriteTranslationHelper::ar(),
 ];

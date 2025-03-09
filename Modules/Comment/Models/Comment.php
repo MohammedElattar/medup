@@ -9,10 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Modules\Comment\Models\Builders\CommentBuilder;
+use Modules\Markable\Entities\FavoriteModel;
+use Modules\Markable\Traits\Markable;
 
 class Comment extends Model
 {
-    use PaginationTrait, Searchable;
+    use PaginationTrait, Searchable, Markable;
 
     protected $fillable = [
         'user_id',
@@ -20,6 +22,10 @@ class Comment extends Model
         'content',
         'commentable_type',
         'commentable_id',
+    ];
+
+    protected static $marks = [
+        FavoriteModel::class,
     ];
 
     public static function boot(): void

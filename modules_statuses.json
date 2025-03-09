@@ -35,5 +35,6 @@
     "Collaborate": true,
     "Comment": true,
     "Library": true,
-    "Course": true
+    "Course": true,
+    "Markable": true
 }

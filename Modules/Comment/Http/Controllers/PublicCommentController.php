@@ -2,6 +2,8 @@
 
 namespace Modules\Comment\Http\Controllers;
 
+use App\Helpers\GeneralHelper;
+use App\Helpers\RequestHelper;
 use App\Traits\HttpResponse;
 use Illuminate\Routing\Controller;
 use Modules\Comment\Http\Requests\CommentFetchRequest;
@@ -15,6 +17,7 @@ class PublicCommentController extends Controller
 
     public function __construct(private PublicCommentService $publicCommentService)
     {
+        RequestHelper::loginIfHasToken($this, GeneralHelper::getDefaultLoggedUserMiddlewares());
     }
 
     public function index(CommentFetchRequest $request)

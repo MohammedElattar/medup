@@ -6,6 +6,7 @@ use App\Helpers\ValidationRuleHelper;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Auth\Transformers\UserResource;
+use Modules\Markable\Helpers\FavoriteHelper;
 
 class CommentResource extends JsonResource
 {
@@ -17,6 +18,8 @@ class CommentResource extends JsonResource
         return [
             'id' => $this->id,
             'created_at' => $this->whenHas('created_at'),
+            'liked_by_user' => $this->whenNotNull(FavoriteHelper::resourceFavorite($this)),
+            'likes_count' => $this->whenHas('favorites_count'),
             'content' => $this->whenHas('content'),
             'user' => $this->whenLoaded('user', function(){
                 return UserResource::make($this->user);
