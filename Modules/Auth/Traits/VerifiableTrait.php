@@ -51,7 +51,7 @@ trait VerifiableTrait
 
         if (! $user) {
             throw new ValidationErrorsException([
-                'user' => translate_error_message('user', 'not_exists'),
+                'email' => translate_error_message('user', 'not_exists'),
             ]);
         }
 
