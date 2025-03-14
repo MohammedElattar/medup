@@ -24,6 +24,7 @@ use Illuminate\Validation\ValidationException;
 use Modules\Auth\Helpers\AuthExceptionHelper;
 use Modules\Auth\Http\Middleware\CheckUserType;
 use Modules\Expert\Helpers\ExpertExceptionHelper;
+use Modules\Wallet\Helpers\WalletExceptionHelper;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -140,5 +141,6 @@ return Application::configure(basePath: dirname(__DIR__))
 
         AuthExceptionHelper::handle($exceptions);
         ExpertExceptionHelper::handle($exceptions);
+        WalletExceptionHelper::handle($exceptions);
     })
     ->create();

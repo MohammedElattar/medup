@@ -75,4 +75,5 @@ return [
     ...\Modules\Course\Helpers\CourseTranslationHelper::en(),
     ...\Modules\Markable\Helpers\FavoriteTranslationHelper::en(),
     ...\Modules\Tag\Helpers\TagTranslationHelper::en(),
+    ...\Modules\Wallet\Helpers\WalletTranslationHelper::en(),
 ];

@@ -1,6 +1,6 @@
 - [ ] notifications (done)
-- [ ] payment process (orders)
 - [ ] wallet page
+- [ ] payment process (orders)
 - [ ] chat process
 - [ ] expert rating
 - [ ] order rating

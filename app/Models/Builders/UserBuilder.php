@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Builder;
 use Modules\Auth\Enums\UserTypeEnum;
 use Modules\Auth\Helpers\UserTypeHelper;
 use Modules\Auth\Traits\VerificationBuilderTrait;
+use Modules\Wallet\Traits\Transafable;
 
 class UserBuilder extends Builder
 {
-    use VerificationBuilderTrait;
+    use VerificationBuilderTrait, Transafable;
 
     public function loginByType(array $data, bool $inMobile)
     {
@@ -50,8 +51,13 @@ class UserBuilder extends Builder
             ->withConditionalAvatar($withAvatar);
     }
 
-    public function whereIsAdmin()
+    public function whereIsAdmin(): UserBuilder
     {
         return $this->where('type', UserTypeEnum::ADMIN);
+    }
+
+    public function whereActive(): UserBuilder
+    {
+        return $this->where('status', true);
     }
 }

@@ -34,15 +34,17 @@ class User extends Authenticatable implements HasMedia
         parent::boot();
 
         static::creating(function($model){
-            $model->name = $model->first_name . ' ' . $model->middle_name;
+            $model->forceFill([
+                'name' => $model->first_name . ' ' . $model->middle_name,
+            ]);
         });
 
         static::updating(function($model){
-            $model->name = $model->first_name . ' ' . $model->middle_name;
-        });
-
-        static::addGlobalScope('valid', function($builder){
-            $builder->where('status', true);
+            if($model->first_name && $model->middle_name) {
+                $model->forceFill([
+                    'name' => $model->first_name . ' ' . $model->middle_name,
+                ]);
+            }
         });
     }
 

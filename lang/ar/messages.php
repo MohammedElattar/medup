@@ -113,4 +113,5 @@ return [
     ...\Modules\Course\Helpers\CourseTranslationHelper::ar(),
     ...\Modules\Markable\Helpers\FavoriteTranslationHelper::ar(),
     ...\Modules\Tag\Helpers\TagTranslationHelper::ar(),
+    ...\Modules\Wallet\Helpers\WalletTranslationHelper::ar(),
 ];

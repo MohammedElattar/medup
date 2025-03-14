@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->json('fcm_tokens')->nullable()->default('[]');
-        });
-
-        Schema::table('users', function (Blueprint $table) {
-            if(Schema::hasColumn('users', 'fcm_token')) {
-                $table->dropColumn('fcm_token');
-            }
+        Schema::create('wallets', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->decimal('balance', 15);
+            $table->timestamps();
         });
     }
 
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {});
+        Schema::dropIfExists('wallets');
     }
 };

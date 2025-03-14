@@ -69,13 +69,17 @@ class NotificationController extends Controller
 
     public function updateToken()
     {
+        self::baseUpdateTokenLogic();
+        return $this->okResponse(message: translate_success_message('profile', 'updated'));
+    }
+
+    public static function baseUpdateTokenLogic()
+    {
         $fcmToken = request()->input('fcm_token');
         $currentFcmTokens = auth()->user()->fcm_tokens;
         $currentFcmTokens[] = $fcmToken;
         $currentFcmTokens = array_unique(array_filter($currentFcmTokens));
 
         auth()->user()->forceFill(['fcm_tokens' => $currentFcmTokens])->save();
-
-        return $this->okResponse(message: translate_success_message('profile', 'updated'));
     }
 }
