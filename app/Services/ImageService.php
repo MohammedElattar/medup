@@ -17,11 +17,13 @@ class ImageService
     private HasMedia $model;
 
     private array $data;
+    private string $disk;
 
-    public function __construct($model, $data)
+    public function __construct($model, $data, string $disk = 'public')
     {
         $this->model = $model;
         $this->data = $data;
+        $this->disk = $disk;
     }
 
     public static function createInstance(HasMedia $model, array $data): ImageService
@@ -39,6 +41,7 @@ class ImageService
                 $this->model,
                 $collectionName,
                 $requestFileName,
+                disk: $this->disk
             );
         }
     }
@@ -106,19 +109,18 @@ class ImageService
     public function storeMediaFromFile(UploadedFile $media, string $collectionName)
     {
         if (self::isCompressibleImage($media->getMimeType())) {
-            info('iam here');
             return $this
                 ->model
                 ->addMediaFromString(self::getCompressesImagePath($media->getPathname()))
                 ->usingFileName(Str::random().'.webp')
-                ->toMediaCollection($collectionName);
+                ->toMediaCollection($collectionName, $this->disk);
         }
 
         return $this
             ->model
             ->addMedia($media)
             ->usingFileName(Str::random().'.'.static::getMediaExtension($media))
-            ->toMediaCollection($collectionName);
+            ->toMediaCollection($collectionName, $this->disk);
     }
 
     public static function getMediaExtension(UploadedFile $uploadedFile): string
@@ -140,5 +142,12 @@ class ImageService
         $mimeType = explode('/', $mimeType);
 
         return $mimeType[0] == 'image' && $mimeType[1] != 'svg+xml';
+    }
+
+    public function setDisk(string $disk)
+    {
+        $this->disk = $disk;
+
+        return $this;
     }
 }

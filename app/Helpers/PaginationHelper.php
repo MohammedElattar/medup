@@ -16,7 +16,7 @@ class PaginationHelper
 
     public static function paginateData(Builder $builder): LengthAwarePaginator
     {
-        return $builder->fastPaginate(static::paginationCountPerPage(), page: static::getCurrentPage());
+        return $builder->paginate(static::paginationCountPerPage(), page: static::getCurrentPage());
     }
 
     public static function getCurrentPage()

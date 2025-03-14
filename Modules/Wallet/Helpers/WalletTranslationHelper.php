@@ -15,7 +15,7 @@ class WalletTranslationHelper
             'money_sender' => 'Money sender',
             'money_receiver' => 'Money receiver',
             'transfer' => 'Money Transfer',
-            'transferring_to_the_same_user' => 'Cannot transfer money to the same user',
+            'transferring_to_the_same_user' => 'Cannot transfer money to yourself',
             'money_transfer' => 'Money transfer',
         ];
     }
@@ -31,7 +31,7 @@ class WalletTranslationHelper
             'money_sender' => 'مرسل الأموال',
             'money_receiver' => 'مستقبل الاموال',
             'transfer' => 'تحويل الأموال',
-            'transferring_to_the_same_user' => 'لا يمكن تحويل الأموال لنفس المستخدم',
+            'transferring_to_the_same_user' => '',
             'money_transfer' => 'تحويل الأموال',
         ];
     }

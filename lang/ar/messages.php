@@ -114,4 +114,5 @@ return [
     ...\Modules\Markable\Helpers\FavoriteTranslationHelper::ar(),
     ...\Modules\Tag\Helpers\TagTranslationHelper::ar(),
     ...\Modules\Wallet\Helpers\WalletTranslationHelper::ar(),
+    ...\Modules\Order\Helpers\OrderTranslationHelper::ar(),
 ];

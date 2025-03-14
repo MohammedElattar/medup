@@ -5,6 +5,7 @@ namespace Modules\Course\Traits;
 use App\Helpers\MediaHelper;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Expert\Models\Expert;
+use Modules\Order\Models\Order;
 use Modules\Speciality\Models\Speciality;
 
 trait CourseRelations
@@ -22,5 +23,10 @@ trait CourseRelations
     public function speciality(): BelongsTo
     {
         return $this->belongsTo(Speciality::class);
+    }
+
+    public function order()
+    {
+        return $this->morphOne(Order::class, 'orderable');
     }
 }

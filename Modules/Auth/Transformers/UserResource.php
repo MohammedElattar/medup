@@ -6,6 +6,7 @@ use App\Helpers\ResourceHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Auth\Enums\AuthEnum;
 use Modules\Role\Transformers\RoleResource;
+use Modules\Wallet\Transformers\WalletResource;
 
 class UserResource extends JsonResource
 {
@@ -47,6 +48,9 @@ class UserResource extends JsonResource
             'social_provider' => $this->whenHas('social_provider'),
             'role' => $this->whenLoaded('roles', function () {
                 return RoleResource::make($this->roles->first());
+            }),
+            'wallet' => $this->whenLoaded('wallet', function(){
+                return WalletResource::make($this->wallet);
             }),
             $this->mergeWhen($this->relationLoaded('permissionsOnly'), function () {
                 $role = $this->permissionsOnly->first();

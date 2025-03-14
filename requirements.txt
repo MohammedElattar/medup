@@ -1,7 +1,6 @@
 - [ ] notifications (done)
-- [ ] wallet page
-- [ ] payment process (orders)
-- [ ] chat process
+- [ ] wallet page (done)
+- [ ] payment process (orders) (done)
 - [ ] expert rating
 - [ ] order rating
 - [ ] about us page

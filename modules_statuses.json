@@ -37,5 +37,6 @@
     "Library": true,
     "Course": true,
     "Markable": true,
-    "FcmNotification": true
+    "FcmNotification": true,
+    "Order": true
 }

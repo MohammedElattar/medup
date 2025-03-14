@@ -50,7 +50,9 @@ class PublicLibraryService
 
             $imageService = new ImageService($library, $data);
             $imageService->storeOneMediaFromRequest('library_cover', 'cover');
-            $imageService->storeOneMediaFromRequest('library_file', 'file');
+            $imageService
+                ->setDisk('books')
+                ->storeOneMediaFromRequest('library_file', 'file');
         });
     }
 

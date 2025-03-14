@@ -23,6 +23,12 @@ class CourseResource extends JsonResource
             'rating_average' => $this->whenHas('rating_average'),
             'created_at' => $this->whenHas('created_at'),
             'link' => $this->whenHas('link'),
+            $this->mergeWhen($this->relationLoaded('order'), function(){
+                return [
+                    'purchased' => !is_null($this->order),
+                    'public_link' => !is_null($this->order) ? $this->public_link : null,
+                ];
+            }),
             'description' => $this->whenHas('description'),
             'expert' => $this->whenLoaded('expert', function(){
                 return ExpertResource::make($this->expert);

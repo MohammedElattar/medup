@@ -59,4 +59,12 @@ class CourseBuilder extends Builder
             'expert.user' => fn(UserBuilder|BelongsTo $b) => $b->withMinimalDetails(false, ['type', 'status'])
         ]);
     }
+
+    public function withMinimalDetailsForOrders()
+    {
+        return $this->select([...self::$baseColumns, 'link as public_link'])
+            ->withCover()
+            ->withExpertDetails()
+            ->with(['order' => fn($q) => $q->where('user_id', auth()->id())]);
+    }
 }

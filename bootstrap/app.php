@@ -142,5 +142,6 @@ return Application::configure(basePath: dirname(__DIR__))
         AuthExceptionHelper::handle($exceptions);
         ExpertExceptionHelper::handle($exceptions);
         WalletExceptionHelper::handle($exceptions);
+        \Modules\Order\Helpers\OrderExceptionHelper::handle($exceptions);
     })
     ->create();

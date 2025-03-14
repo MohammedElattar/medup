@@ -2,6 +2,8 @@
 
 namespace Modules\Library\Http\Controllers;
 
+use App\Helpers\GeneralHelper;
+use App\Helpers\RequestHelper;
 use App\Traits\HttpResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
@@ -16,6 +18,7 @@ class PublicLibraryController extends Controller
 
     public function __construct(private readonly PublicLibraryService $publicLibraryService)
     {
+        RequestHelper::loginIfHasToken($this, GeneralHelper::getDefaultLoggedUserMiddlewares());
     }
 
     public function index(LibraryFilterRequest $request)

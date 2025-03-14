@@ -23,13 +23,30 @@ class LibraryBuilder extends Builder
             ])->thenReturn();
     }
 
-    public function withMinimalDetailsForPublic(): LibraryBuilder
+    public function withMinimalDetailsForPublic(array $additionalColumns = ['price']): LibraryBuilder
     {
-        return $this->select(['id', 'title', 'description', 'expert_id', 'price', 'speciality_id'])->withCover()->withMinimalExpertDetails()->withSpecialityDetails();
+        return $this
+            ->select(['id', 'title', 'description', 'expert_id', 'speciality_id', ...$additionalColumns])
+            ->withCover()
+            ->withMinimalExpertDetails()
+            ->withSpecialityDetails()
+            ->withPurchaseStatus();
     }
 
     public function withDetailsForPublic(): LibraryBuilder
     {
-        return $this->withCover()->withExpertDetails()->withSpecialityDetails();
+        return $this->withCover()->withExpertDetails()->withSpecialityDetails()->withPurchaseStatus();
+    }
+
+    public function withMinimalDetailsForOrders()
+    {
+        return $this->withMinimalDetailsForPublic([]);
+    }
+
+    public function withPurchaseStatus()
+    {
+        return $this->with([
+            'order' => fn($q) => $q->where('orders.user_id', auth()->id()),
+        ]);
     }
 }

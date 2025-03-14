@@ -13,7 +13,8 @@ class FileOperationService
         object $class,
         string $collectionName = 'default',
         string $fileName = 'img',
-        ?string $storedFileName = null
+        ?string $storedFileName = null,
+        string $disk = 'public',
     ): object {
 
         if (ImageService::isCompressibleImage(request()->file($fileName)->getMimeType())) {
@@ -21,13 +22,13 @@ class FileOperationService
                 $class
                     ->addMediaFromString(ImageService::getCompressesImagePath(request()->file($fileName)->getPathname()))
                     ->usingFileName(Str::random().'.webp')
-                    ->toMediaCollection($collectionName);
+                    ->toMediaCollection($collectionName, $disk);
         }
 
         return json_decode($class
             ->addMediaFromRequest($fileName)
             ->usingFileName($storedFileName ?: Str::random().'.'.request()->file($fileName)->extension())
-            ->toMediaCollection($collectionName));
+            ->toMediaCollection($collectionName, $disk));
     }
 
     public function storeFileFromRequest(
