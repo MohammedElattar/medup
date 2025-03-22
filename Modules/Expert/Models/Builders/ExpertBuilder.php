@@ -9,11 +9,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Pipeline;
+use Modules\Expert\Models\Expert;
 use Modules\Expert\Models\Filters\ExpertDateFilter;
 use Modules\Expert\Models\Filters\ExpertRelationFilter;
 use Modules\Expert\Models\Filters\ExpertSearchFilter;
 use Modules\Expert\Models\Filters\PremiumExpertFilter;
 use Modules\Expert\Models\Filters\TopExpertFilter;
+use Modules\Review\Entities\Review;
 
 class ExpertBuilder extends Builder
 {
@@ -22,6 +24,7 @@ class ExpertBuilder extends Builder
         return $this
             ->select($selectedColumns)
             ->withTotalExperienceYears()
+            ->addReviewedColumn()
             ->withSkills()
             ->withSpecialityDetails()
             ->withUserDetails($userSelectedColumns)
@@ -42,6 +45,7 @@ class ExpertBuilder extends Builder
             ->withBaseMinimalDetails(userSelectedColumns: ['created_at'])
             ->withExperiences()
             ->withCertificationDetails()
+            ->withReviewsCount()
             ->withSocialContacts()
             ->withCv();
     }
@@ -141,5 +145,20 @@ class ExpertBuilder extends Builder
     public function withTotalExperienceYears(): ExpertBuilder
     {
         return $this->withSum('experiences', 'experience_years');
+    }
+
+    public function addReviewedColumn()
+    {
+        return $this->addSelect([
+            'reviewed' => Review::query()
+                ->where('user_id', auth()->id())
+                ->whereColumn('reviewable_id', 'experts.id')
+                ->where('reviewable_type', Expert::class)
+                ->selectRaw('COUNT(*)')
+        ]);
+    }
+
+    public function withReviewsCount() {
+        return $this->withCount('reviews');
     }
 }

@@ -26,7 +26,7 @@ class LibraryBuilder extends Builder
     public function withMinimalDetailsForPublic(array $additionalColumns = ['price']): LibraryBuilder
     {
         return $this
-            ->select(['id', 'title', 'description', 'expert_id', 'speciality_id', ...$additionalColumns])
+            ->select(['id', 'title', 'description', 'rating_average', 'expert_id', 'speciality_id', ...$additionalColumns])
             ->withCover()
             ->withMinimalExpertDetails()
             ->withSpecialityDetails()

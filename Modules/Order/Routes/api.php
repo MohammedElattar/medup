@@ -10,4 +10,5 @@ Route::group(['prefix' => 'public/orders', 'middleware' => GeneralHelper::getDef
 ])], function(){
     Route::get('', [OrderController::class, 'index']);
     Route::post('', [OrderController::class, 'store']);
+    Route::post('{id}/review', [OrderController::class, 'review']);
 });

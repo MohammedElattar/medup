@@ -4,6 +4,7 @@ namespace Modules\Order\Services;
 
 use App\Exceptions\ValidationErrorsException;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
@@ -52,34 +53,10 @@ class OrderService
     {
         $this->assertPurchasedBefore($data['type'], $data['id']);
 
-        $model = $this->getModel($data['type'])::query()
-            ->where('id', $data['id'])
-            ->when($data['type'] == 'library', fn($q) => $q->where('status', true))
-            ->first();
-
-        if(! $model) {
-            throw new ValidationErrorsException([
-                'id' => translate_error_message('model', 'not_exists'),
-            ]);
-        }
+        $model = $this->getOrderableModel($data);
 
         $order = DB::transaction(function() use ($data, $model){
-            try{
-                ( new WalletService(
-                    app(Wallet::class),
-                    app(User::class),
-                    app(TransactionService::class),
-                ))->transfer(
-                    auth()->user(),
-                    $model->expert->user,
-                    $model->price,
-                    'Order for ' . $model->name,
-                );
-            } catch(ValidationErrorsException $e) {
-                $errors = $e->getErrors();
-                $firstKey = array_key_first($errors);
-                throw new OrderException($e->getErrors()[$firstKey], 400);
-            }
+            $this->transferMoney($model);
 
             return Order::query()->create([
                 'user_id' => auth()->id(),
@@ -89,23 +66,20 @@ class OrderService
             ]);
         });
 
-        Notification::send($model->expert->user, new FcmNotification(
-            'order_created_title',
-            'order_created_body',
-            additionalData: [
-                'type' => NotificationTypeEnum::ORDER_CREATED,
-                'id' => $data['id'],
-            ],shouldTranslate: [
-                'title' => true,
-                'body' => true,
-            ],translatedAttributes: [
-                'name' => $model->name,
-            ]
-        ));
+        $this->orderCreatedNotification($model, $data);
 
         return $this->show($order->id);
     }
 
+    public function review(array $data, $id)
+    {
+        $order = Order::query()
+            ->where('user_id', auth()->id())
+            ->where('reviewed', false)
+            ->findOrFail($id);
+
+        DB::transaction(fn() => $order->review($data));
+    }
     private function getModel(string $type)
     {
         return [
@@ -130,5 +104,58 @@ class OrderService
                 'id' => translate_word('item_purchased_before'),
             ]);
         }
+    }
+
+    private function getOrderableModel(array $data)
+    {
+        $model = $this->getModel($data['type'])::query()
+            ->where('id', $data['id'])
+            ->when($data['type'] == 'library', fn($q) => $q->where('status', true))
+            ->first();
+
+        if(! $model) {
+            throw new ValidationErrorsException([
+                'id' => translate_error_message('model', 'not_exists'),
+            ]);
+        }
+
+        return $model;
+    }
+
+    private function transferMoney(Model $orderable)
+    {
+        try{
+            ( new WalletService(
+                app(Wallet::class),
+                app(User::class),
+                app(TransactionService::class),
+            ))->transfer(
+                auth()->user(),
+                $orderable->expert->user,
+                $orderable->price,
+                'Order for ' . $orderable->name,
+            );
+        } catch(ValidationErrorsException $e) {
+            $errors = $e->getErrors();
+            $firstKey = array_key_first($errors);
+            throw new OrderException($e->getErrors()[$firstKey], 400);
+        }
+    }
+
+    private function orderCreatedNotification(Model $model, array $data)
+    {
+        Notification::send($model->expert->user, new FcmNotification(
+            'order_created_title',
+            'order_created_body',
+            additionalData: [
+                'type' => NotificationTypeEnum::ORDER_CREATED,
+                'id' => $data['id'],
+            ],shouldTranslate: [
+            'title' => true,
+            'body' => true,
+        ],translatedAttributes: [
+            'name' => $model->name,
+        ]
+        ));
     }
 }

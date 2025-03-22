@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\Library\Models\Builders\LibraryBuilder;
 use Modules\Library\Traits\LibraryRelations;
 use Modules\Order\Models\Order;
+use Modules\Review\Traits\ReviewTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Library extends Model implements HasMedia
 {
-    use InteractsWithMedia, LibraryRelations, PaginationTrait, Searchable;
+    use InteractsWithMedia, LibraryRelations, PaginationTrait, Searchable, ReviewTrait;
 
     protected $fillable = [
         'title',
@@ -23,6 +24,7 @@ class Library extends Model implements HasMedia
         'pages_count',
         'speciality_id',
         'status',
+        'rating_average',
     ];
 
     protected function casts()
@@ -30,6 +32,7 @@ class Library extends Model implements HasMedia
         return [
             'price' => 'double',
             'status' => 'boolean',
+            'rating_average' => 'double',
         ];
     }
 

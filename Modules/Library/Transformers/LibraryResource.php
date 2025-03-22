@@ -17,6 +17,7 @@ class LibraryResource extends JsonResource
             'id' => $this->id,
             'title' => $this->whenHas('title'),
             'price' => $this->whenHas('price'),
+            'rating_average' => $this->whenHas('rating_average'),
             'cover' => $this->whenNotNull(ResourceHelper::getFirstMediaOriginalUrl($this, 'cover')),
             'purchased' => $this->when($this->relationLoaded('order'), function(){
                return !is_null($this->order);

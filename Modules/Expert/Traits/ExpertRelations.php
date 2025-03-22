@@ -10,11 +10,14 @@ use Modules\City\Models\City;
 use Modules\Expert\Models\ExpertCertification;
 use Modules\Expert\Models\ExpertContact;
 use Modules\Expert\Models\ExpertExperience;
+use Modules\Review\Traits\ReviewRelation;
 use Modules\Skill\Models\Skill;
 use Modules\Speciality\Models\Speciality;
 
 trait ExpertRelations
 {
+    use ReviewRelation;
+
     public function cv()
     {
         return MediaHelper::mediaRelationship($this, 'expert_cv');

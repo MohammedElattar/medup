@@ -9,6 +9,7 @@ class OrderTranslationHelper
         return [
             'item_purchased_before' => 'You have already purchased this item.',
             'item_purchased' => 'You have successfully purchased this item.',
+            'order' => 'Order',
         ];
     }
 
@@ -17,6 +18,7 @@ class OrderTranslationHelper
         return [
             'item_purchased_before' => 'لقد قمت بشراء هذا العنصر بالفعل.',
             'item_purchased' => 'لقد قمت بشراء هذا العنصر بنجاح.',
+            'order' => 'الطلب',
         ];
     }
 }

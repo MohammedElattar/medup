@@ -10,6 +10,7 @@ use Modules\Order\Models\Builders\OrderBuilder;
 class Order extends Model
 {
     use PaginationTrait;
+
     protected $fillable = [
         'user_id',
         'orderable_type',
@@ -21,6 +22,7 @@ class Order extends Model
     {
         return [
             'price' => 'double',
+            'reviewed' => 'boolean',
         ];
     }
 
@@ -32,5 +34,15 @@ class Order extends Model
     public function newEloquentBuilder($query)
     {
         return new OrderBuilder($query);
+    }
+
+    public function review(array $data)
+    {
+        $this->forceFill([
+            'reviewed' => true,
+        ])->save();
+
+        $this->orderable->storeReview($data);
+        $this->orderable->recalculateRating();
     }
 }

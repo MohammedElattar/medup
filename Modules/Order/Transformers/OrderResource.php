@@ -19,6 +19,7 @@ class OrderResource extends JsonResource
         return [
             'id' => $this->id,
             'type' => $this->getType()[$this->orderable_type],
+            'reviewed' => $this->whenHas('reviewed'),
             'price' => round($this->price),
             'created_at' => $this->whenHas('created_at'),
             'item' => $this->whenLoaded('orderable', function(){

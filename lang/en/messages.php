@@ -77,4 +77,5 @@ return [
     ...\Modules\Tag\Helpers\TagTranslationHelper::en(),
     ...\Modules\Wallet\Helpers\WalletTranslationHelper::en(),
     ...\Modules\Order\Helpers\OrderTranslationHelper::en(),
+    ...\Modules\Review\Helpers\ReviewTranslationHelper::en(),
 ];

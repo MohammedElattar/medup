@@ -10,6 +10,7 @@ use Modules\Collaborate\Models\Filters\CollaborateRelationFilter;
 use Modules\Course\Models\Filters\CourseRecommendedFilter;
 use Modules\Library\Models\Filters\LibrarySuggestedFilter;
 use Modules\Library\Traits\CommonLibraryEloquent;
+use Modules\Review\Traits\ReviewEloquentTrait;
 
 class CourseBuilder extends Builder
 {
@@ -46,9 +47,10 @@ class CourseBuilder extends Builder
     public function withDetailsForPublic(): CourseBuilder
     {
         return $this
-            ->select([...self::$baseColumns, 'created_at'])
+            ->select([...self::$baseColumns, 'link as public_link', 'created_at'])
             ->withCover()
             ->withExpertDetails()
+            ->withPurchasedStatus()
             ->withSpecialityDetails();
     }
 
@@ -66,5 +68,11 @@ class CourseBuilder extends Builder
             ->withCover()
             ->withExpertDetails()
             ->with(['order' => fn($q) => $q->where('user_id', auth()->id())]);
+    }
+
+    public function withPurchasedStatus() {
+        return $this->with([
+            'order' => fn($q) => $q->where('user_id', auth()->id())
+        ]);
     }
 }

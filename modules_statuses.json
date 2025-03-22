@@ -38,5 +38,6 @@
     "Course": true,
     "Markable": true,
     "FcmNotification": true,
-    "Order": true
+    "Order": true,
+    "Review": true
 }

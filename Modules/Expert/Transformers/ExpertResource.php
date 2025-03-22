@@ -16,6 +16,10 @@ class ExpertResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'reviewed' => $this->whenHas('reviewed', function(){
+                return !!$this->reviewed;
+            }),
+            'reviews_count' => $this->whenHas('reviews_count'),
             'rating_average' => $this->whenHas('rating_average'),
             'is_premium' => $this->whenHas('is_premium'),
             'headline' => $this->whenHas('headline'),

@@ -115,4 +115,5 @@ return [
     ...\Modules\Tag\Helpers\TagTranslationHelper::ar(),
     ...\Modules\Wallet\Helpers\WalletTranslationHelper::ar(),
     ...\Modules\Order\Helpers\OrderTranslationHelper::ar(),
+    ...\Modules\Review\Helpers\ReviewTranslationHelper::ar(),
 ];

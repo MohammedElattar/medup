@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\Expert\Models\Builders\ExpertBuilder;
 use Modules\Expert\Models\Scopes\OrderByPremiumScope;
 use Modules\Expert\Traits\ExpertRelations;
+use Modules\Review\Traits\ReviewTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Expert extends Model implements HasMedia
 {
-    use InteractsWithMedia, ExpertRelations, PaginationTrait, Searchable;
+    use InteractsWithMedia, ExpertRelations, PaginationTrait, Searchable, ReviewTrait;
 
     protected $fillable = [
         'user_id',
@@ -49,5 +50,10 @@ class Expert extends Model implements HasMedia
     public function newEloquentBuilder($query)
     {
         return new ExpertBuilder($query);
+    }
+
+    public function review(array $data) {
+        $this->storeReview($data);
+        $this->recalculateRating();
     }
 }

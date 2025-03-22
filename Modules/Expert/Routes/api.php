@@ -10,6 +10,7 @@ use Modules\Expert\Http\Controllers\PublicExpertController;
 Route::group(['prefix' => 'public/experts'], function(){
     Route::get('', [PublicExpertController::class, 'index']);
     Route::get('{id}', [PublicExpertController::class, 'show']);
+    Route::post('{id}/review', [PublicExpertController::class, 'review']);
 });
 
 Route::group(['prefix' => 'experts', 'middleware' => GeneralHelper::generalExpertMiddlewares()], function(){

@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-class ValidationMessageHelper extends \Elattar\Prepare\Helpers\ValidationMessageHelper
+class ValidationMessageHelper
 {
     /**
      * Get Name Validation Messages
