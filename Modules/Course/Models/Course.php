@@ -33,8 +33,8 @@ class Course extends Model implements HasMedia
     protected function casts()
     {
         return [
-            'price' => 'double',
-            'rating_average' => 'double',
+            'price' => 'double:2',
+            'rating_average' => 'double:2',
         ];
     }
 }

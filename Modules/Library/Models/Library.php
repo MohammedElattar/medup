@@ -30,7 +30,7 @@ class Library extends Model implements HasMedia
     protected function casts()
     {
         return [
-            'price' => 'double',
+            'price' => 'double:2',
             'status' => 'boolean',
             'rating_average' => 'double',
         ];
