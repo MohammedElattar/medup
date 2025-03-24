@@ -22,9 +22,9 @@ class PublicExpertService
 
     public function topExperts()
     {
-        return cache()->remember('top_experts', now()->addHour(), function(){
+//        return cache()->remember('top_experts', now()->addHour(), function(){
           return $this->index(['only_top' => true]);
-        });
+//        });
     }
 
     public function show($id)
