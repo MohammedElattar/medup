@@ -2,13 +2,10 @@
 
 use App\Helpers\GeneralHelper;
 use Illuminate\Support\Facades\Route;
-use Modules\Auth\Helpers\UserTypeHelper;
 use Modules\Subscription\Http\Controllers\SubscriptionController;
 
-Route::group(['prefix' => 'subscription', 'middleware' => GeneralHelper::getDefaultLoggedUserMiddlewares([
-    GeneralHelper::userTypeIn(UserTypeHelper::mobileTypes())
-])], function(){
+Route::group(['prefix' => 'experts/me/subscription', 'middleware' => GeneralHelper::generalExpertMiddlewares()], function(){
     Route::get('', [SubscriptionController::class, 'show']);
-    Route::post('upgrade', [SubscriptionController::class, 'upgrade']);
     Route::post('renew', [SubscriptionController::class, 'renew']);
+    Route::post('cancel', [SubscriptionController::class, 'cancel']);
 });

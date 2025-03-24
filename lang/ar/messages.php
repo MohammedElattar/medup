@@ -117,4 +117,5 @@ return [
     ...\Modules\Order\Helpers\OrderTranslationHelper::ar(),
     ...\Modules\Review\Helpers\ReviewTranslationHelper::ar(),
     ...\Modules\Chat\Helpers\ChatTranslationHelper::ar(),
+    ...\Modules\Subscription\Helpers\SubscriptionTranslationHelper::ar(),
 ];

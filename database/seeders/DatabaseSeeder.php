@@ -13,6 +13,7 @@ use Modules\Course\Database\Seeders\CourseDatabaseSeeder;
 use Modules\Idea\Database\Seeders\IdeaDatabaseSeeder;
 use Modules\Library\Database\Seeders\LibraryDatabaseSeeder;
 use Modules\Research\Database\Seeders\ResearchDatabaseSeeder;
+use Modules\Setting\Database\Seeders\SettingDatabaseSeeder;
 use Modules\Skill\Database\Seeders\SkillDatabaseSeeder;
 use Modules\Speciality\Database\Seeders\SpecialityDatabaseSeeder;
 use Modules\Tag\Database\Seeders\TagDatabaseSeeder;
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            SettingDatabaseSeeder::class,
             CountryDatabaseSeeder::class,
             CityDatabaseSeeder::class,
             SkillDatabaseSeeder::class,

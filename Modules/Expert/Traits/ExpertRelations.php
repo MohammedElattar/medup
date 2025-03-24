@@ -13,6 +13,7 @@ use Modules\Expert\Models\ExpertExperience;
 use Modules\Review\Traits\ReviewRelation;
 use Modules\Skill\Models\Skill;
 use Modules\Speciality\Models\Speciality;
+use Modules\Subscription\Models\Subscription;
 
 trait ExpertRelations
 {
@@ -56,5 +57,10 @@ trait ExpertRelations
     public function socialContacts(): HasOne
     {
         return $this->hasOne(ExpertContact::class, 'expert_id');
+    }
+
+    public function subscription()
+    {
+        return $this->hasOne(Subscription::class);
     }
 }

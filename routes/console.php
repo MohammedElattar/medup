@@ -3,6 +3,7 @@
 use App\Jobs\TruncateTelescopeJob;
 use Illuminate\Support\Facades\Schedule;
 use Modules\Expert\Jobs\SyncTopExpertJob;
+use Modules\Subscription\Jobs\ExpirePassedSubscriptionsJob;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,4 @@ use Modules\Expert\Jobs\SyncTopExpertJob;
 
 Schedule::job(new TruncateTelescopeJob)->everyTenMinutes();
 Schedule::job(SyncTopExpertJob::class)->everyMinute();
+Schedule::job(ExpirePassedSubscriptionsJob::class)->twiceDaily();

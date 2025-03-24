@@ -3,20 +3,22 @@
 namespace Modules\Subscription\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\Subscription\Database\Factories\SubscriptionFactory;
 
 class Subscription extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'starts_at',
+        'ends_at',
+        'paid',
+        'expert_id',
+    ];
 
-    /**
-     * The attributes that are mass assignable.
-     */
-    protected $fillable = [];
-
-    protected static function newFactory(): SubscriptionFactory
+    protected function casts()
     {
-        //return SubscriptionFactory::new();
+        return [
+            'starts_at' => 'datetime',
+            'ends_at' => 'datetime',
+            'paid' => 'boolean',
+        ];
     }
 }

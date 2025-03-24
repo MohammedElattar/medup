@@ -8,7 +8,7 @@
     "Material": false,
     "TileTexture": false,
     "Service": false,
-    "Setting": false,
+    "Setting": true,
     "TermsAndConditions": false,
     "PrivacyPolicy": false,
     "Brand": false,
