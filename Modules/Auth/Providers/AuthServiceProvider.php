@@ -123,7 +123,7 @@ class AuthServiceProvider extends ServiceProvider
         );
     }
 
-    private function getVerificationSVerifiabletrategy()
+    private function getVerificationStrategy()
     {
         $defaultStrategy = VerifyConfigHelper::defaultStrategy();
         $class = VerifyConfigHelper::getStrategyClass($defaultStrategy);

@@ -14,6 +14,7 @@
     "ext-imagick": "*",
     "aaronfrancis/fast-paginate": "^2.0",
     "cerbero/json-parser": "^1.1",
+    "elattar/laravel-mysql-spatial": "^7.0",
     "elattar/prepare": "^4.5",
     "google/apiclient": "^2.18",
     "intervention/image": "^3.11",

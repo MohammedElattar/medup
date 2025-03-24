@@ -6,4 +6,5 @@ enum NotificationTypeEnum
 {
     const SYSTEM_NOTIFICATION = 'system_notification';
     const ORDER_CREATED = 'order_created';
+    const CHAT = 'chat';
 }

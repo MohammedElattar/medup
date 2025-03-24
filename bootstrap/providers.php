@@ -5,4 +5,5 @@ return [
     \App\Providers\RouteServiceProvider::class,
     \App\Providers\TelescopeServiceProvider::class,
     \App\Providers\MenuServiceProvider::class,
+    \App\Providers\BroadcastServiceProvider::class,
 ];

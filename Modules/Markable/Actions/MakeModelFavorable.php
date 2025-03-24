@@ -6,14 +6,13 @@ use Illuminate\Database\Eloquent\Builder;
 
 class MakeModelFavorable
 {
-    public function handle(Builder $builder, $userId = null)
+    public function handle(Builder $builder)
     {
-        $userId = $userId ?: auth()->id();
         $favoritesOnly = request('favorites_only') == 'yes';
-        $withFavorites = request('with_favorites') == 'yes';
+        $withFavorites = request('with_favorites', 'yes') == 'yes';
 
         return $builder
-            ->when($favoritesOnly, fn ($query) => $query->whereHasFavorites($userId)->withFavorites($userId))
-            ->when(! $favoritesOnly && $withFavorites, fn ($query) => $query->withFavorites($userId));
+            ->when($favoritesOnly, fn ($query) => $query->whereHasFavorites()->withFavorites())
+            ->when(! $favoritesOnly && $withFavorites, fn ($query) => $query->withFavorites());
     }
 }

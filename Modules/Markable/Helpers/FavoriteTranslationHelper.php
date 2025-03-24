@@ -7,16 +7,16 @@ class FavoriteTranslationHelper
     public static function en(): array
     {
         return [
-            'model' => 'Like',
-            'toggled' => 'updated successfully',
+            'model' => 'Item',
+            'toggled' => 'Toggeled Successfully',
         ];
     }
 
     public static function ar(): array
     {
         return [
-            'model' => 'الإعجاب',
-            'toggled' => 'تم تحديثه بنجاح',
+            'model' => 'العنصر',
+            'toggled' => 'تم التبديل بنجاح',
         ];
     }
 
@@ -25,6 +25,14 @@ class FavoriteTranslationHelper
         return [
             'model' => 'Article',
             'toggled' => 'Basculé avec succès',
+        ];
+    }
+
+    public static function ku(): array
+    {
+        return [
+            'model' => 'بڕگە',
+            'toggled' => 'بە سەرکەوتویی گۆڕدرا',
         ];
     }
 }

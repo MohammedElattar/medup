@@ -78,4 +78,5 @@ return [
     ...\Modules\Wallet\Helpers\WalletTranslationHelper::en(),
     ...\Modules\Order\Helpers\OrderTranslationHelper::en(),
     ...\Modules\Review\Helpers\ReviewTranslationHelper::en(),
+    ...\Modules\Chat\Helpers\ChatTranslationHelper::en(),
 ];

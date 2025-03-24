@@ -34,6 +34,7 @@ class FcmNotification extends Notification implements ShouldQueue
         array   $additionalData = [],
         array   $shouldTranslate = [],
         array   $translatedAttributes = [],
+        private array $viaChannels = ['database', FcmChannel::class]
     ) {
         $this->title = $title;
         $this->body = $body;
@@ -45,7 +46,7 @@ class FcmNotification extends Notification implements ShouldQueue
 
     public function via($notifiable)
     {
-        return ['database', FcmChannel::class];
+        return $this->viaChannels;
     }
 
     public function toFcm($notifiable)

@@ -7,31 +7,22 @@ use Modules\Markable\Helpers\FavoriteHelper;
 
 trait Favorable
 {
-    public function whereHasFavorites($userId = null): static
+    public function whereHasFavorites()
     {
-        return $this->whereHas(FavoriteHelper::RELATIONSHIP_NAME, function ($query) use ($userId) {
-            $userId = $userId ?: auth()->id();
-
-            $query->whereUserId($userId);
+        return $this->whereHas(FavoriteHelper::RELATIONSHIP_NAME, function ($query) {
+            $query->whereUserId(auth()->id());
         });
     }
 
-    public function withFavorites($userId = null): static
+    public function withFavorites(): mixed
     {
-        return $this->with([FavoriteHelper::RELATIONSHIP_NAME => function ($query) use ($userId) {
-            $userId = $userId ?: auth()->id();
-
-            $query->whereUserId($userId);
+        return $this->with([FavoriteHelper::RELATIONSHIP_NAME => function ($query) {
+            $query->whereUserId(auth()->id());
         }]);
     }
 
-    public function getFavorites($userId = null): static
+    public function getFavorites()
     {
-        return (new MakeModelFavorable)->handle($this, $userId);
-    }
-
-    public function withFavoritesCount(): static
-    {
-        return $this->withCount(FavoriteHelper::RELATIONSHIP_NAME);
+        return (new MakeModelFavorable)->handle($this);
     }
 }

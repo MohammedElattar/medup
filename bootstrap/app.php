@@ -143,5 +143,6 @@ return Application::configure(basePath: dirname(__DIR__))
         ExpertExceptionHelper::handle($exceptions);
         WalletExceptionHelper::handle($exceptions);
         \Modules\Order\Helpers\OrderExceptionHelper::handle($exceptions);
+        \Modules\Chat\Helpers\ConversationExceptionHelper::handle($exceptions);
     })
     ->create();

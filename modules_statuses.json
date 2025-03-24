@@ -39,5 +39,6 @@
     "Markable": true,
     "FcmNotification": true,
     "Order": true,
-    "Review": true
+    "Review": true,
+    "Chat": true
 }
