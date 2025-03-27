@@ -5,6 +5,8 @@ namespace Modules\Speciality\Http\Controllers;
 use App\Helpers\FlasherHelper;
 use App\Http\Controllers\Controller;
 use Modules\Country\Http\Requests\CountryRequest;
+use Modules\Skill\Models\Skill;
+use Modules\Speciality\Http\Requests\SpecialityRequest;
 use Modules\Speciality\Services\AdminSpecialityService;
 
 class AdminSpecialityController extends Controller
@@ -27,10 +29,10 @@ class AdminSpecialityController extends Controller
 
     public function create($collegeId)
     {
-        return view('speciality::create', compact('collegeId'));
+        return view('speciality::create', [...$this->getMenus(), ...compact('collegeId')]);
     }
 
-    public function store(CountryRequest $request, $collegeId)
+    public function store(SpecialityRequest $request, $collegeId)
     {
         $this->specialityService->store($request->validated(), $collegeId);
 
@@ -43,10 +45,10 @@ class AdminSpecialityController extends Controller
     {
         $item = $this->specialityService->show($collegeId, $id);
 
-        return view('speciality::edit', compact('item', 'collegeId'));
+        return view('speciality::edit', [...$this->getMenus(), ...compact('item', 'collegeId')]);
     }
 
-    public function update(CountryRequest $request, $collegeId, $id)
+    public function update(SpecialityRequest $request, $collegeId, $id)
     {
         $this->specialityService->update($request->validated(), $collegeId, $id);
 
@@ -62,5 +64,12 @@ class AdminSpecialityController extends Controller
         FlasherHelper::success(translate_success_message('speciality', 'deleted'));
 
         return redirect()->route('specialities.index', $collegeId);
+    }
+
+    private function getMenus()
+    {
+        $skills = Skill::query()->latest()->get(['id', 'name']);
+
+        return compact('skills');
     }
 }

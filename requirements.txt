@@ -5,6 +5,6 @@
 - [ ] order rating (done)
 - [ ] chat process (done)
 - [ ] upgrade to premium (done)
+- [ ] about us page (done)
+- [ ] skills are a part of specialities  (done)
 - [ ] contract process (needs more information)
-- [ ] about us page
-- [ ] skills are a part of specialities

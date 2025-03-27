@@ -34,7 +34,17 @@
                                 </div>
                             </x-forms.multi-lang>
                         </div>
-
+                        <div class="mb-1 col-12">
+                            <div class="col-sm-3">
+                                <label class="col-form-label" for="skills">{{ translate_ui('skills') }}</label>
+                            </div>
+                            <div>
+                                <x-forms.select name="skills" :options="$skills" :item="$item"/>
+                                @error('skills')
+                                <span class="invalid-feedback d-block">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="col-sm-9">
                             <button type="submit" class="btn btn-primary me-1">{{ translate_ui('update') }}</button>
                         </div>

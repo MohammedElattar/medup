@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\College\Models\College;
 use App\Traits\HasTranslations;
 use Modules\Expert\Models\Expert;
+use Modules\Skill\Models\Skill;
 
 class Speciality extends Model
 {
@@ -24,5 +25,10 @@ class Speciality extends Model
     public function experts()
     {
         return $this->hasMany(Expert::class);
+    }
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class);
     }
 }

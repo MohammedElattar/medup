@@ -5,6 +5,7 @@ namespace Modules\Speciality\Database\Seeders;
 use App\Helpers\TranslationHelper;
 use Illuminate\Database\Seeder;
 use Modules\College\Models\College;
+use Modules\Skill\Models\Skill;
 use Modules\Speciality\Models\Speciality;
 
 class SpecialityDatabaseSeeder extends Seeder
@@ -37,14 +38,18 @@ class SpecialityDatabaseSeeder extends Seeder
             ['en' => 'Radiation Therapy', 'ar' => 'العلاج الإشعاعي', 'college_id' => 9],
         ];
 
+        $skills = Skill::query()->pluck('id')->toArray();
+
         foreach($specializations as $specialization) {
             $i = $specialization;
             unset($i['college_id']);
 
-            Speciality::query()->create([
+            $item = Speciality::query()->create([
                 'name' => $i,
                 'college_id' => $specialization['college_id'],
             ]);
+
+            $item->skills()->attach(fake()->randomElements($skills));
         }
     }
 }

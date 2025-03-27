@@ -5,6 +5,7 @@ namespace Modules\Skill\Database\Seeders;
 use App\Helpers\TranslationHelper;
 use Illuminate\Database\Seeder;
 use Modules\Skill\Models\Skill;
+use Modules\Speciality\Models\Speciality;
 
 class SkillDatabaseSeeder extends Seeder
 {

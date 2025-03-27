@@ -3,12 +3,14 @@
 namespace Modules\Speciality\Services;
 
 use App\Exceptions\ValidationErrorsException;
+use Illuminate\Support\Facades\DB;
 use Modules\College\Services\AdminCollegeService;
+use Modules\Skill\Services\AdminSkillService;
 use Modules\Speciality\Models\Speciality;
 
 readonly class AdminSpecialityService
 {
-    public function __construct(private AdminCollegeService $collegeService) {}
+    public function __construct(private AdminCollegeService $collegeService, private AdminSkillService $adminSkillService) {}
 
     public function index($collegeId)
     {
@@ -28,15 +30,26 @@ readonly class AdminSpecialityService
     public function store(array $data, $collegeId)
     {
         $this->collegeService->exists($collegeId);
+        $this->adminSkillService->exist($data['skills']);
 
-        Speciality::query()->create($data + ['college_id' => $collegeId]);
+        DB::transaction(function() use ($data, $collegeId){
+            $item = Speciality::query()->create($data + ['college_id' => $collegeId]);
+            $item->skills()->attach($data['skills']);
+        });
     }
 
     public function update(array $data, $collegeId, $id)
     {
         $this->collegeService->exists($collegeId);
+        $this->adminSkillService->exist($data['skills']);
 
-        Speciality::query()->where('college_id', $collegeId)->findOrFail($id)->update($data);
+        DB::transaction(function() use ($data, $collegeId, $id){
+            $item = Speciality::query()->where('college_id', $collegeId)->findOrFail($id);
+
+            $item->update($data);
+
+            $item->skills()->sync($data['skills']);
+        });
     }
 
     public function destroy($collegeId, $id)

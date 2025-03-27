@@ -66,7 +66,7 @@
                     dropdownAutoWidth: true,
                     width: '100%',
                     dropdownParent: $this.parent(),
-
+                    closeOnSelect: false
                 });
             });
         });

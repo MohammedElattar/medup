@@ -38,9 +38,16 @@ class SelectMenuController extends Controller
 
     public function skills()
     {
+        $specialities = explode(',', request()->input('specialities', [])) ?: [];
+
         return $this->resourceResponse(
             CountryResource::collection(
-                Skill::query()->latest()->select(['id', 'name'])->withCount('experts')->get()
+                Skill::query()
+                    ->latest()
+                    ->select(['id', 'name'])
+                    ->withCount('experts')
+                    ->when(!empty($specialities), fn($q) => $q->whereHas('specialities', fn($q) => $q->whereIn('specialities.id', $specialities)))
+                    ->get()
             )
         );
     }
