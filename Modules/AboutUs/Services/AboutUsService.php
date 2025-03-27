@@ -11,7 +11,9 @@ class AboutUsService
 {
     public function index(bool $inPublic = false)
     {
-        return AboutUs::query()->when($inPublic, fn ($q) => $q->where('id', '<>', 1))->get();
+        return AboutUs::query()
+            ->when($inPublic, fn($q) => $q->with(['firstImage', 'publicOtherImages']))
+            ->get();
     }
 
     public function show($id, bool $isPublic = false)
