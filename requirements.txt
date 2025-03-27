@@ -3,10 +3,8 @@
 - [ ] payment process (orders) (done)
 - [ ] expert rating (done)
 - [ ] order rating (done)
-- [ ] about us page
-- [ ] chat process
+- [ ] chat process (done)
+- [ ] upgrade to premium (done)
 - [ ] contract process (needs more information)
-- [ ] upgrade to premium
-- [ ] ad section in home page
+- [ ] about us page
 - [ ] skills are a part of specialities
-- [ ] navbar specialities dropdown

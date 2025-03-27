@@ -80,4 +80,5 @@ return [
     ...\Modules\Review\Helpers\ReviewTranslationHelper::en(),
     ...\Modules\Chat\Helpers\ChatTranslationHelper::en(),
     ...\Modules\Subscription\Helpers\SubscriptionTranslationHelper::en(),
+    ...\Modules\AboutUs\Helpers\AboutUsTranslationHelper::en(),
 ];

@@ -7,56 +7,56 @@
 
 <!-- Vendor Styles -->
 @push('custom-styles')
-  @vite([
-    'resources/assets/vendor/libs/dropzone/dropzone.scss'
-  ])
+    @vite([
+      'resources/assets/vendor/libs/dropzone/dropzone.scss'
+    ])
 @endpush
 
 @section('vendor-script')
-  @vite(['resources/assets/vendor/libs/dropzone/dropzone.js'])
+    @vite(['resources/assets/vendor/libs/dropzone/dropzone.js'])
 @endsection
 
 <div class="row">
-<div class="col-12">
-  <div class="col-12">
-    <div class="card mb-6">
-      <div class="card-body dropzone cursor-pointer" id="{{$id}}-dropzone">
-          <div class="dz-message text-white">
-            {{translate_ui('click_to_upload')}}
-          </div>
-      </div>
-      <input type="file" hidden id="{{$id}}-initial-input" multiple accept="image/*">
-      <input
-        hidden
-        type="file"
-        id="{{$id}}-target-input"
-        name="{{$name}}[]"
-        multiple
-      />
-      @if($deletedImagesName)
-        <select hidden name="{{$deletedImagesName}}[]" id="{{$id}}-{{$deletedImagesName}}" multiple="multiple">
-          @foreach(old($deletedImagesName, []) as $deletedImage)
-            <option value="{{$deletedImage}}" selected></option>
-          @endforeach
-        </select>
-      @endif
-    </div>
-    <div class="accordion accordion-margin" id="{{$id}}-preview-accordion">
-    </div>
+    <div class="col-12">
+        <div class="col-12">
+            <div class="card mb-6">
+                <div class="card-body dropzone cursor-pointer" id="{{$id}}-dropzone">
+                    <div class="dz-message text-white">
+                        {{translate_ui('click_to_upload')}}
+                    </div>
+                </div>
+                <input type="file" hidden id="{{$id}}-initial-input" multiple accept="image/*">
+                <input
+                    hidden
+                    type="file"
+                    id="{{$id}}-target-input"
+                    name="{{$name}}[]"
+                    multiple
+                />
+                @if($deletedImagesName)
+                    <select hidden name="{{$deletedImagesName}}[]" id="{{$id}}-{{$deletedImagesName}}" multiple="multiple">
+                        @foreach(old($deletedImagesName, []) as $deletedImage)
+                            <option value="{{$deletedImage}}" selected></option>
+                        @endforeach
+                    </select>
+                @endif
+            </div>
+            <div class="accordion accordion-margin" id="{{$id}}-preview-accordion">
+            </div>
 
-    @error($name)
-    <div class="invalid-feedback d-block fw-bold">{{ $message }}</div>
-    @enderror
-  </div>
-</div>
+            @error($name)
+            <div class="invalid-feedback d-block fw-bold">{{ $message }}</div>
+            @enderror
+        </div>
+    </div>
 </div>
 
 @push('custom-scripts')
     @vite(['resources/assets/vendor/libs/dropzone/dropzone.js'])
     <script>
         let images = @json($images);
-        const allowedExtensions = ['jpeg', 'png', 'jpg'];
-        const maxFileSize = 2 * 1024 * 1024;
+        const allowedExtensions = ['jpeg', 'png', 'jpg', 'webp'];
+        const maxFileSize = 50 * 1024 * 1024;
         const eventHandler = new EventTarget()
         const targetFileInput = document.getElementById('{{$id}}-target-input');
         const deletedImagesIds = document.getElementById('{{$id}}-{{$deletedImagesName}}');
@@ -136,16 +136,17 @@
 
             if(! allowedExtensions.includes(fileExtension))
             {
-                throw new Error('not_allowed_extension')
+                alert('File extension is not allowed, allowed extensions are ' + allowedExtensions.join(', '));
             }
 
             const fileSize = file.size;
 
             if(fileSize > maxFileSize)
             {
-                throw new Error('file_too_large')
+                alert('File size is too large max file size is ' + formatFileSize(maxFileSize));
             }
         }
+
         const formatFileSize = (bytes, decimals = 2) => {
             if (bytes === 0) return '0 B';
 
@@ -155,6 +156,7 @@
 
             return parseFloat((bytes / Math.pow(k, i)).toFixed(decimals)) + ' ' + sizes[i];
         }
+
         const generateUUID = () => {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
                 var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
@@ -176,40 +178,89 @@
                 reader.readAsDataURL(file);
             })
         }
+        // const updateTargetFilesList = (files = [], filesIds = []) => {
+        //     const dataTransfer = new DataTransfer();
+        //
+        //     Array.from(targetFileInput.files).forEach((file) => {
+        //         dataTransfer.items.add(file);
+        //     })
+        //
+        //     files.forEach((file) => {
+        //         dataTransfer.items.add(file);
+        //     })
+        //
+        //     filesIds.forEach((id) => {
+        //         let fileObject = {};
+        //         let fileIndex = -1;
+        //
+        //         images.forEach((f, index) => {
+        //             if((f.id + '') === (id + ''))
+        //             {
+        //                 fileObject = f;
+        //                 fileIndex = index;
+        //             }
+        //         })
+        //
+        //         dataTransfer.items.remove(fileIndex);
+        //         images.splice(fileIndex, 1)
+        //
+        //         if(! fileObject.isNew && deletedImagesIds)
+        //         {
+        //             deletedImagesIds.innerHTML+=`<option value="${fileObject.id}" selected>${fileObject.id}</option>`
+        //         }
+        //     })
+        //
+        //     targetFileInput.files = dataTransfer.files;
+        // }
+
         const updateTargetFilesList = (files = [], filesIds = []) => {
             const dataTransfer = new DataTransfer();
 
+            // Step 1: Add all existing files from targetFileInput.files
             Array.from(targetFileInput.files).forEach((file) => {
                 dataTransfer.items.add(file);
-            })
+            });
 
+            // Step 2: Add new files
             files.forEach((file) => {
                 dataTransfer.items.add(file);
-            })
+            });
 
+            // Step 3: Remove files by id
             filesIds.forEach((id) => {
-                let fileObject = {};
-                let fileIndex = -1;
+                let fileIndexInImages = -1;
+                let fileObject = null;
 
+                // Find the file in images array
                 images.forEach((f, index) => {
-                    if((f.id + '') === (id + ''))
-                    {
+                    if ((f.id + '') === (id + '')) {
                         fileObject = f;
-                        fileIndex = index;
+                        fileIndexInImages = index;
                     }
-                })
+                });
 
-                dataTransfer.items.remove(fileIndex);
-                images.splice(fileIndex, 1)
+                if (fileObject) {
+                    // Remove from images array
+                    images.splice(fileIndexInImages, 1);
 
-                if(! fileObject.isNew && deletedImagesIds)
-                {
-                    deletedImagesIds.innerHTML+=`<option value="${fileObject.id}" selected>${fileObject.id}</option>`
+                    // If it's a new file, remove it from dataTransfer by matching file object
+                    if (fileObject.isNew) {
+                        for (let i = 0; i < dataTransfer.items.length; i++) {
+                            const file = dataTransfer.items[i].getAsFile();
+                            if (file.id === fileObject.id) { // Assumes file.id was set earlier
+                                dataTransfer.items.remove(i);
+                                break;
+                            }
+                        }
+                    } else if (deletedImagesIds) {
+                        // For existing files, mark as deleted
+                        deletedImagesIds.innerHTML += `<option value="${fileObject.id}" selected>${fileObject.id}</option>`;
+                    }
                 }
-            })
+            });
 
             targetFileInput.files = dataTransfer.files;
-        }
+        };
 
         const previewImages = (files) => {
             const accordion = document.getElementById('{{$id}}-preview-accordion');
@@ -256,9 +307,7 @@
             </div>`
             })
 
-            document.querySelectorAll('.file-number').forEach((i, index) => {
-              i.textContent = index+1;
-            })
+            syncFileNumbers()
             // feather.replace()
 
             accordion.addEventListener('click', (e) => {
@@ -271,9 +320,17 @@
                     if (item) {
                         item.remove();
                         updateTargetFilesList([], [fileId]);
+                        syncFileNumbers()
                     }
                 }
             });
+        }
+
+        function syncFileNumbers()
+        {
+            document.querySelectorAll('.file-number').forEach((i, index) => {
+                i.textContent = index+1;
+            })
         }
 
         eventHandler.addEventListener('filesAdded', function(e){

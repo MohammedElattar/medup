@@ -40,5 +40,6 @@
     "FcmNotification": true,
     "Order": true,
     "Review": true,
-    "Chat": true
+    "Chat": true,
+    "AboutUs": true
 }

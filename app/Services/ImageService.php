@@ -97,8 +97,6 @@ class ImageService
                 ->$otherMediasRelationName()
                 ->whereIntegerInRaw('id', $deletedMedias)
                 ->delete();
-
-            Artisan::call('media-library:clean');
         }
     }
 

@@ -53,6 +53,12 @@
             "icon": "menu-icon tf-icons ti ti-bulb",
             "url": "/admin/ideas",
             "slug": "ideas.index"
+        },
+        {
+            "name": "about_us",
+            "icon": "menu-icon tf-icons ti ti-users",
+            "slug": "about_us.index",
+            "url": "admin/about-us"
         }
     ]
 }

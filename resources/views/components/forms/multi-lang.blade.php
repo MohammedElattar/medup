@@ -24,7 +24,7 @@
     </ul>
 
     <!-- Language Tab Content -->
-    <div class="tab-content p-0 mt-5" id="multi-lang-tab-content">
+    <div class="tab-content p-0 mt-5 d-flex justify-content-between flex-column" id="multi-lang-tab-content">
         @foreach(TranslationHelper::getAvailableLocales() as $lang)
             <div
                     class="tab-pane {{ $currentLocale == $lang ? 'active show' : '' }}"

@@ -118,4 +118,5 @@ return [
     ...\Modules\Review\Helpers\ReviewTranslationHelper::ar(),
     ...\Modules\Chat\Helpers\ChatTranslationHelper::ar(),
     ...\Modules\Subscription\Helpers\SubscriptionTranslationHelper::ar(),
+    ...\Modules\AboutUs\Helpers\AboutUsTranslationHelper::ar(),
 ];

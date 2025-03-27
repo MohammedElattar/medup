@@ -100,4 +100,10 @@ return [
     'comment_details' => 'Comment details',
     'replied_user' => 'Replied user',
     'previous' => 'Previous',
+
+
+
+    'about_us' => 'About Us',
+    'click_to_upload' => 'Click To Upload',
+    'first_image' => 'First Image',
 ];
