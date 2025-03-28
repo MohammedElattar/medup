@@ -58,6 +58,7 @@ return Application::configure(basePath: dirname(__DIR__))
             ValidatePostSize::class,
             TrimStrings::class,
             ConvertEmptyStringsToNull::class,
+            \App\Http\Middleware\EtagGenerateMiddleware::class,
         ]);
 
         $middleware->alias([
