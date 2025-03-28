@@ -60,6 +60,7 @@ class ProfileController extends Controller
     {
         $loggedUserInfo = User::whereId(auth()->id())->with(['avatar'])->first();
 
+        $loggedUserInfo->load('wallet');
         return $this->resourceResponse(new UserResource($loggedUserInfo));
     }
 
