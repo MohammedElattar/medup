@@ -23,6 +23,7 @@ class Transaction extends Model
         'materials_total',
         'service_cost',
         'maintenance_invoice_id',
+        'type',
     ];
 
     protected $casts = [
