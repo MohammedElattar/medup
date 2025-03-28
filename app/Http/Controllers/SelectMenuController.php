@@ -38,7 +38,7 @@ class SelectMenuController extends Controller
 
     public function skills()
     {
-        $specialities = explode(',', request()->input('specialities', [])) ?: [];
+        $specialities = explode(',', request()->input('specialities', '')) ?: [];
 
         return $this->resourceResponse(
             CountryResource::collection(
