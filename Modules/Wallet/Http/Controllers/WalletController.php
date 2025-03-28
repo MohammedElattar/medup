@@ -51,7 +51,7 @@ class WalletController extends Controller
         $toUser = User::query()
             ->where('email', $request->email)
             ->where('id', '<>', auth()->id())
-            ->whereNotIn('type', WalletHelper::publicTypes())
+            ->whereIn('type', WalletHelper::publicTypes())
             ->first();
 
         if(! $toUser) {
