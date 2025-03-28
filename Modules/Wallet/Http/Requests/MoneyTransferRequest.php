@@ -25,8 +25,9 @@ class MoneyTransferRequest extends FormRequest
     public function rules()
     {
         return [
+            'email' => ValidationRuleHelper::emailRules(),
             'from_user_id' => ValidationRuleHelper::foreignKeyRules(),
-            'to_user_id' => ValidationRuleHelper::foreignKeyRules(),
+//            'to_user_id' => ValidationRuleHelper::foreignKeyRules(),
             'amount' => ValidationRuleHelper::doubleRules(),
             'description' => ValidationRuleHelper::stringRules([
                 'required' => 'sometimes',

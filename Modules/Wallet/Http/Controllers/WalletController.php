@@ -2,9 +2,13 @@
 
 namespace Modules\Wallet\Http\Controllers;
 
+use App\Exceptions\ValidationErrorsException;
+use App\Models\User;
 use App\Traits\HttpResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use Modules\Auth\Enums\UserTypeEnum;
+use Modules\Wallet\Helpers\WalletHelper;
 use Modules\Wallet\Http\Requests\MoneyTransferRequest;
 use Modules\Wallet\Http\Requests\ResetWalletRequest;
 use Modules\Wallet\Http\Requests\WalletRequest;
@@ -44,9 +48,21 @@ class WalletController extends Controller
      */
     public function transfer(MoneyTransferRequest $request): JsonResponse
     {
+        $toUser = User::query()
+            ->where('email', $request->email)
+            ->where('id', '<>', auth()->id())
+            ->whereNotIn('type', WalletHelper::publicTypes())
+            ->first();
+
+        if(! $toUser) {
+            throw new ValidationErrorsException([
+                'email' => translate_error_message('email', 'not_exists')
+            ]);
+        }
+
         $this->walletService->transfer(
             $request->from_user_id,
-            $request->to_user_id,
+            $toUser->id,
             $request->amount,
             $request->description,
         );
