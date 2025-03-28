@@ -17,6 +17,9 @@ class SkillResource extends JsonResource
             'name' => $this->whenHas('name'),
             'experts_count' => $this->whenHas('experts_count'),
             'posts_count' => 0,
+            'specialities' => $this->whenLoaded('specialities', function(){
+                return $this->specialities->pluck('id');
+            })
         ];
     }
 }

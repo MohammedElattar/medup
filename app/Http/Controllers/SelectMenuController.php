@@ -9,6 +9,7 @@ use Modules\College\Transformers\CollegeResource;
 use Modules\Country\Models\Country;
 use Modules\Country\Transformers\CountryResource;
 use Modules\Skill\Models\Skill;
+use Modules\Skill\Transformers\SkillResource;
 use Modules\Speciality\Models\Speciality;
 use Modules\Speciality\Transformers\SpecialityResource;
 
@@ -38,13 +39,14 @@ class SelectMenuController extends Controller
 
     public function skills()
     {
-        $specialities = explode(',', request()->input('specialities', '')) ?: [];
+        $specialities = array_filter(explode(',', request()->input('specialities', '')) ?: []);
 
         return $this->resourceResponse(
-            CountryResource::collection(
+            SkillResource::collection(
                 Skill::query()
                     ->latest()
                     ->select(['id', 'name'])
+                    ->with('specialities:id')
                     ->withCount('experts')
                     ->when(!empty($specialities), fn($q) => $q->whereHas('specialities', fn($q) => $q->whereIn('specialities.id', $specialities)))
                     ->get()
