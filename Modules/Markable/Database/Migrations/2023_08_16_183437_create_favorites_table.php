@@ -11,8 +11,7 @@ return new class extends Migration
         Schema::create('markable_favorites', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('markable_type');
-            $table->string('markable_id');
+            $table->morphs('markable');
             $table->string('value')->nullable();
             $table->json('metadata')->nullable();
             $table->timestamps();
