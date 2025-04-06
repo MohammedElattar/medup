@@ -160,6 +160,6 @@ class ExpertBuilder extends Builder
 
     public function withReviewsCount()
     {
-        return $this->with('reviews');
+        return $this->with(['reviews' => fn($q) => $q->withUserDetails()]);
     }
 }
