@@ -17,6 +17,6 @@ class ClientReviewController extends Controller
     {
         $reviews = $this->clientReviewService->index();
 
-        return $this->paginatedResponse($reviews, ReviewResource::class);
+        return $this->resourceResponse(ReviewResource::collection($reviews));
     }
 }

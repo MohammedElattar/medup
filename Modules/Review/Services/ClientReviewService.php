@@ -11,6 +11,6 @@ class ClientReviewService
     {
         return Review::query()
             ->when(true, fn (ReviewBuilder $b) => $b->withUserDetails()->handleFilters())
-            ->paginatedCollection();
+            ->get();
     }
 }

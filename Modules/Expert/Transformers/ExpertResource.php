@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Auth\Transformers\UserResource;
 use Modules\City\Transformers\CityResource;
+use Modules\Review\Transformers\ReviewResource;
 use Modules\Skill\Transformers\SkillResource;
 use Modules\Speciality\Transformers\SpecialityResource;
 
@@ -48,6 +49,9 @@ class ExpertResource extends JsonResource
             }),
             'experiences' => $this->whenLoaded('experiences', function(){
                 return ExpertExperienceResource::collection($this->experiences);
+            }),
+            'reviews' => $this->whenLoaded('reviews', function(){
+                return ReviewResource::collection($this->reviews);
             }),
         ];
     }

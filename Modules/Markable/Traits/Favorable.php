@@ -21,8 +21,13 @@ trait Favorable
         }]);
     }
 
-    public function getFavorites()
+    public function getFavorites(): static
     {
         return (new MakeModelFavorable)->handle($this);
+    }
+
+    public function withFavoritesCount(): static
+    {
+        return $this->withCount(FavoriteHelper::RELATIONSHIP_NAME);
     }
 }

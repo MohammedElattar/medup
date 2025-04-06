@@ -158,7 +158,8 @@ class ExpertBuilder extends Builder
         ]);
     }
 
-    public function withReviewsCount() {
-        return $this->withCount('reviews');
+    public function withReviewsCount()
+    {
+        return $this->with('reviews');
     }
 }
