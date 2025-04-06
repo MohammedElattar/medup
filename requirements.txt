@@ -8,3 +8,8 @@
 - [ ] about us page (done)
 - [ ] skills are a part of specialities  (done)
 - [ ] contract process (needs more information)
+
+
+- social medial inks in expert profile
+- fix type in transaction
+- fix top experts show schedule in home screen

@@ -28,7 +28,7 @@ class PublicCourseController extends Controller
         return $this->paginatedResponse($courses, CourseResource::class);
     }
 
-    public function show($id): JsonResponse
+    public function show($id)
     {
         $course = $this->publicCourseService->show($id);
 

@@ -47,6 +47,7 @@ class LibraryBuilder extends Builder
     {
         return $this->with([
             'order' => fn($q) => $q->where('orders.user_id', auth()->id()),
+            'myReview',
         ]);
     }
 }

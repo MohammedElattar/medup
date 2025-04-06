@@ -26,6 +26,8 @@ class CourseResource extends JsonResource
             $this->mergeWhen($this->relationLoaded('order'), function(){
                 return [
                     'purchased' => !is_null($this->order),
+                    'order_id' => $this->order ? $this->order->id : null,
+                    'reviewed' => !! $this->myReview,
                     'public_link' => !is_null($this->order) ? $this->public_link : null,
                 ];
             }),

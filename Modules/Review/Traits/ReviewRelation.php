@@ -11,4 +11,9 @@ trait ReviewRelation
     {
         return $this->morphMany(Review::class, 'reviewable');
     }
+
+    public function myReview()
+    {
+        return $this->morphOne(Review::class, 'reviewable')->where('user_id', auth()->id());
+    }
 }

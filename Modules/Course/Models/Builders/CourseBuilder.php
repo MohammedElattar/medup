@@ -72,7 +72,8 @@ class CourseBuilder extends Builder
 
     public function withPurchasedStatus() {
         return $this->with([
-            'order' => fn($q) => $q->where('user_id', auth()->id())
+            'order' => fn($q) => $q->where('user_id', auth()->id()),
+            'myReview',
         ]);
     }
 }
