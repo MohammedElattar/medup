@@ -16,7 +16,6 @@ use Modules\Markable\Traits\HasReactions;
 
 class ConversationMessageBuilder extends Builder
 {
-    use HasReactions;
 
     public function withPosition($conversationId, array $selectedColumns = ['*'], string $positionColumn = 'position'): ConversationMessageBuilder
     {
@@ -37,7 +36,6 @@ class ConversationMessageBuilder extends Builder
         return $this
             ->withoutGlobalScope(SoftDeletingScope::class)
             ->withPosition($conversationId)
-            ->withReactionsDetails()
             ->with([
                 'mediaSource',
                 'member.user' => fn (BelongsTo|UserBuilder $b) => $b->select(['users.id', 'users.first_name', 'users.middle_name', 'users.name'])->with('avatar'),

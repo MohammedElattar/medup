@@ -46,7 +46,7 @@ class ConversationMessageService
 
     public function index($conversationId)
     {
-        $messages = ConversationMessage::query()
+        return ConversationMessage::query()
             ->when(true, fn (ConversationMessageBuilder $b) => $b
                 ->whereValid($conversationId)
                 ->whereNotDeletedConversation()
@@ -55,9 +55,8 @@ class ConversationMessageService
             )
             ->searchable(['content'])
             ->latest('conversation_messages.created_at')
-            ->paginatedCollection();
+            ->get();
 
-        return self::prepareMessages($messages);
     }
 
     public function show($conversationId, $messageId)
@@ -216,25 +215,25 @@ class ConversationMessageService
         if (isset($data['media'])) {
             $file = request()->file('media');
 
-            if (
-                in_array($message->type, [MessageTypeEnum::AUDIO, MessageTypeEnum::RECORD])
-            ) {
-                $name = Str::random();
-                $ffmpeg = FFMpeg::create();
-                $audio = $ffmpeg->open($file->getPathname());
-                $audioPath = storage_path("app/public/$name.mp3");
-                $audio->save(new Mp3, $audioPath);
-
-                $message->addMedia($audioPath)
-                    ->preservingOriginal()
-                    ->toMediaCollection('chat_media');
-
-                if (file_exists($audioPath)) {
-                    unlink($audioPath);
-                }
-
-                return;
-            }
+//            if (
+//                in_array($message->type, [MessageTypeEnum::AUDIO, MessageTypeEnum::RECORD])
+//            ) {
+//                $name = Str::random();
+//                $ffmpeg = FFMpeg::create();
+//                $audio = $ffmpeg->open($file->getPathname());
+//                $audioPath = storage_path("app/public/$name.mp3");
+//                $audio->save(new Mp3, $audioPath);
+//
+//                $message->addMedia($audioPath)
+//                    ->preservingOriginal()
+//                    ->toMediaCollection('chat_media');
+//
+//                if (file_exists($audioPath)) {
+//                    unlink($audioPath);
+//                }
+//
+//                return;
+//            }
             $this->fileOperationService->addMedia($message, $data['media'], 'chat_media', request()->file('media')->clientExtension());
         }
     }

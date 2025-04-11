@@ -13,9 +13,7 @@ use Illuminate\Support\Carbon;
 use Modules\Chat\Models\Builders\ConversationMessageBuilder;
 use Modules\Chat\Models\Scopes\MustHaveValidConversation;
 use Modules\Chat\Traits\ConversationMessageRelations;
-use Modules\Markable\Entities\ReactionModel;
 use Modules\Markable\Traits\Markable;
-use Modules\Markable\Traits\UserReactionRelations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -28,8 +26,7 @@ class ConversationMessage extends Model implements HasMedia
         PaginationTrait,
         Searchable,
         SoftDeletes,
-        SpatialTrait,
-        UserReactionRelations;
+        SpatialTrait;
 
     protected $fillable = [
         'conversation_id',
@@ -55,10 +52,6 @@ class ConversationMessage extends Model implements HasMedia
 
     protected $spatialFields = [
         'location',
-    ];
-
-    protected static $marks = [
-        ReactionModel::class,
     ];
 
     protected static function boot(): void

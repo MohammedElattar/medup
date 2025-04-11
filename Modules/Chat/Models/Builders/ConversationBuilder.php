@@ -75,16 +75,6 @@ class ConversationBuilder extends Builder
         return $this
             ->with([
                 'latestMessage' => fn (ConversationMessageBuilder|HasOne $b) => $b->withLatestMessageDetails($userId)->withMemberId(),
-                'latestReaction' => function (HasOneThrough $builder) use ($userId) {
-                    $builder->where(function (ReactionModelBuilder $builder) use ($userId) {
-                        $builder
-                            ->whereNull('conversation_messages.deleted_by_user_id')
-                            ->orWhere('conversation_messages.deleted_by_user_id', '<>', $userId ?: auth()->id());
-                    })
-                        ->with([
-                            'markable' => fn (ConversationMessageBuilder|MorphTo $b) => $b->withLatestMessageDetails($userId)->withMemberId(),
-                        ]);
-                },
             ]);
     }
 
