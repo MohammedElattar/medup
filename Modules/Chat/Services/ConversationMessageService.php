@@ -54,7 +54,7 @@ class ConversationMessageService
                 ->withParentMessageDetails($conversationId)
             )
             ->searchable(['content'])
-            ->latest('conversation_messages.created_at')
+//            ->latest('conversation_messages.created_at')
             ->get();
 
     }
