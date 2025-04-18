@@ -3,6 +3,7 @@
 use App\Exceptions\InternalServerErrorException;
 use App\Exceptions\ValidationErrorsException;
 use App\Helpers\FlasherHelper;
+use App\Helpers\GeneralHelper;
 use App\Http\Middleware\AccountMustBeActive;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\MustBeVerified;
@@ -36,10 +37,10 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-//    ->withBroadcasting(
-//        __DIR__.'/../routes/channels.php',
-//        ['prefix' => 'api', 'middleware' => ['api', GeneralHelper::authMiddleware()]],
-//    )
+    ->withBroadcasting(
+        __DIR__.'/../routes/channels.php',
+        ['prefix' => 'api', 'middleware' => GeneralHelper::getDefaultLoggedUserMiddlewares()],
+    )
     ->withMiddleware(function (Middleware $middleware) {
         //        $middleware->statefulApi();
         $middleware->append([

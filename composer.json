@@ -11,8 +11,8 @@
   "require": {
     "php": "^8.2",
     "ext-dom": "*",
-    "ext-imagick": "*",
     "aaronfrancis/fast-paginate": "^2.0",
+    "ably/laravel-broadcaster": "^1.0",
     "cerbero/json-parser": "^1.1",
     "elattar/laravel-mysql-spatial": "^7.0",
     "elattar/prepare": "^4.5",
