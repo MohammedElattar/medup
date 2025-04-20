@@ -25,7 +25,7 @@ class ConversationUpdatedEvent implements ShouldBroadcast, ShouldQueue
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('chat.'.$this->userId),
+            'chat.'.$this->userId
         ];
     }
 
