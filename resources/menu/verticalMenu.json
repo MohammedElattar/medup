@@ -1,64 +1,70 @@
 {
-    "menu": [
-        {
-            "name": "experts",
-            "icon": "menu-icon tf-icons ti ti-users",
-            "url": "/admin/experts",
-            "slug": "experts.index"
-        },
-        {
-            "name": "countries",
-            "icon": "menu-icon tf-icons ti ti-world",
-            "url": "/admin/countries",
-            "slug": "countries.index"
-        },
-        {
-            "name": "skills",
-            "icon": "menu-icon tf-icons ti ti-pill",
-            "url": "/admin/skills",
-            "slug": "skills.index"
-        },
-        {
-            "name": "colleges",
-            "icon": "menu-icon tf-icons ti ti-building",
-            "url": "/admin/colleges",
-            "slug": "colleges.index"
-        },
-        {
-            "name": "tags",
-            "icon": "menu-icon tf-icons ti ti-tags",
-            "url": "/admin/tags",
-            "slug": "tags.index"
-        },
-        {
-            "name": "blogs",
-            "icon": "menu-icon tf-icons ti ti-article",
-            "url": "/admin/blogs",
-            "slug": "blogs.index"
-        },
-        {
-            "name": "researches",
-            "icon": "menu-icon tf-icons ti ti-microscope",
-            "url": "/admin/researches",
-            "slug": "researches.index"
-        },
-        {
-            "name": "collaborates",
-            "icon": "menu-icon tf-icons ti ti-users-group",
-            "url": "/admin/collaborates",
-            "slug": "collaborates.index"
-        },
-        {
-            "name": "ideas",
-            "icon": "menu-icon tf-icons ti ti-bulb",
-            "url": "/admin/ideas",
-            "slug": "ideas.index"
-        },
-        {
-            "name": "about_us",
-            "icon": "menu-icon tf-icons ti ti-users",
-            "slug": "about_us.index",
-            "url": "admin/about-us"
-        }
-    ]
+  "menu": [
+    {
+      "name": "experts",
+      "icon": "menu-icon tf-icons ti ti-users",
+      "url": "/admin/experts",
+      "slug": "experts.index"
+    },
+    {
+      "name": "countries",
+      "icon": "menu-icon tf-icons ti ti-world",
+      "url": "/admin/countries",
+      "slug": "countries.index"
+    },
+    {
+      "name": "skills",
+      "icon": "menu-icon tf-icons ti ti-pill",
+      "url": "/admin/skills",
+      "slug": "skills.index"
+    },
+    {
+      "name": "colleges",
+      "icon": "menu-icon tf-icons ti ti-building",
+      "url": "/admin/colleges",
+      "slug": "colleges.index"
+    },
+    {
+      "name": "tags",
+      "icon": "menu-icon tf-icons ti ti-tags",
+      "url": "/admin/tags",
+      "slug": "tags.index"
+    },
+    {
+      "name": "blogs",
+      "icon": "menu-icon tf-icons ti ti-article",
+      "url": "/admin/blogs",
+      "slug": "blogs.index"
+    },
+    {
+      "name": "researches",
+      "icon": "menu-icon tf-icons ti ti-microscope",
+      "url": "/admin/researches",
+      "slug": "researches.index"
+    },
+    {
+      "name": "collaborates",
+      "icon": "menu-icon tf-icons ti ti-users-group",
+      "url": "/admin/collaborates",
+      "slug": "collaborates.index"
+    },
+    {
+      "name": "ideas",
+      "icon": "menu-icon tf-icons ti ti-bulb",
+      "url": "/admin/ideas",
+      "slug": "ideas.index"
+    },
+    {
+      "name": "library",
+      "icon": "menu-icon tf-icons ti ti-book",
+      "url": "/admin/library",
+      "slug": "library.index"
+    },
+    {
+      "name": "about_us",
+      "icon": "menu-icon tf-icons ti ti-users",
+      "slug": "about_us.index",
+      "url": "admin/about-us"
+    }
+  ]
 }
