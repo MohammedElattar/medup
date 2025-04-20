@@ -13,7 +13,6 @@
     "ext-dom": "*",
     "aaronfrancis/fast-paginate": "^2.0",
     "ably/ably-php": "^1.1",
-    "ably/laravel-broadcaster": "^1.0",
     "cerbero/json-parser": "^1.1",
     "elattar/laravel-mysql-spatial": "^7.0",
     "elattar/prepare": "^4.5",
@@ -27,6 +26,7 @@
     "laravel/tinker": "^2.9",
     "nwidart/laravel-modules": "*",
     "php-flasher/flasher-laravel": "^2.1",
+    "pusher/pusher-php-server": "^7.2",
     "setasign/fpdf": "^1.8",
     "setasign/fpdi": "^2.6",
     "socialiteproviders/apple": "^5.6",
@@ -52,8 +52,8 @@
     },
     "files": [
       "app/Helpers/translator.php",
-        "app/Helpers/Helpers.php",
-        "app/Helpers/Helper.php"
+      "app/Helpers/Helpers.php",
+      "app/Helpers/Helper.php"
     ]
   },
   "autoload-dev": {
