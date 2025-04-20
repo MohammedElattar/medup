@@ -13,5 +13,5 @@ Route::group(['prefix' => 'api/select_menu'], function(){
 });
 
 Route::get('test_event', function(){
-    \App\Events\TestingEvent::dispatch();
+    event(new \App\Events\TestingEvent());
 });
