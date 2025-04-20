@@ -12,6 +12,7 @@
     "php": "^8.2",
     "ext-dom": "*",
     "aaronfrancis/fast-paginate": "^2.0",
+    "ably/ably-php": "^1.1",
     "ably/laravel-broadcaster": "^1.0",
     "cerbero/json-parser": "^1.1",
     "elattar/laravel-mysql-spatial": "^7.0",
