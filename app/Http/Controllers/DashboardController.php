@@ -10,6 +10,7 @@ class DashboardController extends Controller
     {
         $pageConfigs = ['pageHeader' => false];
 
+        return redirect()->route('experts.index');
         return view('/content/dashboard/dashboards-crm', ['pageConfigs' => $pageConfigs]);
     }
 }
