@@ -13,7 +13,5 @@ Route::group(['prefix' => 'api/select_menu'], function(){
 });
 
 Route::get('test_event', function(){
-    $conversation = \Modules\Chat\Models\Conversation::query()->first();
-    $message = \Modules\Chat\Models\ConversationMessage::query()->first();
-    \Modules\Chat\Events\ConversationUpdatedEvent::dispatch($conversation->id, $message);
-});
+    \App\Events\TestingEvent::dispatch();
+})->middleware(\App\Helpers\GeneralHelper::generalExpertMiddlewares());
