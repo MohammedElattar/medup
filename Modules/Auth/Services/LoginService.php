@@ -35,8 +35,6 @@ class LoginService
 
         $this->validateUser($user, $data);
 
-        $user->addIsPremium();
-        
         return $this->processLogin($user, $data);
     }
 
@@ -102,6 +100,7 @@ class LoginService
         $user->forceFill(['last_login_at' => now()])->save();
 
         $user->tokens = self::addBearerToken($user);
+        $user->addIsPremium();
         UserRelationHelper::loadUserRelations($user);
     }
 
