@@ -67,6 +67,7 @@ class ProfileController extends Controller
 
         $user = User::query()
             ->where('id', auth()->id())
+            ->with('avatar')
             ->addSelect([
                 'is_premium' => Subscription::query()
                     ->where('expert_id', $expertId)
