@@ -5,7 +5,6 @@ namespace Modules\Auth\Transformers;
 use App\Helpers\ResourceHelper;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Auth\Enums\AuthEnum;
-use Modules\Role\Transformers\RoleResource;
 use Modules\Wallet\Transformers\WalletResource;
 
 class UserResource extends JsonResource
@@ -18,6 +17,9 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'first_name' => $this->whenHas('first_name'),
+            'is_premium' => $this->whenHas('is_premium', function(){
+                return (bool) $this->is_premium;
+            }),
             'middle_name' => $this->whenHas('middle_name'),
             'name' => $this->whenHas('name'),
             'reaction' => $this->when(! is_null($this->pivot), function () {

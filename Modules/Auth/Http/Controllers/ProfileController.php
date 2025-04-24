@@ -11,10 +11,13 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\App;
 use Modules\Auth\Enums\AuthEnum;
+use Modules\Auth\Enums\UserTypeEnum;
 use Modules\Auth\Http\Requests\ProfileRequest;
 use Modules\Auth\Http\Requests\UpdateLocaleRequest;
 use Modules\Auth\Services\ProfileService;
 use Modules\Auth\Transformers\UserResource;
+use Modules\Expert\Helpers\ExpertHelper;
+use Modules\Subscription\Models\Subscription;
 
 class ProfileController extends Controller
 {
@@ -58,10 +61,24 @@ class ProfileController extends Controller
 
     public function show()
     {
-        $loggedUserInfo = User::whereId(auth()->id())->with(['avatar'])->first();
+        $expertId = in_array(UserTypeEnum::getUserType(), [UserTypeEnum::EXPERT, UserTypeEnum::EXPERT_LEARNER])
+            ? ExpertHelper::getUserExpert()->id
+            : null;
 
-        $loggedUserInfo->load('wallet');
-        return $this->resourceResponse(new UserResource($loggedUserInfo));
+        $user = User::query()
+            ->where('id', auth()->id())
+            ->addSelect([
+                'is_premium' => Subscription::query()
+                    ->where('expert_id', $expertId)
+                    ->where('paid', true)
+                    ->where('ends_at', '>=', now())
+                    ->select('paid')
+                    ->limit(1),
+            ])
+            ->first();
+
+        $user->load('wallet');
+        return $this->resourceResponse(new UserResource($user));
     }
 
     public function updateLocale(UpdateLocaleRequest $request): JsonResponse
