@@ -61,23 +61,12 @@ class ProfileController extends Controller
 
     public function show()
     {
-        $expertId = in_array(UserTypeEnum::getUserType(), [UserTypeEnum::EXPERT, UserTypeEnum::EXPERT_LEARNER])
-            ? ExpertHelper::getUserExpert()->id
-            : null;
-
         $user = User::query()
             ->where('id', auth()->id())
             ->with('avatar')
-            ->addSelect([
-                'is_premium' => Subscription::query()
-                    ->where('expert_id', $expertId)
-                    ->where('paid', true)
-                    ->where('ends_at', '>=', now())
-                    ->select('paid')
-                    ->limit(1),
-            ])
             ->first();
 
+        $user->addIsPremium();
         $user->load('wallet');
         return $this->resourceResponse(new UserResource($user));
     }

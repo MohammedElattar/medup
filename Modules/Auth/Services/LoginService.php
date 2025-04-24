@@ -35,6 +35,8 @@ class LoginService
 
         $this->validateUser($user, $data);
 
+        $user->addIsPremium();
+        
         return $this->processLogin($user, $data);
     }
 
