@@ -13,7 +13,7 @@ class CollaborateBuilder extends Builder
 {
     public function withDetailsForPublic(): CollaborateBuilder
     {
-        return $this->withExpertDetails()->withSpecialityDetails()->withCommentsCount();
+        return $this->withExpertDetails()->withSpecialityDetails()->withCommentsCount()->withComments();
     }
 
     public function withFilters(array $filters)
@@ -41,5 +41,9 @@ class CollaborateBuilder extends Builder
     public function withCommentsCount(): CollaborateBuilder
     {
         return $this->withCount('comments');
+    }
+
+    public function withComments() {
+        return $this->with(['comments' => fn($q) => $q->withDetails()]);
     }
 }
