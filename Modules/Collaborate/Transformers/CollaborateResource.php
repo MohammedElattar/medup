@@ -4,6 +4,7 @@ namespace Modules\Collaborate\Transformers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Modules\Comment\Transformers\CommentResource;
 use Modules\Expert\Transformers\ExpertResource;
 use Modules\Speciality\Transformers\SpecialityResource;
 
@@ -25,6 +26,7 @@ class CollaborateResource extends JsonResource
                 return SpecialityResource::make($this->speciality);
             }),
             'description' => $this->whenHas('description'),
+            'comments' => CommentResource::collection($this->whenLoaded('comments')),
         ];
     }
 }
