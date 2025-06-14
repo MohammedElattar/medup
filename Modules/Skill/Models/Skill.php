@@ -11,10 +11,11 @@ use Modules\Speciality\Models\Speciality;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Traits\HasTranslations;
+use App\Traits\Searchable;
 
 class Skill extends Model implements HasMedia
 {
-    use HasTranslations, InteractsWithMedia, PaginationTrait;
+    use HasTranslations, InteractsWithMedia, PaginationTrait, Searchable;
 
     protected $fillable = ['name', 'speciality_id'];
 
