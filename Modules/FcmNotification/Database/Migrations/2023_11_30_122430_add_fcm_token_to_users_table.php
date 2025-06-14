@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->json('fcm_tokens')->nullable()->default('[]');
+            $table->json('fcm_tokens')->nullable()->nullable();
         });
 
         Schema::table('users', function (Blueprint $table) {
-            if(Schema::hasColumn('users', 'fcm_token')) {
+            if (Schema::hasColumn('users', 'fcm_token')) {
                 $table->dropColumn('fcm_token');
             }
         });

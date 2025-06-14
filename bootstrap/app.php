@@ -25,6 +25,7 @@ use Illuminate\Validation\ValidationException;
 use Modules\Auth\Helpers\AuthExceptionHelper;
 use Modules\Auth\Http\Middleware\CheckUserType;
 use Modules\Expert\Helpers\ExpertExceptionHelper;
+use Modules\Payment\Helpers\PaymentExceptionHelper;
 use Modules\Wallet\Helpers\WalletExceptionHelper;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -33,12 +34,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
-        web: __DIR__.'/../routes/web.php',
-        commands: __DIR__.'/../routes/console.php',
+        web: __DIR__ . '/../routes/web.php',
+        commands: __DIR__ . '/../routes/console.php',
         health: '/up',
     )
     ->withBroadcasting(
-        __DIR__.'/../routes/channels.php',
+        __DIR__ . '/../routes/channels.php',
         ['prefix' => 'api', 'middleware' => GeneralHelper::getDefaultLoggedUserMiddlewares()],
     )
     ->withMiddleware(function (Middleware $middleware) {
@@ -80,7 +81,8 @@ return Application::configure(basePath: dirname(__DIR__))
         });
 
         $exceptions->render(function (ValidationException $e, Request $req) {
-            if ($req->acceptsJson() ||
+            if (
+                $req->acceptsJson() ||
                 ($req->hasHeader('show-toast') && ! $req->header('show-toast'))
             ) {
                 return;
@@ -146,5 +148,6 @@ return Application::configure(basePath: dirname(__DIR__))
         WalletExceptionHelper::handle($exceptions);
         \Modules\Order\Helpers\OrderExceptionHelper::handle($exceptions);
         \Modules\Chat\Helpers\ConversationExceptionHelper::handle($exceptions);
+        PaymentExceptionHelper::handle($exceptions);
     })
     ->create();

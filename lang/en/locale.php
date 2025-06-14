@@ -116,4 +116,9 @@ return [
     'my_review' => 'My review',
     'purchase_status' => 'Purchase status',
     'library_file' => 'Library file',
+    'student' => 'Student',
+    'expert' => 'Expert',
+    'trainee' => 'Trainee',
+    'expert_learner' => 'Expert learner',
+    'users' => 'Users',
 ];

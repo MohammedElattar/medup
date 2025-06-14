@@ -7,6 +7,8 @@ use App\Models\Builders\UserBuilder;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Modules\Auth\Enums\UserTypeEnum;
+use Modules\Payment\Factories\PaymentFactory;
+use Modules\Payment\Strategies\PaymentStrategy;
 use Modules\Wallet\Entities\Builders\WalletQueryBuilder;
 use Modules\Wallet\Entities\Wallet;
 use Modules\Wallet\Enums\TransactionTypeEnum;
@@ -34,7 +36,7 @@ class WalletService
         $userId = $userId ?: auth()->id();
         $user = WalletHelper::getUser($userId, $this->userModel);
 
-        return $this->walletModel::query()->when(true, fn (WalletQueryBuilder $b) => $b->whereShowable($user))->firstOrFail();
+        return $this->walletModel::query()->when(true, fn(WalletQueryBuilder $b) => $b->whereShowable($user))->firstOrFail();
     }
 
     public function show($userId = null)
@@ -147,6 +149,7 @@ class WalletService
     private function depositOrWithdrawal(...$args): void
     {
         DB::transaction(function () use ($args) {
+            $paymentStrategy = PaymentFactory::make();
             $isDeposit = $args[0];
             $amount = $args[1];
             $user = $args[2] ?? auth()->user();
@@ -162,6 +165,7 @@ class WalletService
             ]);
 
             if ($isDeposit) {
+                $paymentStrategy->pay($amount, $args);
                 $builder->increment('balance', $amount);
 
                 $this->transactionService->createIncomingTransaction(TransactionTypeEnum::DEPOSIT, $amount, auth()->id(), 'deposit');
@@ -200,14 +204,14 @@ class WalletService
         $fromUserObject = $fromUser instanceof $this->userModel
             ? $fromUser
             : $this->userModel::query()
-                ->when(true, fn (UserBuilder $b) => $b->whereValidWalletSender())
-                ->find($fromUser);
+            ->when(true, fn(UserBuilder $b) => $b->whereValidWalletSender())
+            ->find($fromUser);
 
         $toUserObject = $toUser instanceof $this->userModel
             ? $toUser
             : $this->userModel::query()
-                ->when(true, fn (UserBuilder $b) => $b->whereValidWalletReceiver($fromUser))
-                ->find($toUser);
+            ->when(true, fn(UserBuilder $b) => $b->whereValidWalletReceiver($fromUser))
+            ->find($toUser);
 
         $errors = [];
 
@@ -217,9 +221,9 @@ class WalletService
             throw new ValidationErrorsException($errors);
         }
 
-//        if (UserTypeEnum::getUserType($fromUserObject) == UserTypeEnum::ADMIN_EMPLOYEE) {
-//            $fromUserObject = $this->userModel::query()->whereIsAdmin()->first();
-//        }
+        //        if (UserTypeEnum::getUserType($fromUserObject) == UserTypeEnum::ADMIN_EMPLOYEE) {
+        //            $fromUserObject = $this->userModel::query()->whereIsAdmin()->first();
+        //        }
 
         return [
             $fromUserObject,

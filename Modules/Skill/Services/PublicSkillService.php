@@ -12,6 +12,7 @@ class PublicSkillService
             ->latest()
             ->with('icon')
             ->withCount('experts')
+            ->searchable()
             ->paginatedCollection();
     }
 }

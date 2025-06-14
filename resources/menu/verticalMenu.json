@@ -1,9 +1,9 @@
 {
   "menu": [
     {
-      "name": "experts",
+      "name": "users",
       "icon": "menu-icon tf-icons ti ti-users",
-      "url": "/admin/experts",
+      "url": "/admin/users",
       "slug": "experts.index"
     },
     {
