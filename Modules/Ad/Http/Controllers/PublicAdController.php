@@ -15,7 +15,6 @@ class PublicAdController extends Controller
     {
         $ads = Ad::query()
             ->inRandomOrder()
-            ->limit(20)
             ->with('image')
             ->get();
 
