@@ -41,5 +41,8 @@
     "Order": true,
     "Review": true,
     "Chat": true,
-    "AboutUs": true
+    "AboutUs": true,
+    "Ad": true,
+    "Map": true,
+    "Payment": false
 }

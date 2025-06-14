@@ -59,6 +59,12 @@
       "icon": "menu-icon tf-icons ti ti-book",
       "url": "/admin/library",
       "slug": "library.index"
+    },
+    {
+      "name": "ads",
+      "icon": "menu-icon tf-icons ti ti-speakerphone",
+      "url": "/admin/ads",
+      "slug": "ads.index"
     }
   ]
 }

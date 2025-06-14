@@ -121,4 +121,5 @@ return [
     'trainee' => 'Trainee',
     'expert_learner' => 'Expert learner',
     'users' => 'Users',
+    'ads' => 'Ads',
 ];
