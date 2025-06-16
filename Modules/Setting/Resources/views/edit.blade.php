@@ -16,23 +16,22 @@
                 @csrf
                 @method('PUT')
 
-<!-- Nav Tabs -->
+                <!-- Nav Tabs -->
                 <ul class="nav nav-tabs nav-fill mb-3" role="tablist">
                     <li class="nav-item">
                         <button type="button" class="nav-link active" data-bs-toggle="tab" data-bs-target="#email" role="tab">
                             <i class="tf-icons ti ti-mail me-1"></i> {{ translate_ui('email_settings') }}
                         </button>
-</li>
+                    </li>
                     <li class="nav-item">
                         <button type="button" class="nav-link" data-bs-toggle="tab" data-bs-target="#stripe" role="tab">
                             <i class="tf-icons ti ti-credit-card me-1"></i> {{ translate_ui('stripe_settings') }}
                         </button>
-</li>
+                    </li>
                 </ul>
 
                 <!-- Tab Content -->
                 <div class="tab-content">
-
                     <!-- Email Tab -->
                     <div class="tab-pane fade show active" id="email" role="tabpanel">
                         <div class="row">
@@ -46,7 +45,7 @@
                                 <input type="text" name="mail_username" class="form-control" value="{{ old('mail_username', $item->mail_username) }}">
                             </div>
 
-                            <div class="mb-3 form-password-toggle">
+                            <div class="mb-3 form-password-toggle col-lg-6">
                                 <label class="form-label" for="mail_password">{{ translate_ui('mail_password') }}</label>
                                 <div class="input-group input-group-merge">
                                     <input
@@ -85,24 +84,29 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- Stripe Tab -->
-                    <div class="mb-3 form-password-toggle">
-  <label class="form-label" for="stripe_secret_key">{{ translate_ui('stripe_secret_key') }}</label>
-  <div class="input-group input-group-merge">
-    <input
-      type="password"
-      class="form-control form-control-merge"
-      id="stripe_secret_key"
-      name="stripe_secret_key"
-      placeholder="••••••••••••"
-      aria-describedby="stripe_secret_key"
-      value="{{ old('stripe_secret_key', $item->secret_key) }}"
-    />
-    <span class="input-group-text cursor-pointer">
-      <i class="ti ti-eye-off"></i>
-    </span>
-  </div>
-</div>
+                    <div class="tab-pane fade" id="stripe" role="tabpanel">
+                        <div class="row">
+                            <div class="mb-3 form-password-toggle col-md-12">
+                                <label class="form-label" for="stripe_secret_key">{{ translate_ui('stripe_secret_key') }}</label>
+                                <div class="input-group input-group-merge">
+                                    <input
+                                        type="password"
+                                        class="form-control form-control-merge"
+                                        id="stripe_secret_key"
+                                        name="stripe_secret_key"
+                                        placeholder="••••••••••••"
+                                        aria-describedby="stripe_secret_key"
+                                        value="{{ old('stripe_secret_key', $item->secret_key) }}"
+                                    />
+                                    <span class="input-group-text cursor-pointer">
+                                        <i class="ti ti-eye-off"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Submit -->
@@ -113,30 +117,5 @@
         </div>
     </div>
 </div>
-
 @endsection
-
-@push('scripts')
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".toggle-password").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-            const inputId = btn.getAttribute("data-target");
-            const input = document.getElementById(inputId);
-            const icon = btn.querySelector("i");
-
-            if (input.type === "password") {
-                input.type = "text";
-                icon.classList.remove("ti-eye-off");
-                icon.classList.add("ti-eye");
-            } else {
-                input.type = "password";
-                icon.classList.remove("ti-eye");
-                icon.classList.add("ti-eye-off");
-            }
-        });
-    });
-});
-</script>
-@endpush
 
