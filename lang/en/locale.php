@@ -136,4 +136,5 @@ return [
     'mail_from_name' => 'Mail From Name',
     'stripe_secret_key' => 'Secret Key',
     'save_changes' => 'Save Changes',
+    'settings' => 'Settings',
 ];

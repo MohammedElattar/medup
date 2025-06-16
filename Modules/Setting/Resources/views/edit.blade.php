@@ -3,7 +3,6 @@
 @section('title', translate_ui('edit'))
 
 @section('content')
-<x-ui.breadcrumbs :pages="['tags' => route('tags.index'), 'edit']"/>
 
 <div class="col-12">
     <div class="card">

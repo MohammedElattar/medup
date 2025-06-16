@@ -117,4 +117,5 @@ return [
     'mail_from_name' => 'اسم المُرسل',
     'stripe_secret_key' => 'المفتاح السري لسترايب',
     'save_changes' => 'حفظ التغييرات',
+    'settings' => 'الإعدادات',
 ];
