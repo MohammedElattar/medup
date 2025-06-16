@@ -98,7 +98,7 @@
                                         name="stripe_secret_key"
                                         placeholder="••••••••••••"
                                         aria-describedby="stripe_secret_key"
-                                        value="{{ old('stripe_secret_key', $item->secret_key) }}"
+                                        value="{{ old('stripe_secret_key', $item->stripe_secret_key) }}"
                                     />
                                     <span class="input-group-text cursor-pointer">
                                         <i class="ti ti-eye-off"></i>
