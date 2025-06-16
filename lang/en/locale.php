@@ -122,4 +122,18 @@ return [
     'expert_learner' => 'Expert learner',
     'users' => 'Users',
     'ads' => 'Ads',
+
+
+    'email_settings' => 'Email Settings',
+    'stripe_settings' => 'Stripe Settings',
+    'mail_from' => 'Mail From',
+    'mail_username' => 'Mail Username',
+    'mail_password' => 'Mail Password',
+    'mail_host' => 'Mail Host',
+    'mail_port' => 'Mail Port',
+    'mail_encryption' => 'Mail Encryption',
+    'mail_protocol' => 'Mail Protocol',
+    'mail_from_name' => 'Mail From Name',
+    'stripe_secret_key' => 'Secret Key',
+    'save_changes' => 'Save Changes',
 ];

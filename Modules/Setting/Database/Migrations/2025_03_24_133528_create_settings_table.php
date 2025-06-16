@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->string('mail_from');
+            $table->string('mail_username');
+            $table->string('mail_password');
+            $table->string('mail_host');
+            $table->string('mail_port');
+            $table->string('mail_encryption');
+            $table->string('mail_protocol');
+            $table->string('stripe_secret_key');
             $table->unsignedBigInteger('subscription_price')->default(200);
             $table->timestamps();
         });

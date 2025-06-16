@@ -14,6 +14,14 @@ class SettingDatabaseSeeder extends Seeder
     {
         Setting::query()->create([
             'subscription_price' => 200,
+            'mail_from' => 'Medup',
+            'mail_username' => 'medup@gmail.com',
+            'mail_password' => 'medup',
+            'mail_host' => 'smtp.gmail.com',
+            'mail_port' => '587',
+            'mail_encryption' => 'tls',
+            'mail_protocol' => 'smtp',
+            'stripe_secret_key' => 'sk_test_51I0s2o123alsdfkjalsdkfjalskdfj',
         ]);
     }
 }

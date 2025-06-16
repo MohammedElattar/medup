@@ -8,11 +8,17 @@ class SettingCacheHelper
 {
     public static function get()
     {
-        if(! cache()->has('settings')) {
-            cache()->forever('settings', Setting::query()->first());
+        if (! cache()->has('settings')) {
+            cache()->forever('settings', Setting::firstOrFail());
         }
 
         return cache()->get('settings');
+    }
+
+    public static function set(Setting $item)
+    {
+        cache()->forget('settings');
+        cache()->forever('settings', $item);
     }
 
     public static function getSubscriptionPrice()

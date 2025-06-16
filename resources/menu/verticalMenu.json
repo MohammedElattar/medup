@@ -65,6 +65,12 @@
       "icon": "menu-icon tf-icons ti ti-speakerphone",
       "url": "/admin/ads",
       "slug": "ads.index"
+    },
+    {
+      "name": "settings",
+      "icon": "menu-icon tf-icons ti ti-settings",
+      "url": "/admin/settings",
+      "slug": "settings.show"
     }
   ]
 }
