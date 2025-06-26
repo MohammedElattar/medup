@@ -14,7 +14,12 @@ class ContractService
         return Contract::query()->whereMine()->get();
     }
 
-    public function show($otherUserId)
+    public function show($id)
+    {
+        return Contract::query()->whereMine()->findOrFail($id);
+    }
+
+    public function chatShow($otherUserId)
     {
         return  Contract::query()->whereMine($otherUserId)->value('id');
     }

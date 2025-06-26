@@ -152,7 +152,7 @@ class ConversationService
             )
             ->value('id');
 
-        $contract = (new ContractService())->show($userId);
+        $contract = (new ContractService())->chatShow($userId);
         $chat =   $id ? $this->show($id) : null;
 
         if ($chat) {

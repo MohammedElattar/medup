@@ -21,6 +21,13 @@ class ContractController extends Controller
         return $this->resourceResponse(ContractResource::collection($contracts));
     }
 
+    public function show($id)
+    {
+        $contract = $this->contractService->show($id);
+
+        return $this->resourceResponse(ContractResource::make($contract));
+    }
+
     public function sync(ContractRequest $request)
     {
         $this->contractService->sync($request->validated());
