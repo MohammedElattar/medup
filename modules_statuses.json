@@ -44,5 +44,6 @@
     "AboutUs": true,
     "Ad": true,
     "Map": true,
-    "Payment": false
+    "Payment": false,
+    "Contract": true
 }

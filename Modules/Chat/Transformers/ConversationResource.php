@@ -18,6 +18,7 @@ class ConversationResource extends JsonResource
         return [
             'id' => $this->id,
             'type' => $this->whenHas('type'),
+            'contract_id' => $this->whenHas('contract_id'),
             'pinned' => $this->whenHas('pinned'),
             'unseen_messages_count' => $this->whenHas('unseen_messages_count'),
             'other_user' => UserResource::make($this->whenLoaded('otherUser')),

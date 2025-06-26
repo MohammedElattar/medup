@@ -119,4 +119,5 @@ return [
     ...\Modules\Chat\Helpers\ChatTranslationHelper::ar(),
     ...\Modules\Subscription\Helpers\SubscriptionTranslationHelper::ar(),
     ...\Modules\AboutUs\Helpers\AboutUsTranslationHelper::ar(),
+    'cannot_edit_contract' => 'لا يمكنك تعديل هذا العقد',
 ];

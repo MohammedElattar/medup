@@ -16,6 +16,7 @@ use Modules\Chat\Models\Conversation;
 use Modules\Chat\Models\ConversationMessage;
 use Modules\Chat\Models\Scopes\MyConversationScope;
 use Modules\Chat\Traits\UseChatUserModel;
+use Modules\Contract\Services\ContractService;
 
 class ConversationService
 {
@@ -25,7 +26,7 @@ class ConversationService
     {
         return Conversation::query()
             ->select('*')
-            ->when(true, fn (ConversationBuilder $b) => $b->withConversationDetails()->handleSearch())
+            ->when(true, fn(ConversationBuilder $b) => $b->withConversationDetails()->handleSearch())
             ->orderByRaw('case when pinned = 1 then 0 else 1 end,latest_message_time DESC')
             ->get();
     }
@@ -33,7 +34,7 @@ class ConversationService
     public function show($id, $loggedUserId = null, $operator = '<>')
     {
         return Conversation::query()
-            ->when(true, fn (ConversationBuilder $b) => $b->withConversationDetails($loggedUserId, $operator))
+            ->when(true, fn(ConversationBuilder $b) => $b->withConversationDetails($loggedUserId, $operator))
             ->findOrFail($id);
     }
 
@@ -75,9 +76,9 @@ class ConversationService
                 ->withoutGlobalScope(MyConversationScope::class)
                 ->when(
                     true,
-                    fn (ConversationBuilder $b) => $b
-                        ->whereHas('members', fn ($b) => $b->where('member_id', auth()->id()))
-                        ->whereHas('members', fn ($b) => $b->where('member_id', $data['user_id']))
+                    fn(ConversationBuilder $b) => $b
+                        ->whereHas('members', fn($b) => $b->where('member_id', auth()->id()))
+                        ->whereHas('members', fn($b) => $b->where('member_id', $data['user_id']))
                 )
                 ->with('members')
                 ->where('type', ConversationTypeEnum::PRIVATE)
@@ -88,7 +89,6 @@ class ConversationService
                     'user_id' => translate_error_message('user', 'not_exists'),
                 ]);
             }
-
         }
 
         if ($conversation) {
@@ -148,11 +148,18 @@ class ConversationService
         $id = Conversation::query()
             ->whereHas(
                 'members',
-                fn ($b) => $b->where('member_id', $userId)->where('member_id', '<>', auth()->id())
+                fn($b) => $b->where('member_id', $userId)->where('member_id', '<>', auth()->id())
             )
             ->value('id');
 
-        return $id ? $this->show($id) : null;
+        $contract = (new ContractService())->show($userId);
+        $chat =   $id ? $this->show($id) : null;
+
+        if ($chat) {
+            $chat->contract_id = $contract;
+        }
+
+        return $chat;
     }
 
     public function getOtherUser($userId)
@@ -198,7 +205,7 @@ class ConversationService
     private function getBasicConversation($conversationId)
     {
         return Conversation::query()
-            ->when(true, fn (ConversationBuilder $builder) => $builder->whereHasMessages())
+            ->when(true, fn(ConversationBuilder $builder) => $builder->whereHasMessages())
             ->findOrFail($conversationId);
     }
 

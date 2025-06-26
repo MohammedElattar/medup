@@ -81,4 +81,5 @@ return [
     ...\Modules\Chat\Helpers\ChatTranslationHelper::en(),
     ...\Modules\Subscription\Helpers\SubscriptionTranslationHelper::en(),
     ...\Modules\AboutUs\Helpers\AboutUsTranslationHelper::en(),
+    'cannot_edit_contract' => 'You cannot edit this contract',
 ];
