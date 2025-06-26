@@ -28,9 +28,9 @@ class Contract extends Model
         return $builder->where(function ($query) use ($otherUserId) {
             if ($otherUserId) {
                 return $query->where(function ($query) use ($otherUserId) {
-                    $query->where('first_member', auth()->id())->orWhere('second_member', $otherUserId);
+                    $query->where('first_member', auth()->id())->where('second_member', $otherUserId);
                 })->orWhere(function ($query) use ($otherUserId) {
-                    $query->where('first_member', $otherUserId)->orWhere('second_member', auth()->id());
+                    $query->where('first_member', $otherUserId)->where('second_member', auth()->id());
                 });
             }
 
