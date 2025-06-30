@@ -2,6 +2,7 @@
 
 namespace Modules\Contract\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,7 +25,25 @@ class Contract extends Model
         'expert_email',
         'trainee_name',
         'trainee_email',
+        'paid',
     ];
+
+    protected function casts()
+    {
+        return [
+            'paid' => 'boolean',
+        ];
+    }
+
+    public function firstMember()
+    {
+        return $this->belongsTo(User::class, 'first_member');
+    }
+
+    public function secondMember()
+    {
+        return $this->belongsTo(User::class, 'second_member');
+    }
 
     public function scopeWhereMine(Builder $builder, $otherUserId = null)
     {

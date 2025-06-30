@@ -34,4 +34,11 @@ class ContractController extends Controller
 
         return $this->okResponse();
     }
+
+    public function pay($id)
+    {
+        $this->contractService->pay($id);
+
+        return $this->okResponse(message: 'Contract approved successfully');
+    }
 }

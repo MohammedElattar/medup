@@ -6,6 +6,7 @@ use Modules\Contract\Http\Controllers\ContractController;
 
 Route::group(['prefix' => 'public/contracts', 'middleware' => GeneralHelper::getDefaultLoggedUserMiddlewares()], function () {
     Route::get('', [ContractController::class, 'index']);
+    Route::post('{id}', [ContractController::class, 'pay']);
     Route::get('{id}', [ContractController::class, 'show']);
     Route::post('', [ContractController::class, 'store'])->middleware(GeneralHelper::generalExpertMiddlewares());
 });

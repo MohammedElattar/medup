@@ -4,8 +4,12 @@ namespace Modules\Contract\Services;
 
 use App\Exceptions\ValidationErrorsException;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Modules\Auth\Enums\UserTypeEnum;
 use Modules\Contract\Models\Contract;
+use Modules\Wallet\Entities\Wallet;
+use Modules\Wallet\Services\TransactionService;
+use Modules\Wallet\Services\WalletService;
 
 class ContractService
 {
@@ -38,7 +42,7 @@ class ContractService
             ]);
         }
 
-        if($contract) {
+        if ($contract) {
             $contract->update($data);
         } else {
             $contract = Contract::query()->create($data + [
@@ -46,5 +50,16 @@ class ContractService
                 'second_member' => $otherUserId,
             ]);
         }
+    }
+
+    public function pay($id)
+    {
+        $contract = Contract::query()->whereMine()->where('second_member', auth()->id())->where('paid', false)->findOrFail($id);
+
+        DB::transaction(function () use ($contract) {
+            $walletService = new WalletService(app(Wallet::class), app(User::class), app(TransactionService::class));
+            $walletService->transfer($contract->secondMember, $contract->firstMember, $contract->price, 'contract_payment');
+            $contract->forceFill(['paid' => true])->save();
+        });
     }
 }

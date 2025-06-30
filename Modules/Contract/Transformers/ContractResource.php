@@ -14,6 +14,8 @@ class ContractResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'paid' => $this->whenHas('paid'),
+            'contract' => asset('storage/default/test.pdf'),
             'first_member' => $this->whenHas('first_member'),
             'second_member' => $this->whenHas('second_member'),
             'service_type' => $this->whenHas('service_type'),
