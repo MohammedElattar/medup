@@ -24,7 +24,7 @@ class ContractService
         return  Contract::query()->whereMine($otherUserId)->value('id');
     }
 
-    public function sync(array $data)
+    public function store(array $data)
     {
         $otherUserId = $data['other_user_id'];
         unset($data['other_user_id']);
@@ -38,23 +38,12 @@ class ContractService
             ]);
         }
 
-        if (! $contract) {
-            $contract = Contract::query()->create([
-                'first_member' => auth()->id(),
-                'first_member_details' => $data,
-                'second_member' => $otherUserId,
-            ]);
+        if($contract) {
+            $contract->update($data);
         } else {
-            $key = $contract->first_member == auth()->id() ? 'first_member_details' : 'second_member_details';
-
-            if ($contract->{$key}) {
-                throw new ValidationErrorsException([
-                    'name' => translate_word('cannot_edit_contract'),
-                ]);
-            }
-
-            $contract->update([
-                $key => $data,
+            $contract = Contract::query()->create($data + [
+                'first_member' => auth()->id(),
+                'second_member' => $otherUserId,
             ]);
         }
     }

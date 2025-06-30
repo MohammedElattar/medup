@@ -28,9 +28,9 @@ class ContractController extends Controller
         return $this->resourceResponse(ContractResource::make($contract));
     }
 
-    public function sync(ContractRequest $request)
+    public function store(ContractRequest $request)
     {
-        $this->contractService->sync($request->validated());
+        $this->contractService->store($request->validated());
 
         return $this->okResponse();
     }

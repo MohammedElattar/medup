@@ -11,17 +11,20 @@ class Contract extends Model
     protected $fillable = [
         'first_member',
         'second_member',
-        'first_member_details',
-        'second_member_details',
+        'service_type',
+        'description',
+        'sessions_per_week',
+        'start_date',
+        'end_date',
+        'is_online',
+        'contract_start_date',
+        'contract_end_date',
+        'price',
+        'expert_name',
+        'expert_email',
+        'trainee_name',
+        'trainee_email',
     ];
-
-    protected function casts()
-    {
-        return [
-            'first_member_details' => 'array',
-            'second_member_details' => 'array',
-        ];
-    }
 
     public function scopeWhereMine(Builder $builder, $otherUserId = null)
     {
